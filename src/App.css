@@ -1,0 +1,46 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  /* text-align: center; */
+}
+
+body {
+  font-size: 1.5em;
+  font-family: Tahoma,Verdana,Segoe,sans-serif; 
+}
+
+.card {
+  width: 100%;
+}
+
+tr {
+  text-align: center;
+}
+
+
+td {
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.wholeNum {
+  font-size: 50px;
+}
+
+tbody tr:nth-child(even) {
+  background: lightgray;
+}
+
+thead {
+  font-size: 30px;
+  background: cornflowerblue;
+  height: 50px;
+}
+
+
+span {
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+}
