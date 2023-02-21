@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
+import generateReducedFractions from './Utils/fractions';
 
 const denominator = 16;
-
-const reducedFractions = Array.from({ length: denominator }, (_, i) => {
-  const fraction = `${i}/${denominator}`;
-  const fractionArray = fraction.split("/");
-  const gcd = (a, b) => !b ? a : gcd(b, a % b);
-  const reducer = gcd(fractionArray[0], fractionArray[1]);
-  if(i === 0){
-    return "";
-  }
-  return `${fractionArray[0] / reducer}/${fractionArray[1] / reducer}`;
-});
 
 const ResponsiveList = () => {
   const [rows, setRows] = useState([
@@ -73,7 +63,7 @@ const ResponsiveList = () => {
               value={row.widthFraction}
               onChange={(e) => handleInputChange(e, index)}
             >
-              {reducedFractions.map((fraction) => (
+              {generateReducedFractions(denominator).map((fraction) => (
                 <option key={fraction} value={fraction}>
                   {fraction}
                 </option>
@@ -103,7 +93,7 @@ const ResponsiveList = () => {
               value={row.heightFraction}
               onChange={(e) => handleInputChange(e, index)}
             >
-              {reducedFractions.map((fraction) => (
+              {generateReducedFractions(denominator).map((fraction) => (
                 <option key={fraction} value={fraction}>
                 {fraction}
               </option>
@@ -127,7 +117,7 @@ const ResponsiveList = () => {
             value={row.thicknessFraction}
             onChange={(e) => handleInputChange(e, index)}
           >
-            {reducedFractions.map((fraction) => (
+            {generateReducedFractions(denominator).map((fraction) => (
               <option key={fraction} value={fraction}>
                 {fraction}
               </option>
