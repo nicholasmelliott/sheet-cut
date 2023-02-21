@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import data from './packedBinsQOH.json';
+import data from '../../packedBinsQOH.json';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect

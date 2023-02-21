@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
-import generateReducedFractions from './Utils/fractions';
+import generateReducedFractions from '../../utils/fractions';
 
 const denominator = 16;
 

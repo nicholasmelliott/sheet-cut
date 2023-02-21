@@ -1,11 +1,11 @@
 import './App.css'
-import ResponsiveList from './respList';
-import ViewBoxWrapper from './viewBoxWrapper';
+import ResponsiveList from '../RespList/respList';
+import ViewBox from '../ViewBox/viewBox';
 
 function App() {
   return (
     <div className="App">
-      <ViewBoxWrapper/>
+      <ViewBox/>
       <div className="card">
         <ResponsiveList/>
       </div>
