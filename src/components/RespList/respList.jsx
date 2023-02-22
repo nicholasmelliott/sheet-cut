@@ -4,14 +4,8 @@ import generateReducedFractions from '../../utils/fractions';
 
 const denominator = 16;
 
-const ResponsiveList = () => {
-  const [rows, setRows] = useState([
-    { width: '', 
-    widthFraction: '',
-    height: '', 
-    heightFraction: '', 
-    thicknessFraction: '' }
-  ]);
+const ResponsiveList = (props) => {
+  const {rows, setRows} = props;
 
   const handleInputChange = (e, index) => {
     console.log(rows);

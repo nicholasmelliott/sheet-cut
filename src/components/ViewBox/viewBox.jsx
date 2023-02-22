@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import data from '../../packedBinsQOH.json';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect
@@ -12,8 +10,8 @@ const Rectangle = ({ width, height, x, y }) => (
   />
 );
 
-const ViewBoxWrapper = () => {
-  const [rectangles, setRectangles] = useState(data);
+const ViewBoxWrapper = (props) => {
+  const {rectangles, setRectangles} = props;
 
   const addRectangle = () => {
     console.log(rectangles);
