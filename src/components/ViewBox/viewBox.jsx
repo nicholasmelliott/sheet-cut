@@ -110,7 +110,7 @@ const ViewBoxWrapper = (props) => {
           </text>
           {/* Draw piece to-be-cut inside donor piece */}
           {r.boxes.map((b, j) => (
-            <div key={j}>
+            <g key={j}>
               <rect
                 key={j}
                 x={b.x * multiplier + cMargin}
@@ -170,7 +170,7 @@ const ViewBoxWrapper = (props) => {
               >
                 {b.height}
               </text>
-            </div>
+            </g>
           ))}
           {prevHeight += r.height * multiplier + cMargin}
           {totalBoxes += r.boxes.length}
