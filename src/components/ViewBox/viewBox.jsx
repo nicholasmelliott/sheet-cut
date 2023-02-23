@@ -1,3 +1,4 @@
+import React from 'react';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect

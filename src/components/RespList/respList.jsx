@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
 
