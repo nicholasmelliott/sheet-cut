@@ -5,7 +5,7 @@ import generateReducedFractions from '../../utils/fractions';
 const denominator = 16;
 
 const ResponsiveList = (props) => {
-  const {rows, setRows} = props;
+  const {rows, setRows, rectangles, setRectangles} = props;
 
   const handleInputChange = (e, index) => {
     console.log(rows);
@@ -20,6 +20,46 @@ const ResponsiveList = (props) => {
     );
   };
 
+  const addRectangle = () => {
+    console.log(rectangles);
+    setRectangles([...rectangles, {
+      "width": rows[0].width,
+      "height": rows[0].height,
+      "boxes": [
+        {
+          "width": 19,
+          "height": 19,
+          "constrainRotation": false,
+          "x": 0,
+          "y": 0,
+          "packed": true
+        }
+      ],
+      "heuristic": {},
+      "freeRectangles": [
+        {
+          "x": 0,
+          "y": 19,
+          "width": 20,
+          "height": 5
+        },
+        {
+          "x": 19,
+          "y": 0,
+          "width": 1,
+          "height": 24
+        }
+      ],
+      "thickness": "2.500",
+      "price": 16.99
+    }]);
+  };
+
+  const deleteRectangle = (index) => {
+    const rectIndex = rectangles.length + index - 1;
+    setRectangles((prevRectangles) => prevRectangles.filter((_, i) => i !== rectIndex));
+  };
+
   const addRow = () => {
     setRows((prevRows) => [...prevRows, { width: '', widthFraction: '', height: '', heightFraction: '', thicknessFraction: '' }]);
   };
@@ -27,6 +67,16 @@ const ResponsiveList = (props) => {
   const deleteRow = (index) => {
     setRows((prevRows) => prevRows.filter((_, i) => i !== index));
   };
+
+  const handleAdd = () => {
+    addRow();
+    addRectangle();
+  }
+
+  const handleClose = (index) => {
+    deleteRow(index);
+    deleteRectangle(index);
+  }
 
   return (
     <div className="d-flex justify-content-center flex-wrap" >
@@ -36,7 +86,7 @@ const ResponsiveList = (props) => {
         <Row key={index}>
           <div className='col-8'>Sheet #{index + 1}</div>  
           <div className='d-flex justify-content-end col-4'>  
-            <Button variant="danger" onClick={() => deleteRow(index)}>
+            <Button variant="danger" onClick={() => handleClose(index)}>
                 X
             </Button>
           </div>
@@ -124,7 +174,7 @@ const ResponsiveList = (props) => {
       </div>
     ))}
     <div className='col-6 d-flex justify-content-center'>
-        <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '50px', height: "50px"}} variant="primary" onClick={addRow}>
+        <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '50px', height: "50px"}} variant="primary" onClick={handleAdd}>
           +
         </Button>
     </div>

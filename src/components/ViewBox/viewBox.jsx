@@ -12,43 +12,7 @@ const Rectangle = ({ width, height, x, y }) => (
 );
 
 const ViewBoxWrapper = (props) => {
-  const {rectangles, setRectangles} = props;
-
-  const addRectangle = () => {
-    console.log(rectangles);
-    const lastRectangle = rectangles[rectangles.length - 1];
-    setRectangles([...rectangles, {
-      "width": 20,
-      "height": 24,
-      "boxes": [
-        {
-          "width": 19,
-          "height": 19,
-          "constrainRotation": false,
-          "x": 0,
-          "y": 0,
-          "packed": true
-        }
-      ],
-      "heuristic": {},
-      "freeRectangles": [
-        {
-          "x": 0,
-          "y": 19,
-          "width": 20,
-          "height": 5
-        },
-        {
-          "x": 19,
-          "y": 0,
-          "width": 1,
-          "height": 24
-        }
-      ],
-      "thickness": "2.500",
-      "price": 16.99
-    }]);
-  };
+  const {rectangles} = props;
 
   let totalBoxes = 0;
   let priceTotal = 0;
@@ -182,7 +146,6 @@ const ViewBoxWrapper = (props) => {
             ${parseFloat(priceTotal).toFixed(2)}
           </text>
       </svg>
-      <button onClick={addRectangle}>Add Rectangle</button>
     </div>
   );
 };

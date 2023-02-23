@@ -16,9 +16,9 @@ function App() {
 
   return (
     <div className="App">
-      <ViewBox rectangles={rectangles} setRectangles={setRectangles}/>
+      <ViewBox rectangles={rectangles} />
       <div className="card">
-        <ResponsiveList rows={rows} setRows={setRows}/>
+        <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
       </div>
     </div>
   )
