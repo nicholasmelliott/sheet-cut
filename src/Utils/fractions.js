@@ -5,9 +5,12 @@ const generateReducedFractions = (denominator) => {
       const gcd = (a, b) => !b ? a : gcd(b, a % b);
       const reducer = gcd(fractionArray[0], fractionArray[1]);
       if(i === 0){
-        return "";
+        return {fraction: "", decimal: 0};
       }
-      return `${fractionArray[0] / reducer}/${fractionArray[1] / reducer}`;
+      const reducedNumerator = fractionArray[0] / reducer;
+      const reducedDenominator = fractionArray[1] / reducer; 
+      const decimal = reducedNumerator / reducedDenominator;
+      return {fraction: `${reducedNumerator}/${reducedDenominator}`, decimal};
     });
     return reducedFractions;
   };

@@ -7,6 +7,9 @@ const denominator = 16;
 const ResponsiveList = (props) => {
   const {rows, setRows, rectangles, setRectangles} = props;
 
+  const width = parseInt(rows[0].width) + parseFloat(rows[0].widthFraction);
+  const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
+
   const handleInputChange = (e, index) => {
     console.log(rows);
     const { name, value } = e.target;
@@ -23,12 +26,12 @@ const ResponsiveList = (props) => {
   const addRectangle = () => {
     console.log(rectangles);
     setRectangles([...rectangles, {
-      "width": rows[0].width,
-      "height": rows[0].height,
+      "width": 20,
+      "height": 30,
       "boxes": [
         {
-          "width": 19,
-          "height": 19,
+          "width": width,
+          "height": height,
           "constrainRotation": false,
           "x": 0,
           "y": 0,
@@ -108,8 +111,8 @@ const ResponsiveList = (props) => {
               onChange={(e) => handleInputChange(e, index)}
             >
               {generateReducedFractions(denominator).map((fraction) => (
-                <option key={fraction} value={fraction}>
-                  {fraction}
+                <option key={fraction.fraction} value={fraction.decimal}>
+                  {fraction.fraction}
                 </option>
               ))}
             </Form.Control>
@@ -138,10 +141,10 @@ const ResponsiveList = (props) => {
               onChange={(e) => handleInputChange(e, index)}
             >
               {generateReducedFractions(denominator).map((fraction) => (
-                <option key={fraction} value={fraction}>
-                {fraction}
-              </option>
-            ))}
+                <option key={fraction.fraction} value={fraction.decimal}>
+                  {fraction.fraction}
+                </option>
+              ))}
           </Form.Control>
           </InputGroup>
         </Col>
@@ -162,9 +165,9 @@ const ResponsiveList = (props) => {
             onChange={(e) => handleInputChange(e, index)}
           >
             {generateReducedFractions(denominator).map((fraction) => (
-              <option key={fraction} value={fraction}>
-                {fraction}
-              </option>
+                <option key={fraction.fraction} value={fraction.decimal}>
+                  {fraction.fraction}
+                </option>
             ))}
           </Form.Control>
           </InputGroup>
