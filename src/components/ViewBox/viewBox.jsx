@@ -35,10 +35,10 @@ const ViewBoxWrapper = (props) => {
   return (
     <div>
       { responsiveLayout ? (
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2">
         {rectangles.map((r, i) => (
           <div key={i} className="col mb-4">
-            <svg viewBox={`0 0 700 700`}>
+            <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder}`}>
             <g key={i}>
           {/* Draw donor piece */}
           <rect
