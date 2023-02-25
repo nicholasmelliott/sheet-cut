@@ -20,6 +20,13 @@ const ViewBoxWrapper = (props) => {
   const cBorder = 200;
   const cMargin = cBorder/2;
   const multiplier = 25;
+  const donorTopDimDecrement = 10;
+  const donorLeftDimDecrement = 25;
+  const donorBottomPriceIncrement = 60;
+  const toBeCutTopDimIncrement = 25;
+  const toBeCutBottomDimDecrement = 15;
+  const toBeCutLeftDimIncrement = 15;
+  const toBeCutRightDimDecrement = 15;
 
   const canvasDim = rectangles.reduce((acc, r) => {
     acc.width += r.width * multiplier + cBorder;
@@ -30,7 +37,7 @@ const ViewBoxWrapper = (props) => {
   const viewboxWidth = Math.max(...rectangles.map(o => o.width)) * multiplier + (cBorder * 2);
   const viewboxHeight = canvasDim.height + cBorder;
 
-  const responsiveLayout = true;
+  const responsiveLayout = false;
 
   return (
     <div>
@@ -52,7 +59,7 @@ const ViewBoxWrapper = (props) => {
           {/* Draw donor piece dimensions next to corresponding sides */}
           <text 
             x={cMargin + (r.width * multiplier) / 2} 
-            y={cMargin - 10 + prevHeight} 
+            y={cMargin - donorTopDimDecrement + prevHeight} 
             textAnchor="middle" 
             fontSize="25" 
             fill="#000000"
@@ -60,7 +67,7 @@ const ViewBoxWrapper = (props) => {
             {r.width}
           </text>
           <text 
-            x={cMargin - 25} 
+            x={cMargin - donorLeftDimDecrement} 
             y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
             textAnchor="middle" 
             fontSize="25" 
@@ -70,7 +77,7 @@ const ViewBoxWrapper = (props) => {
           </text>
           <text 
             x={cMargin + (r.width * multiplier) / 2} 
-            y={(cMargin * 2) + (r.height * multiplier)} 
+            y={(cMargin + donorBottomPriceIncrement) + (r.height * multiplier)} 
             textAnchor="middle" 
             fontSize="30" 
             fill="#000"
@@ -103,7 +110,7 @@ const ViewBoxWrapper = (props) => {
               {/* Draw the top dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + 25 + prevHeight)}
+                y={(b.y * multiplier + cMargin + toBeCutTopDimIncrement + prevHeight)}
                 fill="#fff"
                 textAnchor="middle"
                 fontSize={15}
@@ -113,7 +120,7 @@ const ViewBoxWrapper = (props) => {
               {/* Draw the bottom dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + b.height * multiplier - 15 + prevHeight)}
+                y={(b.y * multiplier + cMargin + b.height * multiplier - toBeCutBottomDimDecrement + prevHeight)}
                 fill="#fff"
                 textAnchor="middle"
                 fontSize={15}
@@ -122,7 +129,7 @@ const ViewBoxWrapper = (props) => {
               </text>
               {/* Draw the left dimension */}
               <text
-                x={(b.x * multiplier + cMargin + 15)}
+                x={(b.x * multiplier + cMargin + toBeCutLeftDimIncrement)}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill="#fff"
                 textAnchor="start"
@@ -132,7 +139,7 @@ const ViewBoxWrapper = (props) => {
               </text>
               {/* Draw the right dimension */}
               <text
-                x={(b.x * multiplier + cMargin + b.width * multiplier - 15)}
+                x={(b.x * multiplier + cMargin + b.width * multiplier - toBeCutRightDimDecrement)}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill="#fff"
                 textAnchor="end"
@@ -166,7 +173,7 @@ const ViewBoxWrapper = (props) => {
           {/* Draw donor piece dimensions next to corresponding sides */}
           <text 
             x={cMargin + (r.width * multiplier) / 2} 
-            y={cMargin - 10 + prevHeight} 
+            y={cMargin - donorTopDimDecrement + prevHeight} 
             textAnchor="middle" 
             fontSize="25" 
             fill="#000000"
@@ -174,7 +181,7 @@ const ViewBoxWrapper = (props) => {
             {r.width}
           </text>
           <text 
-            x={cMargin - 25} 
+            x={cMargin - donorLeftDimDecrement} 
             y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
             textAnchor="middle" 
             fontSize="25" 
@@ -217,7 +224,7 @@ const ViewBoxWrapper = (props) => {
               {/* Draw the top dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + 25 + prevHeight)}
+                y={(b.y * multiplier + cMargin + toBeCutTopDimIncrement + prevHeight)}
                 fill="#fff"
                 textAnchor="middle"
                 fontSize={15}
@@ -227,7 +234,7 @@ const ViewBoxWrapper = (props) => {
               {/* Draw the bottom dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + b.height * multiplier - 15 + prevHeight)}
+                y={(b.y * multiplier + cMargin + b.height * multiplier - toBeCutBottomDimDecrement + prevHeight)}
                 fill="#fff"
                 textAnchor="middle"
                 fontSize={15}
@@ -236,7 +243,7 @@ const ViewBoxWrapper = (props) => {
               </text>
               {/* Draw the left dimension */}
               <text
-                x={(b.x * multiplier + cMargin + 15)}
+                x={(b.x * multiplier + cMargin + toBeCutLeftDimIncrement)}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill="#fff"
                 textAnchor="start"
@@ -246,7 +253,7 @@ const ViewBoxWrapper = (props) => {
               </text>
               {/* Draw the right dimension */}
               <text
-                x={(b.x * multiplier + cMargin + b.width * multiplier - 15)}
+                x={(b.x * multiplier + cMargin + b.width * multiplier - toBeCutRightDimDecrement)}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill="#fff"
                 textAnchor="end"
