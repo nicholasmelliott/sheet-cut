@@ -54,7 +54,7 @@ const ViewBoxWrapper = (props) => {
   const viewboxWidth = Math.max(...rectangles.map(o => o.width)) * multiplier + (cBorder * 2);
   const viewboxHeight = canvasDim.height + cBorder;
 
-  const responsiveLayout = false;
+  const responsiveLayout = true;
 
   return (
     <div>
