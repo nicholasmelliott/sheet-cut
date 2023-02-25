@@ -69,8 +69,8 @@ const ViewBoxWrapper = (props) => {
             {r.height}
           </text>
           <text 
-            x={(cMargin * 2) + (r.width * multiplier)} 
-            y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
+            x={cMargin + (r.width * multiplier) / 2} 
+            y={(cMargin * 2) + (r.height * multiplier)} 
             textAnchor="middle" 
             fontSize="30" 
             fill="#000"
