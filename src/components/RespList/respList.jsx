@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
 import packBoxes from '../../helpers/binPacking';
@@ -23,21 +23,11 @@ const ResponsiveList = (props) => {
     );
   };
 
-  const packBins = () => {
+  //When rows is updated, viewbox is re-rendered
+  useEffect(() => {
     const bins = packBoxes(rows);
     setRectangles(bins);
-  }
-
-  const addRectangle = () => {
-    packBins();
-  };
-
-  const deleteRectangle = (index) => {
-    setRectangles(rectangles => rectangles.map((rectangle, i) => {
-        const newBoxes = rectangle.boxes.filter((_, j) => j !== index);
-        return {...rectangle, boxes: newBoxes}; 
-    }));
-  };
+  },[rows.length]);
 
   const addRow = () => {
     setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, height: "", heightFraction: 0, thicknessFraction: 0 }]);
@@ -46,15 +36,6 @@ const ResponsiveList = (props) => {
   const deleteRow = (index) => {
     setRows((prevRows) => prevRows.filter((_, i) => i !== index));
   };
-
-  const handleAdd = () => {
-    addRow();
-  }
-
-  const handleClose = (index) => {
-    deleteRow(index);
-    deleteRectangle(index);
-  }
 
   return (
     <div>
@@ -66,7 +47,7 @@ const ResponsiveList = (props) => {
           <div className='col-8'>Sheet #{index + 1}</div>  
           <div className='d-flex justify-content-end col-4'>  
             {rows.length > 1 && (
-              <Button variant="danger" onClick={() => handleClose(index)}>
+              <Button variant="danger" onClick={deleteRow}>
                 X
               </Button>
             )}
@@ -155,18 +136,13 @@ const ResponsiveList = (props) => {
         </div>
       ))}
   </div>
-  <Row style={{margin: '10px', padding: '10px', height: '100px'}}>
-        <div className='col-6 d-flex justify-content-end'>
-            <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '100px', height: "50px"}} variant="primary" onClick={handleAdd}>
-              Add New
-            </Button>
-        </div>
-        <div className='col-6 d-flex justify-content-start'>
-          <Button className="text-align-center" style={{margin: '10px', padding: '10px',  width: '100px', height: "50px"}} variant="secondary" onClick={addRectangle}>
-            Update
+    <Row style={{margin: '10px', padding: '10px', height: '100px'}}>
+      <div className='col-12 d-flex justify-content-center'>
+          <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '100px', height: "50px"}} variant="primary" onClick={addRow}>
+            Add New
           </Button>
-        </div>
-      </Row>
+      </div>
+    </Row>
   </div>
 );
 };
