@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './App.css'
-import data from '../../packedBinsQOH.json';
 import ResponsiveList from '../RespList/respList';
 import ViewBox from '../ViewBox/viewBox';
 
 function App() {
-  const [rectangles, setRectangles] = useState(data);
+  const [rectangles, setRectangles] = useState([]);
   const [rows, setRows] = useState([
-    { width: '', 
-    widthFraction: '',
-    height: '', 
-    heightFraction: '', 
-    thicknessFraction: '' }
+    { width: "", 
+    widthFraction: 0,
+    height: "", 
+    heightFraction: 0, 
+    thicknessFraction: 0}
   ]);
 
   return (
