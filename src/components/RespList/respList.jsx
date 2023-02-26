@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
+import packBoxes from '../../helpers/binPacking';
 
 const denominator = 16;
 
@@ -11,7 +12,6 @@ const ResponsiveList = (props) => {
   const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
 
   const handleInputChange = (e, index) => {
-    console.log(rows);
     const { name, value } = e.target;
     setRows((prevRows) =>
       prevRows.map((row, i) => {
@@ -23,48 +23,24 @@ const ResponsiveList = (props) => {
     );
   };
 
+  const packBins = () => {
+    const bins = packBoxes(rows);
+    setRectangles(bins);
+  }
+
   const addRectangle = () => {
-    console.log(rectangles);
-    setRectangles([...rectangles, {
-      "width": 20,
-      "height": 30,
-      "boxes": [
-        {
-          "width": width,
-          "height": height,
-          "constrainRotation": false,
-          "x": 0,
-          "y": 0,
-          "packed": true
-        }
-      ],
-      "heuristic": {},
-      "freeRectangles": [
-        {
-          "x": 0,
-          "y": 19,
-          "width": 20,
-          "height": 5
-        },
-        {
-          "x": 19,
-          "y": 0,
-          "width": 1,
-          "height": 24
-        }
-      ],
-      "thickness": "2.500",
-      "price": 16.99
-    }]);
+    packBins();
   };
 
   const deleteRectangle = (index) => {
-    const rectIndex = rectangles.length + index - 1;
-    setRectangles((prevRectangles) => prevRectangles.filter((_, i) => i !== rectIndex));
+    setRectangles(rectangles => rectangles.map((rectangle, i) => {
+        const newBoxes = rectangle.boxes.filter((_, j) => j !== index);
+        return {...rectangle, boxes: newBoxes}; 
+    }));
   };
 
   const addRow = () => {
-    setRows((prevRows) => [...prevRows, { width: '', widthFraction: '', height: '', heightFraction: '', thicknessFraction: '' }]);
+    setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, height: "", heightFraction: 0, thicknessFraction: 0 }]);
   };
 
   const deleteRow = (index) => {
@@ -73,7 +49,6 @@ const ResponsiveList = (props) => {
 
   const handleAdd = () => {
     addRow();
-    addRectangle();
   }
 
   const handleClose = (index) => {
@@ -82,6 +57,7 @@ const ResponsiveList = (props) => {
   }
 
   return (
+    <div>
     <div className="d-flex justify-content-center flex-wrap" >
       {rows.map((row, index) => (
         <div key={index} style={{margin: '10px', padding: '10px', backgroundColor: 'lightGray', height: '300px'}}>
@@ -89,9 +65,11 @@ const ResponsiveList = (props) => {
         <Row key={index}>
           <div className='col-8'>Sheet #{index + 1}</div>  
           <div className='d-flex justify-content-end col-4'>  
-            <Button variant="danger" onClick={() => handleClose(index)}>
+            {rows.length > 1 && (
+              <Button variant="danger" onClick={() => handleClose(index)}>
                 X
-            </Button>
+              </Button>
+            )}
           </div>
         </Row>
         <Row className="mt-2">  
@@ -172,17 +150,23 @@ const ResponsiveList = (props) => {
           </Form.Control>
           </InputGroup>
         </Col>
+        </Row>
+        </Form>
+        </div>
+      ))}
+  </div>
+  <Row style={{margin: '10px', padding: '10px', height: '100px'}}>
+        <div className='col-6 d-flex justify-content-end'>
+            <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '100px', height: "50px"}} variant="primary" onClick={handleAdd}>
+              Add New
+            </Button>
+        </div>
+        <div className='col-6 d-flex justify-content-start'>
+          <Button className="text-align-center" style={{margin: '10px', padding: '10px',  width: '100px', height: "50px"}} variant="secondary" onClick={addRectangle}>
+            Update
+          </Button>
+        </div>
       </Row>
-      </Form>
-      </div>
-    ))}
-    <div className='col-6 d-flex justify-content-center'>
-        <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '50px', height: "50px"}} variant="primary" onClick={handleAdd}>
-          +
-        </Button>
-    </div>
-    <div className='col-6'></div>
-   
   </div>
 );
 };
