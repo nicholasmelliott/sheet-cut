@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
 import packBoxes from '../../helpers/binPacking';
+import './respList.css';
 
 const denominator = 16;
 
@@ -27,7 +28,7 @@ const ResponsiveList = (props) => {
   useEffect(() => {
     const bins = packBoxes(rows);
     setRectangles(bins);
-  },[rows.length]);
+  },[rows]);
 
   const addRow = () => {
     setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, height: "", heightFraction: 0, thicknessFraction: 0 }]);
@@ -39,23 +40,31 @@ const ResponsiveList = (props) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center flex-wrap" >
+      <div className="row">
+        <div className='col-12 d-flex justify-content-center'>
+            <Button className="addButton text-align-center" variant="primary" onClick={addRow}>
+              Add New
+            </Button>
+        </div>
+      </div>
+      <div className="container testimonial-group">
+        <div className="row">
         {rows.map((row, index) => (
-          <div key={index} style={{margin: '10px', padding: '10px', backgroundColor: 'lightGray', height: '300px'}}>
+          <div key={index} className="testGroupCol col-12 col-md-4">
           <Form>
           <Row key={index}>
-            <div className='col-8'>Sheet #{index + 1}</div>  
+            <div className='col-8 mb-1'>Sheet #{index + 1}</div>  
             <div className='d-flex justify-content-end col-4'>  
               {rows.length > 1 && (
-                <Button variant="danger" onClick={deleteRow}>
+                <Button className="mb-1" variant="danger" onClick={() => deleteRow(index)}>
                   X
                 </Button>
               )}
             </div>
           </Row>
-          <Row className="mt-2">  
+          <Row>  
             <Col>
-            <InputGroup className="mb-3">
+            <InputGroup>
               <InputGroup.Text>Width</InputGroup.Text>
               <Form.Control
                 type="text"
@@ -85,7 +94,7 @@ const ResponsiveList = (props) => {
             </Row>
             <Row className="mt-2">  
             <Col>
-            <InputGroup className="mb-3">
+            <InputGroup>
               <InputGroup.Text>Height</InputGroup.Text>
               <Form.Control
                 type="text"
@@ -115,7 +124,7 @@ const ResponsiveList = (props) => {
           </Row>
             <Row className="mt-2">  
           <Col>
-          <InputGroup className="mb-3">
+          <InputGroup>
               <InputGroup.Text>Thickness</InputGroup.Text> 
             <Form.Control
               as="select"
@@ -136,13 +145,7 @@ const ResponsiveList = (props) => {
           </div>
         ))}
       </div>
-      <Row style={{margin: '10px', padding: '10px', height: '100px'}}>
-        <div className='col-12 d-flex justify-content-center'>
-            <Button className="text-align-center" style={{margin: '10px', padding: '10px', width: '100px', height: "50px"}} variant="primary" onClick={addRow}>
-              Add New
-            </Button>
-        </div>
-      </Row>
+      </div>
     </div>
 );
 };

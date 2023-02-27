@@ -15,8 +15,10 @@ function App() {
 
   return (
     <div className="App">
-      <ViewBox rectangles={rectangles} />
-      <div className="card">
+      <div style={{height: "60vh"}}>
+        <ViewBox rectangles={rectangles} />
+      </div>
+      <div style={{height: "40vh"}}>
         <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
       </div>
     </div>

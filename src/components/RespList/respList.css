@@ -1,0 +1,20 @@
+.testimonial-group > .row {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.testimonial-group > .row > .testGroupCol {
+    display: inline-block;
+}
+
+.testGroupCol {margin: 0px; padding: 10px; background: lightGray}
+.testGroupCol:nth-child(3n+1) { background: #cc6699; }
+.testGroupCol:nth-child(3n+2) { background: #9c6; }
+.testGroupCol:nth-child(3n+3) { background: #69c; }
+
+.addButton {
+    margin: 10px;
+    padding: 10px;
+    width: 100px;
+    /* height: 50px; */
+}
