@@ -1,4 +1,5 @@
 import React from 'react';
+import './viewBox.css';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect
@@ -57,12 +58,13 @@ const ViewBoxWrapper = (props) => {
   const responsiveLayout = true;
 
   return (
-    <div>
+    <div style={{height: "100%"}}>
       { responsiveLayout ? (
-      <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2">
+      <div className="container testimonial-group" style={{height: "100%"}}>
+        <div className="row text-center" style={{height: "100%"}}>
         {rectangles.map((r, i) => (
-          <div key={i} className="col mb-4">
-            <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder}`}>
+          <div key={i} className="col">
+            <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder}`} width="100%" height="100%" preserveAspectRatio="none">
             <g key={i}>
           {/* Draw donor piece */}
           <rect
@@ -173,6 +175,7 @@ const ViewBoxWrapper = (props) => {
             </svg>
           </div>
         ))}
+        </div>
       </div>
       ) : (
       <svg viewBox={`0 0 ${viewboxWidth} ${viewboxHeight}`}>
