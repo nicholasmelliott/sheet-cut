@@ -75,7 +75,7 @@ const ResponsiveList = (props) => {
             <InputGroup>
               <InputGroup.Text>Width</InputGroup.Text>
               <Form.Control
-                type="text"
+                type="number"
                 name="width"
                 value={row.width}
                 onChange={(e) => handleInputChange(e, index)}
@@ -105,7 +105,7 @@ const ResponsiveList = (props) => {
             <InputGroup>
               <InputGroup.Text>Height</InputGroup.Text>
               <Form.Control
-                type="text"
+                type="number"
                 name="height"
                 value={row.height}
                 onChange={(e) => handleInputChange(e, index)}
