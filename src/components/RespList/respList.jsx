@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
+import scrollLeft from '../../utils/scrollLeft';
 import packBoxes from '../../helpers/binPacking';
 import './respList.css';
 
@@ -8,9 +9,11 @@ const denominator = 16;
 
 const ResponsiveList = (props) => {
   const {rows, setRows, rectangles, setRectangles} = props;
+  const containerRef = useRef(null);
 
   const width = parseInt(rows[0].width) + parseFloat(rows[0].widthFraction);
   const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
+
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -30,6 +33,11 @@ const ResponsiveList = (props) => {
     setRectangles(bins);
   },[rows]);
 
+  //Scrolls to newly added input form
+  useEffect(() => {
+    scrollLeft(containerRef);
+  },[rows.length]);
+
   const addRow = () => {
     setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, height: "", heightFraction: 0, thicknessFraction: 0 }]);
   };
@@ -48,7 +56,7 @@ const ResponsiveList = (props) => {
         </div>
       </div>
       <div className="container testimonial-group">
-        <div className="row">
+        <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
           <div key={index} className="testGroupCol col-12 col-md-4">
           <Form>
@@ -67,7 +75,7 @@ const ResponsiveList = (props) => {
             <InputGroup>
               <InputGroup.Text>Width</InputGroup.Text>
               <Form.Control
-                type="text"
+                type="number"
                 name="width"
                 value={row.width}
                 onChange={(e) => handleInputChange(e, index)}
@@ -97,7 +105,7 @@ const ResponsiveList = (props) => {
             <InputGroup>
               <InputGroup.Text>Height</InputGroup.Text>
               <Form.Control
-                type="text"
+                type="number"
                 name="height"
                 value={row.height}
                 onChange={(e) => handleInputChange(e, index)}
