@@ -5,7 +5,7 @@ const generateReducedFractions = (denominator) => {
       const gcd = (a, b) => !b ? a : gcd(b, a % b);
       const reducer = gcd(fractionArray[0], fractionArray[1]);
       if(i === 0){
-        return {fraction: "", decimal: 0};
+        return {fraction: "0", decimal: 0};
       }
       const reducedNumerator = fractionArray[0] / reducer;
       const reducedDenominator = fractionArray[1] / reducer; 
