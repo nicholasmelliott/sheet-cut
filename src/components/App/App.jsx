@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{height: "60vh"}}>
+      <div style={{height: "50vh"}}>
         <ViewBox rectangles={rectangles} />
       </div>
       <div style={{height: "40vh"}}>
