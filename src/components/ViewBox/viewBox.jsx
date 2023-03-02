@@ -124,7 +124,7 @@ const ViewBoxWrapper = (props) => {
                 textAnchor="middle"
                 fontSize={toBeCutMainDimFontSize}
               >
-                {b.width} x {b.height} x {parseFloat(r.thickness).toFixed(1)}
+                {b.width} x {b.height} x {parseFloat(b.thickness)}
               </text>
               {/* Draw the top dimension */}
               <text

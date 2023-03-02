@@ -12,8 +12,9 @@ const ranBoxes = () => {
 
 const createBoxes = (array) => {
     const boxes = [];
-    array.forEach(el => {
+    array.forEach((el, i) => {
         boxes.push(new Box(parseInt(el.width) + parseFloat(el.widthFraction), parseInt(el.height) + parseFloat(el.heightFraction)));
+        boxes[i].thickness = parseFloat(el.thicknessFraction);
     });
     return boxes;
 }

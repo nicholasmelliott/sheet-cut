@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
+import { Form, Row, Col, Button, InputGroup, CloseButton } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
 import scrollLeft from '../../utils/scrollLeft';
 import packBoxes from '../../helpers/binPacking';
@@ -64,9 +64,7 @@ const ResponsiveList = (props) => {
             <div className='col-8 mb-1'>Sheet #{index + 1}</div>  
             <div className='d-flex justify-content-end col-4'>  
               {rows.length > 1 && (
-                <Button className="mb-1" variant="danger" onClick={() => deleteRow(index)}>
-                  X
-                </Button>
+                <CloseButton className="mb-1" variant="white" onClick={() => deleteRow(index)}/>
               )}
             </div>
           </Row>
