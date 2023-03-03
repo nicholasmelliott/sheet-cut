@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
 import ResponsiveList from '../RespList/respList';
 import ViewBox from '../ViewBox/viewBox';
@@ -13,14 +13,19 @@ function App() {
     thicknessFraction: 0}
   ]);
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, []);
+
   return (
     <div className="App">
-      <div style={{height: "50vh"}}>
+      <div style={{height: "60vh"}}>
         <ViewBox rectangles={rectangles} />
       </div>
       <div style={{height: "40vh"}}>
         <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
       </div>
+      <div style={{height: "10vh"}}/>
     </div>
   )
 }
