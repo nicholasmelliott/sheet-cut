@@ -3,6 +3,7 @@ import { Form, Row, Col, Button, InputGroup, CloseButton } from 'react-bootstrap
 import generateReducedFractions from '../../utils/fractions';
 import scrollLeft from '../../utils/scrollLeft';
 import packBoxes from '../../helpers/binPacking';
+import getHexColorByIndex from '../../utils/colorByIndex';
 import './respList.css';
 
 const denominator = 16;
@@ -58,7 +59,7 @@ const ResponsiveList = (props) => {
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
-          <div key={index} className="testGroupCol col-12 col-md-4">
+          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(index) }}>
           <Form>
           <Row key={index}>
             <div className='col-8 mb-1'>Sheet #{index + 1}</div>  

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './viewBox.css';
+import getHexColorByIndex from '../../utils/colorByIndex';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect
@@ -57,6 +58,8 @@ const ViewBoxWrapper = (props) => {
 
   const responsiveLayout = true;
 
+  console.log(rectangles);
+
   return (
     <div style={{height: "100%"}}>
       { responsiveLayout ? (
@@ -112,7 +115,7 @@ const ViewBoxWrapper = (props) => {
                 y={b.y * multiplier + cMargin + prevHeight}
                 width={b.width * multiplier}
                 height={b.height * multiplier}
-                fill={toBeCutPieceFill}
+                fill={getHexColorByIndex(b.index)}
                 strokeDasharray={toBeCutPieceStrokeDasharray}
                 stroke={toBeCutPieceStroke}
               />
@@ -124,7 +127,7 @@ const ViewBoxWrapper = (props) => {
                 textAnchor="middle"
                 fontSize={toBeCutMainDimFontSize}
               >
-                {b.width} x {b.height} x {parseFloat(b.thickness)}
+                {b.width} x {b.height} x {parseFloat(b.thickness)} Sheet #{b.index + 1}
               </text>
               {/* Draw the top dimension */}
               <text
