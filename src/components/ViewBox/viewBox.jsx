@@ -23,12 +23,14 @@ const ViewBoxWrapper = (props) => {
   const cMargin = cBorder/2;
   const multiplier = 25;
   
+  const windowWidth = window.innerWidth
+
   const donorPieceFill = "#a1c5ff";
   const donorPieceStroke = "#000";
   const donorTopDimDecrement = 10;
   const donorLeftDimDecrement = 25;
   const donorBottomPriceIncrement = 60;
-  const donorSidesFontSize = 25;
+  const donorSidesFontSize = 30;
   const donorPriceFontSize = 30; 
   const donorSidesTextFill = "#000";
   const donorPriceTextFill = "#000";
@@ -46,6 +48,10 @@ const ViewBoxWrapper = (props) => {
   const toBeCutSideDimsFill = "#FFF";
 
   const totalPriceTextFill = "#000";
+
+  const scaleFontWithWindow = (viewBoxWidth, fontSize) => {
+    return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * fontSize;
+  }
 
   const canvasDim = rectangles.reduce((acc, r) => {
     acc.width += r.width * multiplier + cBorder;
@@ -83,7 +89,7 @@ const ViewBoxWrapper = (props) => {
             x={cMargin + (r.width * multiplier) / 2} 
             y={cMargin - donorTopDimDecrement + prevHeight} 
             textAnchor="middle" 
-            fontSize={donorSidesFontSize} 
+            fontSize={scaleFontWithWindow(r.width, donorSidesFontSize)}
             fill={donorSidesTextFill}
           >
             {r.width}
@@ -92,7 +98,7 @@ const ViewBoxWrapper = (props) => {
             x={cMargin - donorLeftDimDecrement} 
             y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
             textAnchor="middle" 
-            fontSize={donorSidesFontSize}  
+            fontSize={scaleFontWithWindow(r.width, donorSidesFontSize)}
             fill={donorSidesTextFill}
           >
             {r.height}
@@ -101,7 +107,7 @@ const ViewBoxWrapper = (props) => {
             x={cMargin + (r.width * multiplier) / 2} 
             y={(cMargin + donorBottomPriceIncrement) + (r.height * multiplier)} 
             textAnchor="middle" 
-            fontSize={donorPriceFontSize} 
+            fontSize={scaleFontWithWindow(r.width, donorPriceFontSize)} 
             fill={donorPriceTextFill}
           >
             ${r.price}
@@ -125,7 +131,7 @@ const ViewBoxWrapper = (props) => {
                 y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
                 fill={toBeCutMainDimFill}
                 textAnchor="middle"
-                fontSize={toBeCutMainDimFontSize}
+                fontSize={scaleFontWithWindow(r.width, toBeCutMainDimFontSize)}
               >
                 {b.width} x {b.height} x {parseFloat(b.thickness)} Sheet #{b.index + 1}
               </text>
@@ -135,7 +141,7 @@ const ViewBoxWrapper = (props) => {
                 y={(b.y * multiplier + cMargin + toBeCutTopDimIncrement + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="middle"
-                fontSize={toBeCutSideDimsFontSize}
+                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.width}
               </text>
@@ -145,7 +151,7 @@ const ViewBoxWrapper = (props) => {
                 y={(b.y * multiplier + cMargin + b.height * multiplier - toBeCutBottomDimDecrement + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="middle"
-                fontSize={toBeCutSideDimsFontSize}
+                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.width}
               </text>
@@ -155,7 +161,7 @@ const ViewBoxWrapper = (props) => {
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="start"
-                fontSize={toBeCutSideDimsFontSize}
+                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.height}
               </text>
@@ -165,7 +171,7 @@ const ViewBoxWrapper = (props) => {
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="end"
-                fontSize={toBeCutSideDimsFontSize}
+                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.height}
               </text>
