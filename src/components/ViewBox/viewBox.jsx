@@ -22,6 +22,7 @@ const ViewBoxWrapper = (props) => {
   const cBorder = 250;
   const cMargin = cBorder/2;
   const multiplier = 25;
+  const heightIncrement = 100;
   
   const windowWidth = window.innerWidth
 
@@ -29,7 +30,7 @@ const ViewBoxWrapper = (props) => {
   const donorPieceStroke = "#000";
   const donorTopDimDecrement = 10;
   const donorLeftDimDecrement = 25;
-  const donorBottomPriceIncrement = 60;
+  const donorBottomPriceIncrement = 50;
   const donorSidesFontSize = 30;
   const donorPriceFontSize = 30; 
   const donorSidesTextFill = "#000";
@@ -74,7 +75,7 @@ const ViewBoxWrapper = (props) => {
         <div className="row text-center" style={{height: "100%"}}>
         {rectangles.map((r, i) => (
           <div key={i} className="col">
-            <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder}`} width="100%" height="100%" preserveAspectRatio="none">
+            <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
             <g key={i}>
           {/* Draw donor piece */}
           <rect
