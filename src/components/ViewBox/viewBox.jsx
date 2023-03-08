@@ -19,7 +19,7 @@ const ViewBoxWrapper = (props) => {
   let totalBoxes = 0;
   let priceTotal = 0;
   let prevHeight = 0;
-  const cBorder = 200;
+  const cBorder = 250;
   const cMargin = cBorder/2;
   const multiplier = 25;
   
@@ -38,19 +38,20 @@ const ViewBoxWrapper = (props) => {
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
-  const toBeCutTopDimIncrement = 25;
+  const toBeCutTopDimIncrement = 35;
   const toBeCutBottomDimDecrement = 15;
   const toBeCutLeftDimIncrement = 15;
   const toBeCutRightDimDecrement = 15;
   const toBeCutMainDimFontSize= 25;
-  const toBeCutSideDimsFontSize = 15;
+  const toBeCutSideDimsFontSize = 25;
   const toBeCutMainDimFill = "#000";
   const toBeCutSideDimsFill = "#FFF";
 
   const totalPriceTextFill = "#000";
 
-  const scaleFontWithWindow = (viewBoxWidth, fontSize) => {
-    return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * fontSize;
+  // Scales font size and spacing to maintain consistency across all SVG viewboxes.
+  const scaleWithWindow = (viewBoxWidth, adjVal) => {
+    return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
   }
 
   const canvasDim = rectangles.reduce((acc, r) => {
@@ -87,27 +88,27 @@ const ViewBoxWrapper = (props) => {
           {/* Draw donor piece dimensions next to corresponding sides */}
           <text 
             x={cMargin + (r.width * multiplier) / 2} 
-            y={cMargin - donorTopDimDecrement + prevHeight} 
+            y={cMargin - scaleWithWindow(r.width, donorTopDimDecrement) + prevHeight} 
             textAnchor="middle" 
-            fontSize={scaleFontWithWindow(r.width, donorSidesFontSize)}
+            fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
             fill={donorSidesTextFill}
           >
             {r.width}
           </text>
           <text 
-            x={cMargin - donorLeftDimDecrement} 
+            x={cMargin - scaleWithWindow(r.width, donorLeftDimDecrement)} 
             y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
             textAnchor="middle" 
-            fontSize={scaleFontWithWindow(r.width, donorSidesFontSize)}
+            fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
             fill={donorSidesTextFill}
           >
             {r.height}
           </text>
           <text 
             x={cMargin + (r.width * multiplier) / 2} 
-            y={(cMargin + donorBottomPriceIncrement) + (r.height * multiplier)} 
+            y={(cMargin + scaleWithWindow(r.width, donorBottomPriceIncrement)) + (r.height * multiplier)} 
             textAnchor="middle" 
-            fontSize={scaleFontWithWindow(r.width, donorPriceFontSize)} 
+            fontSize={scaleWithWindow(r.width, donorPriceFontSize)} 
             fill={donorPriceTextFill}
           >
             ${r.price}
@@ -125,53 +126,62 @@ const ViewBoxWrapper = (props) => {
                 strokeDasharray={toBeCutPieceStrokeDasharray}
                 stroke={toBeCutPieceStroke}
               />
-              {/* Draw the dimensions of the piece to-be-cut */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
                 y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
                 fill={toBeCutMainDimFill}
                 textAnchor="middle"
-                fontSize={scaleFontWithWindow(r.width, toBeCutMainDimFontSize)}
+                fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
               >
-                {b.width} x {b.height} x {parseFloat(b.thickness)} Sheet #{b.index + 1}
+                #{b.index + 1}
+              </text>
+              {/* Draw the dimensions of the piece to-be-cut */}
+              <text
+                x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
+                y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 1.5)}
+                fill={toBeCutMainDimFill}
+                textAnchor="middle"
+                fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+              >
+                {b.width} x {b.height} x {parseFloat(b.thickness)}
               </text>
               {/* Draw the top dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + toBeCutTopDimIncrement + prevHeight)}
+                y={(b.y * multiplier + cMargin + scaleWithWindow(r.width, toBeCutTopDimIncrement) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="middle"
-                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
+                fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.width}
               </text>
               {/* Draw the bottom dimension */}
               <text
                 x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                y={(b.y * multiplier + cMargin + b.height * multiplier - toBeCutBottomDimDecrement + prevHeight)}
+                y={(b.y * multiplier + cMargin + b.height * multiplier - scaleWithWindow(r.width, toBeCutBottomDimDecrement) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="middle"
-                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
+                fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.width}
               </text>
               {/* Draw the left dimension */}
               <text
-                x={(b.x * multiplier + cMargin + toBeCutLeftDimIncrement)}
+                x={(b.x * multiplier + cMargin + scaleWithWindow(r.width, toBeCutLeftDimIncrement))}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="start"
-                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
+                fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.height}
               </text>
               {/* Draw the right dimension */}
               <text
-                x={(b.x * multiplier + cMargin + b.width * multiplier - toBeCutRightDimDecrement)}
+                x={(b.x * multiplier + cMargin + b.width * multiplier - scaleWithWindow(r.width, toBeCutRightDimDecrement))}
                 y={(b.y * multiplier + cMargin + (b.height * multiplier / 2) + prevHeight)}
                 fill={toBeCutSideDimsFill}
                 textAnchor="end"
-                fontSize={scaleFontWithWindow(r.width, toBeCutSideDimsFontSize)}
+                fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               >
                 {b.height}
               </text>
