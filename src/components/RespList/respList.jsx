@@ -49,13 +49,6 @@ const ResponsiveList = (props) => {
 
   return (
     <div>
-      <div className="row">
-        <div className='col-12 d-flex justify-content-center'>
-            <Button className="addButton text-align-center" variant="primary" onClick={addRow}>
-              Add New
-            </Button>
-        </div>
-      </div>
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
@@ -152,6 +145,13 @@ const ResponsiveList = (props) => {
           </div>
         ))}
       </div>
+      </div>
+      <div className="row">
+        <div className='col-12 d-flex justify-content-center'>
+            <Button className="addButton text-align-center" variant="primary" onClick={addRow}>
+              Add New
+            </Button>
+        </div>
       </div>
     </div>
 );

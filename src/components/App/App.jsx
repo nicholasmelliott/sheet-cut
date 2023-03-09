@@ -25,7 +25,6 @@ function App() {
       <div style={{height: "40vh"}}>
         <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
       </div>
-      <div style={{height: "10vh"}}/>
     </div>
   )
 }
