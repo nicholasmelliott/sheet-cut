@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './viewBox.css';
 import getHexColorByIndex from '../../utils/colorByIndex';
 
@@ -14,7 +14,7 @@ const Rectangle = ({ width, height, x, y }) => (
 );
 
 const ViewBoxWrapper = (props) => {
-  const {rectangles} = props;
+  const {rectangles, printRef} = props;
 
   let totalBoxes = 0;
   let priceTotal = 0;
@@ -71,7 +71,7 @@ const ViewBoxWrapper = (props) => {
   return (
     <div style={{height: "100%"}}>
       { responsiveLayout ? (
-      <div className="container testimonial-group" style={{height: "100%"}}>
+      <div className="container testimonial-group"  ref={printRef} style={{height: "100%"}}>
         <div className="row text-center" style={{height: "100%"}}>
         {rectangles.map((r, i) => (
           <div key={i} className="col">
