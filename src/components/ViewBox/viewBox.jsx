@@ -67,7 +67,7 @@ const ViewBoxWrapper = (props) => {
   const responsiveLayout = true;
 
   console.log(rectangles);
-
+   
   return (
     <div style={{height: "100%"}}>
       { responsiveLayout ? (
@@ -124,7 +124,7 @@ const ViewBoxWrapper = (props) => {
                 width={b.width * multiplier}
                 height={b.height * multiplier}
                 fill={getHexColorByIndex(b.index)}
-                strokeDasharray={toBeCutPieceStrokeDasharray}
+                strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                 stroke={toBeCutPieceStroke}
               />
               <text
