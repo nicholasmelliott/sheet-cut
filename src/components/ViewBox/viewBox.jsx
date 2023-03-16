@@ -16,8 +16,8 @@ const Rectangle = ({ width, height, x, y }) => (
 const ViewBoxWrapper = (props) => {
   const {rectangles, printRef} = props;
 
-  let totalBoxes = 0;
-  let priceTotal = 0;
+  let donorBoxTotal = rectangles.length;
+  let priceTotal = (rectangles.reduce((acc, r) => acc + r.price, 0)).toFixed(2);
   let prevHeight = 0;
   const cBorder = 250;
   const cMargin = cBorder/2;
@@ -72,7 +72,11 @@ const ViewBoxWrapper = (props) => {
     <div style={{height: "100%"}}>
       { responsiveLayout ? (
       <div className="container testimonial-group"  ref={printRef} style={{height: "100%"}}>
-        <div className="row text-center" style={{height: "100%"}}>
+      <div className="row text-center d-flex justify-content-between">
+        <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
+        <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
+      </div>
+      <div className="row text-center" style={{height: "100%"}}>
         {rectangles.map((r, i) => (
           <div key={i} className="col">
             <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
@@ -188,9 +192,6 @@ const ViewBoxWrapper = (props) => {
               </text>
             </g>
           ))}
-          {/* {prevHeight += r.height * multiplier + cMargin}
-          {totalBoxes += r.boxes.length} */}
-          {priceTotal += r.price}
         </g>
             </svg>
           </div>
