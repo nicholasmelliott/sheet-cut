@@ -18,10 +18,16 @@ const ResponsiveList = (props) => {
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
+    let innerText = "";
+    if(e.target.selectedIndex != undefined){
+      const selectedIndex = e.target.selectedIndex;
+      const selectedOption = e.target.options[selectedIndex];
+      innerText = selectedOption.innerText;
+    }
     setRows((prevRows) =>
       prevRows.map((row, i) => {
         if (i === index) {
-          return { ...row, [name]: value };
+          return { ...row, [name]: value, [name + "Text"]: innerText };
         }
         return row;
       })
@@ -40,7 +46,7 @@ const ResponsiveList = (props) => {
   },[rows.length]);
 
   const addRow = () => {
-    setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, height: "", heightFraction: 0, thicknessFraction: 0 }]);
+    setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, widthFractionText: "", height: "", heightFraction: 0, heightFractionText: "", thicknessFraction: 0,  thicknessFractionText: ""}]);
   };
 
   const deleteRow = (index) => {

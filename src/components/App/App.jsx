@@ -9,9 +9,13 @@ function App() {
   const [rows, setRows] = useState([
     { width: "", 
     widthFraction: 0,
+    widthFractionText: "",
     height: "", 
-    heightFraction: 0, 
-    thicknessFraction: 0}
+    heightFraction: 0,
+    heightFractionText: "", 
+    thicknessFraction: 0,
+    thicknessFractionText: "",
+  }
   ]);
   const printRef = useRef(null);
 

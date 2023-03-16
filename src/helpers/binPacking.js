@@ -16,6 +16,11 @@ const createBoxes = (array) => {
         boxes.push(new Box(parseInt(el.width) + parseFloat(el.widthFraction), parseInt(el.height) + parseFloat(el.heightFraction)));
         boxes[i].thickness = parseFloat(el.thicknessFraction);
         boxes[i].index = i;
+        boxes[i].w = el.width;
+        boxes[i].wFrac = el.widthFractionText;
+        boxes[i].h = el.height;
+        boxes[i].hFrac = el.heightFractionText;
+        boxes[i].tFrac = el.thicknessFractionText;
     });
     return boxes;
 }

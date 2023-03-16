@@ -122,7 +122,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                  #{b.index + 1}
+                  ({b.index + 1})
                 </text>
                 {/* Draw the dimensions of the piece to-be-cut */}
                 <text
@@ -132,7 +132,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                  {b.width} x {b.height} x {parseFloat(b.thickness)}
+                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""}  x  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""}{(b.tFrac != 0) ? " x " + b.tFrac : ""}
                 </text>
                 {/* Draw the top dimension */}
                 <text
@@ -142,7 +142,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.width}
+                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""} 
                 </text>
                 {/* Draw the bottom dimension */}
                 <text
@@ -152,7 +152,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.width}
+                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""} 
                 </text>
                 {/* Draw the left dimension */}
                 <text
@@ -162,7 +162,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="start"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.height}
+                  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""} 
                 </text>
                 {/* Draw the right dimension */}
                 <text
@@ -172,7 +172,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="end"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.height}
+                  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""} 
                 </text>
               </g>
             ))}
