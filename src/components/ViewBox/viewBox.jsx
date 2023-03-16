@@ -67,16 +67,16 @@ const ViewBoxWrapper = (props) => {
   const responsiveLayout = true;
 
   console.log(rectangles);
-
+   
   return (
     <div style={{height: "100%"}}>
       { responsiveLayout ? (
       <div className="container testimonial-group"  ref={printRef} style={{height: "100%"}}>
-        <div className="row text-center d-flex justify-content-between">
-          <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
-          <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
-        </div>
-        <div className="row text-center" style={{height: "100%"}}>
+      <div className="row text-center d-flex justify-content-between">
+        <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
+        <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
+      </div>
+      <div className="row text-center" style={{height: "100%"}}>
         {rectangles.map((r, i) => (
           <div key={i} className="col">
             <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
@@ -128,7 +128,7 @@ const ViewBoxWrapper = (props) => {
                 width={b.width * multiplier}
                 height={b.height * multiplier}
                 fill={getHexColorByIndex(b.index)}
-                strokeDasharray={toBeCutPieceStrokeDasharray}
+                strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                 stroke={toBeCutPieceStroke}
               />
               <text
