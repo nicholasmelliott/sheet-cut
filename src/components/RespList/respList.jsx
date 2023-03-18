@@ -70,7 +70,7 @@ const ResponsiveList = (props) => {
           </Row>
           <Row>  
             <Col>
-            <InputGroup>
+            <InputGroup className='input-group-lg'>
               <InputGroup.Text>Width</InputGroup.Text>
               <Form.Control
                 type="number"
@@ -100,7 +100,7 @@ const ResponsiveList = (props) => {
             </Row>
             <Row className="mt-2">  
             <Col>
-            <InputGroup>
+            <InputGroup className='input-group-lg'>
               <InputGroup.Text>Height</InputGroup.Text>
               <Form.Control
                 type="number"
@@ -130,7 +130,7 @@ const ResponsiveList = (props) => {
           </Row>
             <Row className="mt-2">  
           <Col>
-          <InputGroup>
+          <InputGroup className='input-group-lg'>
               <InputGroup.Text>Thickness</InputGroup.Text> 
             <Form.Control
               as="select"
