@@ -10,7 +10,8 @@ const denominator = 16;
 
 const ResponsiveList = (props) => {
   const {rows, setRows, rectangles, setRectangles} = props;
-  const containerRef = useRef(null);
+  const containerRef = useRef(null);  
+  const prevRowsLengthRef = useRef(rows.length);
 
   const width = parseInt(rows[0].width) + parseFloat(rows[0].widthFraction);
   const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
@@ -42,7 +43,10 @@ const ResponsiveList = (props) => {
 
   //Scrolls to newly added input form
   useEffect(() => {
-    scrollLeft(containerRef);
+    if (rows.length > prevRowsLengthRef.current) {
+      scrollLeft(containerRef);
+    }
+    prevRowsLengthRef.current = rows.length;
   },[rows.length]);
 
   const addRow = () => {
@@ -55,6 +59,13 @@ const ResponsiveList = (props) => {
 
   return (
     <div>
+      <div className="row">
+        <div className='col-12 d-flex justify-content-center'>
+            <Button className="addButton text-align-center" variant="secondary" onClick={addRow}>
+              Add Sheet
+            </Button>
+        </div>
+      </div>
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
@@ -151,13 +162,6 @@ const ResponsiveList = (props) => {
           </div>
         ))}
       </div>
-      </div>
-      <div className="row">
-        <div className='col-12 d-flex justify-content-center'>
-            <Button className="addButton text-align-center" variant="primary" onClick={addRow}>
-              Add New
-            </Button>
-        </div>
       </div>
     </div>
 );
