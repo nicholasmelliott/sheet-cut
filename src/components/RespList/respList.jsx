@@ -49,9 +49,9 @@ const ResponsiveList = (props) => {
     prevRowsLengthRef.current = rows.length;
   },[rows.length]);
 
-  const addRow = () => {
-    setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, widthFractionText: "", height: "", heightFraction: 0, heightFractionText: "", thicknessFraction: 0,  thicknessFractionText: ""}]);
-  };
+  // const addRow = () => {
+  //   setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, widthFractionText: "", height: "", heightFraction: 0, heightFractionText: "", thicknessFraction: 0,  thicknessFractionText: ""}]);
+  // };
 
   const deleteRow = (index) => {
     setRows((prevRows) => prevRows.filter((_, i) => i !== index));
@@ -61,9 +61,9 @@ const ResponsiveList = (props) => {
     <div>
       <div className="row">
         <div className='col-12 d-flex justify-content-center'>
-            <Button className="addButton text-align-center" variant="secondary" onClick={addRow}>
+            {/* <Button className="addButton text-align-center" variant="secondary" onClick={addRow}>
               Add Sheet
-            </Button>
+            </Button> */}
         </div>
       </div>
       <div className="container testimonial-group">
