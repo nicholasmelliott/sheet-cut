@@ -26,24 +26,24 @@ function App() {
 
 
   useEffect(() => {
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="App">
       <iframe id="ifmcontentstoprint" style={{"height": "0px", "width": "0px", "position": "absolute"}}></iframe>
-      <div>
+      <div style={{height: "80vh"}}>
         <ViewBox rectangles={rectangles} printRef={printRef} />
       </div>
       <div style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
         <div className="d-flex align-items-center justify-content-center w-100" style={{backgroundColor: '#eee', height: '60px', width: "100%"}}>
-          <Dropdown className="d-flex align-items-center justify-content-center w-100" autoClose={false} drop="up">
-            <Dropdown.Toggle variant="danger" id="dropdown-autoclose-false dropdown-button-drop-up">
+          <Dropdown className="d-flex align-items-center justify-content-between p-2 w-100" autoClose={false} drop="up">
+            <Button variant="primary" style={{width: "30%"}} onClick={handlePrint}>Print</Button>
+            <Dropdown.Toggle variant="danger" id="dropdown-autoclose-false dropdown-button-drop-up" className='mx-auto' style={{width: "30%"}}>
               <span>&#9776;</span>
             </Dropdown.Toggle>
-            <Dropdown.Menu className="w-100 p-3 overflow-auto" style={{backgroundColor: '#eee'}}>
-              <Button variant="primary" style={{"width": "100%"}} onClick={handlePrint}>Print</Button>
-              <Dropdown.Divider />
+            <Button variant="secondary" style={{width: "30%"}} onClick={()=>{alert('Add!')}}>Add</Button>
+            <Dropdown.Menu className="w-100 p-3" style={{backgroundColor: '#eee'}}>
               <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
             </Dropdown.Menu>
           </Dropdown>
