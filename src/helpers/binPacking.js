@@ -2,14 +2,6 @@ import { BP2D as BinPacking2D } from 'binpackingjs'
 const { Bin, Box, Packer } = BinPacking2D;
 import data from '../data/Product_w_Dimensions.json';
 
-const ranBoxes = () => {
-    const boxes = [];
-    for(let i = 0; i < 15; i++) {
-        boxes.push(new Box(i + 5, i + 5));
-    }
-    return boxes;
-}
-
 const createBoxes = (array) => {
     const boxes = [];
     array.forEach((el, i) => {
@@ -25,7 +17,7 @@ const createBoxes = (array) => {
     return boxes;
 }
 
-const createBins = function(array) {
+const createBins = (array) => {
     const bins = [];
     array.forEach(el => {
         const dims = el.dimensions;
@@ -54,7 +46,7 @@ const packBoxes = (array) => {
     const bins = createBins(data);
     const boxes = createBoxes( array );
     const packer = new Packer(bins);
-    const packed_boxes = packer.pack(boxes);
+    packer.pack(boxes);
     const nonEmptyBins = removeEmptyBins(packer.bins);
     return nonEmptyBins;
 }
