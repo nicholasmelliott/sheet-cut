@@ -35,10 +35,35 @@ const ResponsiveList = (props) => {
     );
   };
 
+  const materials = [
+    {
+      mat: "SS Glass",
+      thick: 2.5
+    },
+    {
+      mat: "DS Glass",
+      thick: 3.0
+    },
+    {
+      mat: "1/8 Acrylic",
+      thick: .100
+    },
+    {
+      mat: "3/16 Acrylic",
+      thick: .210
+    },
+    {
+      mat: "1/4 Acrylic",
+      thick: .220
+    }
+  ]
+
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {
+    console.log(rows);
     const bins = packBoxes(rows);
     setRectangles(bins);
+    console.log(rectangles);
   },[rows]);
 
   //Scrolls to newly added input form
@@ -149,9 +174,9 @@ const ResponsiveList = (props) => {
               value={row.thicknessFraction}
               onChange={(e) => handleInputChange(e, index)}
             >
-              {generateReducedFractions(denominator).map((fraction) => (
-                  <option key={fraction.fraction} value={fraction.decimal}>
-                    {fraction.fraction}
+              {materials.map((material, i) => (
+                  <option key={i} value={material.thick}>
+                    {material.mat}
                   </option>
               ))}
             </Form.Control>
