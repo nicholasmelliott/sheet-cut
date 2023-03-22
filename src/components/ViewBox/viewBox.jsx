@@ -21,7 +21,7 @@ const ViewBoxWrapper = (props) => {
   let prevHeight = 0;
   const cBorder = 250;
   const cMargin = cBorder/2;
-  const multiplier = 25;
+  const multiplier = 15;
   const heightIncrement = 100;
   
   const windowWidth = window.innerWidth
