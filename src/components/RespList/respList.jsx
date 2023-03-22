@@ -9,7 +9,7 @@ import './respList.css';
 const denominator = 16;
 
 const ResponsiveList = (props) => {
-  const {rows, setRows, rectangles, setRectangles} = props;
+  const {rows, setRows, rectangles, setRectangles, materials} = props;
   const containerRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
 
@@ -34,29 +34,6 @@ const ResponsiveList = (props) => {
       })
     );
   };
-
-  const materials = [
-    {
-      mat: "SS Glass",
-      thick: 2.5
-    },
-    {
-      mat: "DS Glass",
-      thick: 3.0
-    },
-    {
-      mat: "1/8 Acrylic",
-      thick: .100
-    },
-    {
-      mat: "3/16 Acrylic",
-      thick: .210
-    },
-    {
-      mat: "1/4 Acrylic",
-      thick: .220
-    }
-  ]
 
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {

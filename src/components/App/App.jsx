@@ -6,6 +6,29 @@ import ViewBox from '../ViewBox/viewBox';
 import print from '../../helpers/printViewBox';
 
 function App() {
+  const mats = [
+    {
+      mat: "SS Glass",
+      thick: 2.5
+    },
+    {
+      mat: "DS Glass",
+      thick: 3.0
+    },
+    {
+      mat: "1/8 Acrylic",
+      thick: .100
+    },
+    {
+      mat: "3/16 Acrylic",
+      thick: .118
+    },
+    {
+      mat: "1/4 Acrylic",
+      thick: .220
+    }
+  ];
+
   const row = (index, colorIndex) => ({ 
     index,
     colorIndex,
@@ -15,11 +38,12 @@ function App() {
     height: "", 
     heightFraction: 0,
     heightFractionText: "", 
-    thicknessFraction: 0,
-    thicknessFractionText: "",
+    thicknessFraction: materials[0].thick,
+    thicknessFractionText: materials[0].mat,
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [rectangles, setRectangles] = useState([]);
+  const [materials] = useState(mats);
   const [rows, setRows] = useState([row(0, 0)]);
   const printRef = useRef(null);
 
@@ -54,7 +78,7 @@ function App() {
             </Dropdown.Toggle>
             <Button variant="secondary" style={{width: "30%"}} onClick={addRow} disabled={!isMenuOpen}>Add</Button>
             <Dropdown.Menu className="w-100 p-3" style={{backgroundColor: '#eee'}}>
-              <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} />
+              <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials}/>
             </Dropdown.Menu>
           </Dropdown>
         </div>
