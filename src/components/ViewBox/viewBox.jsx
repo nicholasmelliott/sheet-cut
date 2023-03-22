@@ -111,7 +111,7 @@ const ViewBoxWrapper = (props) => {
                   y={b.y * multiplier + cMargin + prevHeight}
                   width={b.width * multiplier}
                   height={b.height * multiplier}
-                  fill={getHexColorByIndex(b.index)}
+                  fill={getHexColorByIndex(b.colorIndex)}
                   strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                   stroke={toBeCutPieceStroke}
                 />

@@ -40,7 +40,8 @@ const createBoxes = (array) => {
     array.forEach((el, i) => {
         boxes.push(new Box(parseInt(el.width) + parseFloat(el.widthFraction), parseInt(el.height) + parseFloat(el.heightFraction)));
         boxes[i].thickness = parseFloat(el.thicknessFraction);
-        boxes[i].index = i;
+        boxes[i].index = el.index;
+        boxes[i].colorIndex = el.colorIndex;
         boxes[i].w = el.width;
         boxes[i].wFrac = el.widthFractionText;
         boxes[i].h = el.height;

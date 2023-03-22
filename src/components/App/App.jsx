@@ -6,7 +6,9 @@ import ViewBox from '../ViewBox/viewBox';
 import print from '../../helpers/printViewBox';
 
 function App() {
-  const row = { 
+  const row = (index, colorIndex) => ({ 
+    index,
+    colorIndex,
     width: "", 
     widthFraction: 0,
     widthFractionText: "",
@@ -15,10 +17,10 @@ function App() {
     heightFractionText: "", 
     thicknessFraction: 0,
     thicknessFractionText: "",
-  };
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [rectangles, setRectangles] = useState([]);
-  const [rows, setRows] = useState([row]);
+  const [rows, setRows] = useState([row(0, 0)]);
   const printRef = useRef(null);
 
   const handlePrint = () => {
@@ -30,7 +32,7 @@ function App() {
   };
 
   const addRow = () => {
-    setRows((prevRows) => [...prevRows, row]);
+    setRows((prevRows) => [...prevRows, row(prevRows.length, prevRows.length)]);
   };
 
   useEffect(() => {

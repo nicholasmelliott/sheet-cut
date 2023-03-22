@@ -79,7 +79,11 @@ const ResponsiveList = (props) => {
   // };
 
   const deleteRow = (index) => {
-    setRows((prevRows) => prevRows.filter((_, i) => i !== index));
+    setRows((prevRows) => 
+      prevRows
+        .filter((_, i) => i !== index)
+        .map((row, i) => ({...row, index: i}))
+    );
   };
 
   return (
@@ -94,7 +98,7 @@ const ResponsiveList = (props) => {
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
-          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(index) }}>
+          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
           <Form>
           <Row key={index}>
             <div className='col-8 mb-1'>Sheet #{index + 1}</div>  
