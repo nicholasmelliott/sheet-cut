@@ -41,7 +41,7 @@ function App() {
     thicknessFraction: materials[0].thick,
     thicknessFractionText: materials[0].mat,
   });
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [rectangles, setRectangles] = useState([]);
   const [materials] = useState(mats);
   const [rows, setRows] = useState([row(0, 0)]);
@@ -71,7 +71,7 @@ function App() {
       </div>
       <div style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
         <div className="d-flex align-items-center justify-content-center w-100" style={{backgroundColor: '#eee', height: '60px', width: "100%"}}>
-          <Dropdown className="d-flex align-items-center justify-content-between p-2 w-100" autoClose={false} drop="up" onToggle={handleToggle}>
+          <Dropdown className="d-flex align-items-center justify-content-between p-2 w-100" autoClose={false} drop="up" onToggle={handleToggle} defaultShow={isMenuOpen}>
             <Button variant="primary" style={{width: "30%"}} onClick={handlePrint}>Print</Button>
             <Dropdown.Toggle variant="danger" id="dropdown-autoclose-false dropdown-button-drop-up" className='mx-auto' style={{width: "30%"}}>
               <span>&#9776;</span>

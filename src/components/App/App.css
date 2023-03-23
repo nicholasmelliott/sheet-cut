@@ -14,3 +14,6 @@ body {
   width: 100%;
 }
 
+.dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
