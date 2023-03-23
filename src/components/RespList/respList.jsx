@@ -9,7 +9,7 @@ import './respList.css';
 const denominator = 16;
 
 const ResponsiveList = (props) => {
-  const {rows, setRows, rectangles, setRectangles} = props;
+  const {rows, setRows, rectangles, setRectangles, materials} = props;
   const containerRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
 
@@ -35,29 +35,6 @@ const ResponsiveList = (props) => {
     );
   };
 
-  const materials = [
-    {
-      mat: "SS Glass",
-      thick: 2.5
-    },
-    {
-      mat: "DS Glass",
-      thick: 3.0
-    },
-    {
-      mat: "1/8 Acrylic",
-      thick: .100
-    },
-    {
-      mat: "3/16 Acrylic",
-      thick: .210
-    },
-    {
-      mat: "1/4 Acrylic",
-      thick: .220
-    }
-  ]
-
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {
     console.log(rows);
@@ -79,7 +56,11 @@ const ResponsiveList = (props) => {
   // };
 
   const deleteRow = (index) => {
-    setRows((prevRows) => prevRows.filter((_, i) => i !== index));
+    setRows((prevRows) => 
+      prevRows
+        .filter((_, i) => i !== index)
+        .map((row, i) => ({...row, index: i}))
+    );
   };
 
   return (
@@ -94,7 +75,7 @@ const ResponsiveList = (props) => {
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
-          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(index) }}>
+          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
           <Form>
           <Row key={index}>
             <div className='col-8 mb-1'>Sheet #{index + 1}</div>  
