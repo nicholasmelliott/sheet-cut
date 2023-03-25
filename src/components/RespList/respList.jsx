@@ -100,6 +100,7 @@ const ResponsiveList = (props) => {
             <InputGroup className='input-group-lg'>
               <InputGroup.Text>Width</InputGroup.Text>
               <Form.Control
+                inputMode="numeric"
                 type="number"
                 name="width"
                 value={row.width}
@@ -131,6 +132,7 @@ const ResponsiveList = (props) => {
             <InputGroup className='input-group-lg'>
               <InputGroup.Text>Height</InputGroup.Text>
               <Form.Control
+                inputMode="numeric"
                 type="number"
                 name="height"
                 value={row.height}
