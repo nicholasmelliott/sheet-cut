@@ -113,6 +113,7 @@ const ResponsiveList = (props) => {
                 value={row.widthFraction}
                 onChange={(e) => handleInputChange(e, index)}
               >
+                <option value={0} defaultValue disabled>+ Frac. in</option>
                 {generateReducedFractions(denominator).map((fraction) => (
                   <option key={fraction.fraction} value={fraction.decimal}>
                     {fraction.fraction}
@@ -144,6 +145,7 @@ const ResponsiveList = (props) => {
                 value={row.heightFraction}
                 onChange={(e) => handleInputChange(e, index)}
               >
+                <option value={0} defaultValue disabled>+ Frac. in</option>
                 {generateReducedFractions(denominator).map((fraction) => (
                   <option key={fraction.fraction} value={fraction.decimal}>
                     {fraction.fraction}
