@@ -10,7 +10,8 @@ const denominator = 16;
 
 const ResponsiveList = (props) => {
   const {rows, setRows, rectangles, setRectangles, materials} = props;
-  const containerRef = useRef(null);  
+  const containerRef = useRef(null);
+  const firstInputRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
 
   const width = parseInt(rows[0].width) + parseFloat(rows[0].widthFraction);
@@ -35,6 +36,11 @@ const ResponsiveList = (props) => {
     );
   };
 
+  useEffect(() => {
+    firstInputRef.current.focus();
+    firstInputRef.current.onClick;
+  }, []);
+
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {
     console.log(rows);
@@ -43,10 +49,14 @@ const ResponsiveList = (props) => {
     console.log(rectangles);
   },[rows]);
 
-  //Scrolls to newly added input form
-  useEffect(() => {
+  // When rows length changes
+  useEffect(() => {    
+    // If row length increases
     if (rows.length > prevRowsLengthRef.current) {
+      // scrolls to newly added input form
       scrollLeft(containerRef);
+      // focuses on first input
+      firstInputRef.current.focus()
     }
     prevRowsLengthRef.current = rows.length;
   },[rows.length]);
@@ -94,6 +104,7 @@ const ResponsiveList = (props) => {
                 name="width"
                 value={row.width}
                 onChange={(e) => handleInputChange(e, index)}
+                ref={firstInputRef}
               />
               <Form.Control
                 as="select"
