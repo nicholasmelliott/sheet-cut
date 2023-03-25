@@ -51,8 +51,10 @@ function App() {
     print(printRef);
   }
 
+  // Handles dropdown menu button click
   const handleToggle = (isOpen) => {
     setIsMenuOpen(isOpen);
+    window.scrollTo(0, 0);
   };
 
   const addRow = () => {
