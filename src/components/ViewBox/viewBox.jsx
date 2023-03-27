@@ -54,8 +54,8 @@ const ViewBoxWrapper = (props) => {
   }
 
   return (
-    <div style={{height: "100%"}}>
-      <div className="container testimonial-group"  ref={printRef} style={{height: "100%"}}>
+    <div ref={printRef} style={{height: "100%"}}>
+      <div className="container testimonial-group" style={{height: "100%"}}>
         <div className="row text-center d-flex justify-content-between p-2">
           <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
