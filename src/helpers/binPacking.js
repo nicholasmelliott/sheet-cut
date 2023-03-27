@@ -35,21 +35,28 @@ const splitArryByThickness = arr => {
   };
   
 
-const createBoxes = (array) => {
-    const boxes = [];
-    array.forEach((el, i) => {
-        boxes.push(new Box(parseInt(el.width) + parseFloat(el.widthFraction), parseInt(el.height) + parseFloat(el.heightFraction)));
-        boxes[i].thickness = parseFloat(el.thicknessFraction);
-        boxes[i].index = el.index;
-        boxes[i].colorIndex = el.colorIndex;
-        boxes[i].w = el.width;
-        boxes[i].wFrac = el.widthFractionText;
-        boxes[i].h = el.height;
-        boxes[i].hFrac = el.heightFractionText;
-        boxes[i].tFrac = el.thicknessFractionText;
+  const createBoxes = (array) => {
+    return array.map((el) => {
+      const { width, height, heightFraction, widthFraction, heightFractionText, widthFractionText, thicknessFraction, thicknessFractionText, index, colorIndex } = el;
+      const updatedWidth = width > height ? height : width;
+      const updatedHeight = width > height ? width : height;
+      const updatedWFrac = width > height ? heightFraction : widthFraction;
+      const updatedHFrac = width > height ? widthFraction : heightFraction;
+      const updatedWFracText = width > height ? heightFractionText : widthFractionText;
+      const updatedHFracText = width > height ? widthFractionText : heightFractionText;
+      const box = new Box((updatedWidth + updatedWFrac), (updatedHeight + updatedHFrac));
+      box.thickness = thicknessFraction;
+      box.index = index;
+      box.colorIndex = colorIndex;
+      box.w = updatedWidth;
+      box.wFrac = updatedWFracText;
+      box.h = updatedHeight;
+      box.hFrac = updatedHFracText;
+      box.tFrac = thicknessFractionText;
+      return box;
     });
-    return boxes;
-}
+  }
+  
 
 //Creates bins depending on thickness
 const createBins = (array, matThickness) => {
@@ -84,12 +91,15 @@ const packBoxes = (array) => {
     let finalArray = [];
     const arraysByThick = splitArryByThickness(array);
     arraysByThick.forEach(el => {
-        const bins = createBins(data, parseFloat(el[0].thicknessFraction)); 
-        const boxes = createBoxes( el );
-        const packer = new Packer(bins);
-        packer.pack(boxes);
-        const nonEmptyBins = removeEmptyBins(packer.bins);
-        finalArray = [...finalArray, ...nonEmptyBins];
+        // This code checks if both the width and height properties are either non-empty strings or non-zero fractions
+        if (!(el[0].width === "" && el[0].widthFraction === 0) && !(el[0].height === "" && el[0].heightFraction === 0)) {
+            const bins = createBins(data, el[0].thicknessFraction); 
+            const boxes = createBoxes( el );
+            const packer = new Packer(bins);
+            packer.pack(boxes);
+            const nonEmptyBins = removeEmptyBins(packer.bins);
+            finalArray = [...finalArray, ...nonEmptyBins];
+        }
     })
     return finalArray;
 }

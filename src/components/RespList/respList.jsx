@@ -18,7 +18,7 @@ const ResponsiveList = (props) => {
   const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
 
 
-  const handleInputChange = (e, index) => {
+  const handleInputChange = (e, index, valueParser) => {
     const { name, value } = e.target;
     let innerText = "";
     if(e.target.selectedIndex != undefined){
@@ -29,11 +29,19 @@ const ResponsiveList = (props) => {
     setRows((prevRows) =>
       prevRows.map((row, i) => {
         if (i === index) {
-          return { ...row, [name]: value, [name + "Text"]: innerText };
+          return { ...row, [name]: valueParser(value), [name + "Text"]: innerText };
         }
         return row;
       })
     );
+  };
+
+  const handleIntInputChange = (e, index) => {
+    handleInputChange(e, index, parseInt);
+  };
+
+  const handleFloatInputChange = (e, index) => {
+    handleInputChange(e, index, parseFloat);
   };
 
   useEffect(() => {
@@ -104,14 +112,14 @@ const ResponsiveList = (props) => {
                 type="number"
                 name="width"
                 value={row.width}
-                onChange={(e) => handleInputChange(e, index)}
+                onChange={(e) => handleIntInputChange(e, index)}
                 ref={firstInputRef}
               />
               <Form.Control
                 as="select"
                 name="widthFraction"
                 value={row.widthFraction}
-                onChange={(e) => handleInputChange(e, index)}
+                onChange={(e) => handleFloatInputChange(e, index)}
               >
                 <option value={0} defaultValue disabled>+ Frac. in</option>
                 {generateReducedFractions(denominator).map((fraction) => (
@@ -137,13 +145,13 @@ const ResponsiveList = (props) => {
                 type="number"
                 name="height"
                 value={row.height}
-                onChange={(e) => handleInputChange(e, index)}
+                onChange={(e) => handleIntInputChange(e, index)}
               />
               <Form.Control
                 as="select"
                 name="heightFraction"
                 value={row.heightFraction}
-                onChange={(e) => handleInputChange(e, index)}
+                onChange={(e) => handleFloatInputChange(e, index)}
               >
                 <option value={0} defaultValue disabled>+ Frac. in</option>
                 {generateReducedFractions(denominator).map((fraction) => (
@@ -168,7 +176,7 @@ const ResponsiveList = (props) => {
               as="select"
               name="thicknessFraction"
               value={row.thicknessFraction}
-              onChange={(e) => handleInputChange(e, index)}
+              onChange={(e) => handleFloatInputChange(e, index)}
             >
               {materials.map((material, i) => (
                   <option key={i} value={material.thick}>
