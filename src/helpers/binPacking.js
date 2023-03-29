@@ -13,6 +13,11 @@ const splitArryByThickness = arr => {
         if(!curr){
             return acc; // Skip the current element if it is falsy
         }
+        
+        // This code checks if both the width and height properties are either non-empty strings or non-zero fractions and skips curr element if true
+        if ((curr.width === "" && curr.widthFraction === 0) || (curr.height === "" && curr.heightFraction === 0)) {
+            return acc;            
+        }
   
         const thickness = curr.thicknessFraction;
         if (!acc[thickness]) {
@@ -90,16 +95,13 @@ const removeEmptyBins = (bins) => {
 const packBoxes = (array) => {
     let finalArray = [];
     const arraysByThick = splitArryByThickness(array);
-    arraysByThick.forEach(el => {
-        // This code checks if both the width and height properties are either non-empty strings or non-zero fractions
-        if (!(el[0].width === "" && el[0].widthFraction === 0) && !(el[0].height === "" && el[0].heightFraction === 0)) {
-            const bins = createBins(data, el[0].thicknessFraction); 
-            const boxes = createBoxes( el );
-            const packer = new Packer(bins);
-            packer.pack(boxes);
-            const nonEmptyBins = removeEmptyBins(packer.bins);
-            finalArray = [...finalArray, ...nonEmptyBins];
-        }
+    arraysByThick.forEach((el) => {
+        const bins = createBins(data, el[0].thicknessFraction); 
+        const boxes = createBoxes( el );
+        const packer = new Packer(bins);
+        packer.pack(boxes);
+        const nonEmptyBins = removeEmptyBins(packer.bins);
+        finalArray = [...finalArray, ...nonEmptyBins];
     })
     return finalArray;
 }
