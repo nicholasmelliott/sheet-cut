@@ -14,10 +14,6 @@ const ResponsiveList = (props) => {
   const firstInputRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
 
-  const width = parseInt(rows[0].width) + parseFloat(rows[0].widthFraction);
-  const height = parseInt(rows[0].height) + parseFloat(rows[0].heightFraction);
-
-
   const handleInputChange = (e, index, valueParser) => {
     const { name, value } = e.target;
     let innerText = "";
@@ -69,10 +65,6 @@ const ResponsiveList = (props) => {
     prevRowsLengthRef.current = rows.length;
   },[rows.length]);
 
-  // const addRow = () => {
-  //   setRows((prevRows) => [...prevRows, { width: "", widthFraction: 0, widthFractionText: "", height: "", heightFraction: 0, heightFractionText: "", thicknessFraction: 0,  thicknessFractionText: ""}]);
-  // };
-
   const deleteRow = (index) => {
     setRows((prevRows) => 
       prevRows
@@ -83,13 +75,6 @@ const ResponsiveList = (props) => {
 
   return (
     <div>
-      <div className="row">
-        <div className='col-12 d-flex justify-content-center'>
-            {/* <Button className="addButton text-align-center" variant="secondary" onClick={addRow}>
-              Add Sheet
-            </Button> */}
-        </div>
-      </div>
       <div className="container testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
