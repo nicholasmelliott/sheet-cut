@@ -22,7 +22,7 @@ const ViewBoxWrapper = (props) => {
   const cBorder = 250;
   const cMargin = cBorder/2;
   const multiplier = 15;
-  const heightIncrement = 100;
+  const heightIncrement = 400;
   
   const windowWidth = window.innerWidth
 
@@ -35,7 +35,9 @@ const ViewBoxWrapper = (props) => {
   const donorPriceFontSize = 30; 
   const donorSidesTextFill = "#000";
   const donorPriceTextFill = "#000";
-  
+
+  let toBeCutMainSpacing = 0;
+  const toBeCutMainBottomIncrement = 90;
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
@@ -126,14 +128,16 @@ const ViewBoxWrapper = (props) => {
                 </text>
                 {/* Draw the dimensions of the piece to-be-cut */}
                 <text
-                  x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
-                  y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 1.5)}
+                  x={cMargin + (r.width * multiplier) / 2} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
                   fill={toBeCutMainDimFill}
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""}  x  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""}{(b.tFrac != 0) ? " x " + b.tFrac : ""}
+                   ({b.index + 1}) {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""}  x  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""}{(b.tFrac != 0) ? " x " + b.tFrac : ""}
                 </text>
+                {/* Update spacing between dimensions */}
+                {toBeCutMainSpacing += 35}
                 {/* Draw the top dimension */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
@@ -176,6 +180,8 @@ const ViewBoxWrapper = (props) => {
                 </text>
               </g>
             ))}
+            {/* Reset toBeCut dims spacing for each viewbox */}
+            {toBeCutMainSpacing = 0}  
           </g>
               </svg>
             </div>
