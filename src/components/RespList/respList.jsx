@@ -16,19 +16,17 @@ const ResponsiveList = (props) => {
 
   const handleInputChange = (e, index, valueParser) => {
     const { name, value } = e.target;
-    let innerText = "";
-    if(e.target.selectedIndex != undefined){
-      const selectedIndex = e.target.selectedIndex;
-      const selectedOption = e.target.options[selectedIndex];
-      innerText = selectedOption.innerText;
-    }
+    const innerText = e.target.options?.[e.target.selectedIndex]?.innerText || "";
     setRows((prevRows) =>
-      prevRows.map((row, i) => {
-        if (i === index) {
-          return { ...row, [name]: valueParser(value), [name + "Text"]: innerText };
-        }
-        return row;
-      })
+      prevRows.map((row, i) =>
+      i === index
+        ? {
+            ...row,
+            [name]: value === "" ? "" : valueParser(value),
+            [`${name}Text`]: innerText,
+          }
+        : row
+      )
     );
   };
 
