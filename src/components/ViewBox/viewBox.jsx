@@ -23,10 +23,13 @@ const ViewBoxWrapper = (props) => {
   const cMargin = cBorder/2;
   const multiplier = 15;
   const heightIncrement = 400;
+  const minWidthSize = 8;
+  const minHeightSize = 8;
   
   const windowWidth = window.innerWidth
 
-  const donorPieceFill = "#a1c5ff";
+  // const donorPieceFill = "#a1c5ff";
+  const donorPieceFill = "#003d34";
   const donorPieceStroke = "#000";
   const donorTopDimDecrement = 10;
   const donorLeftDimDecrement = 25;
@@ -55,6 +58,27 @@ const ViewBoxWrapper = (props) => {
     return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
   }
 
+  // Conditionally render text based on rect width.
+  const renderHeightDim = (rect, minWidthSize) => {
+    return rect.w > minWidthSize && (
+      <>
+        {rect.h}
+        {rect.hFrac !== 0 && ` ${rect.hFrac}`}
+      </>
+    );
+  };
+
+  // Conditionally render text based on rect height.
+  const renderWidthDim = (rect, minHeightSize) => {
+    return rect.h > minHeightSize && (
+      <>
+        {rect.w}
+        {rect.wFrac !== 0 && ` ${rect.wFrac}`}
+      </>
+    );
+  };
+  
+
   return (
     <div ref={printRef} style={{height: "100%"}}>
       <div className="container testimonial-group" style={{height: "100%"}}>
@@ -66,6 +90,16 @@ const ViewBoxWrapper = (props) => {
           {rectangles.map((r, i) => (
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id={`donorPieceGradient${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                  <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                  <stop offset="40%" stopColor={donorPieceFill} stopOpacity="0.1" />
+                  <stop offset="60%" stopColor={donorPieceFill} stopOpacity="0.1" />
+                  <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
               <g key={i}>
             {/* Draw donor piece */}
             <rect
@@ -73,7 +107,7 @@ const ViewBoxWrapper = (props) => {
               y={cMargin + prevHeight}
               width={r.width * multiplier}
               height={r.height * multiplier}
-              fill={donorPieceFill}
+              fill={`url(#donorPieceGradient${i})`}
               stroke={donorPieceStroke}
             />
             {/* Draw donor piece dimensions next to corresponding sides */}
@@ -107,13 +141,23 @@ const ViewBoxWrapper = (props) => {
             {/* Draw piece to-be-cut inside donor piece */}
             {r.boxes.map((b, j) => (
               <g key={j}>
+                <defs>
+                  <linearGradient id={`toBeCutPieceGradient${i}${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                    <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                    <stop offset="40%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
+                    <stop offset="60%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
+                    <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                  </linearGradient>
+                </defs>
                 <rect
                   key={j}
                   x={b.x * multiplier + cMargin}
                   y={b.y * multiplier + cMargin + prevHeight}
                   width={b.width * multiplier}
                   height={b.height * multiplier}
-                  fill={getHexColorByIndex(b.colorIndex)}
+                  fill={`url(#toBeCutPieceGradient${i}${j})`}
                   strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                   stroke={toBeCutPieceStroke}
                 />
@@ -146,7 +190,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""} 
+                  {renderWidthDim(b, minHeightSize)}
                 </text>
                 {/* Draw the bottom dimension */}
                 <text
@@ -156,7 +200,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.w}{(b.wFrac != 0) ? " " + b.wFrac : ""} 
+                  {renderWidthDim(b, minHeightSize)}
                 </text>
                 {/* Draw the left dimension */}
                 <text
@@ -166,7 +210,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="start"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""} 
+                  {renderHeightDim(b, minWidthSize)}
                 </text>
                 {/* Draw the right dimension */}
                 <text
@@ -176,7 +220,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="end"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
                 >
-                  {b.h}{(b.hFrac != 0) ? " " + b.hFrac : ""} 
+                  {renderHeightDim(b, minWidthSize)}
                 </text>
               </g>
             ))}
