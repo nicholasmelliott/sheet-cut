@@ -73,7 +73,7 @@ const ResponsiveList = (props) => {
 
   return (
     <div>
-      <div className="container testimonial-group">
+      <div className="resp-list-container resp-list-testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
           <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>

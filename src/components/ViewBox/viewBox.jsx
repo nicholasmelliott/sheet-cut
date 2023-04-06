@@ -55,7 +55,15 @@ const ViewBoxWrapper = (props) => {
 
   // Scales font size and spacing to maintain consistency across all SVG viewboxes.
   const scaleWithWindow = (viewBoxWidth, adjVal) => {
-    return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
+    const xlWindowMult = 3;
+    const lgWindowMult = 2;
+    if(windowWidth > 1200){
+      return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * xlWindowMult);
+    }else if(windowWidth > 768){
+      return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * lgWindowMult);
+    }else{
+      return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
+    }
   }
 
   // Conditionally render text based on rect width.
@@ -81,7 +89,7 @@ const ViewBoxWrapper = (props) => {
 
   return (
     <div ref={printRef} style={{height: "100%"}}>
-      <div className="container testimonial-group" style={{height: "100%"}}>
+      <div className="container view-box-testimonial-group" style={{height: "100%"}}>
         <div className="row text-center d-flex justify-content-between p-2">
           <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>

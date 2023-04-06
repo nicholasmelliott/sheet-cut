@@ -1,8 +1,20 @@
-.testimonial-group > .row {
+@media (min-width: 768px) {
+  .view-box-testimonial-group > .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .view-box-testimonial-group > .row > .col {
+    flex: 0 0 33.33%; 
+    max-width: 33.33%; 
+  }
+}
+
+.view-box-testimonial-group > .row {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
-  .testimonial-group > .row > .col {
+  .view-box-testimonial-group > .row > .col {
     display: inline-block;
   }
