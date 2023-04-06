@@ -15,11 +15,11 @@ const print = (printRef) => {
           height: auto;
           margin: 0 auto;   
         }
-        .testimonial-group > .row {
+        .view-box-testimonial-group > .row {
           height: auto;
           display: block;
         }
-        .testimonial-group > .row > .col {
+        .view-box-testimonial-group > .row > .col {
           display: inline-block;
           width: 33.33%;
           height: 33.33%;
@@ -39,6 +39,9 @@ const print = (printRef) => {
         .col-6.text-primary {
           text-align: right;
           margin-left: 20px;
+        }
+        rect {
+          fill: none;
         }
       }
     </style>
