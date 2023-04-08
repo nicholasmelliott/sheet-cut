@@ -2,42 +2,39 @@ import { BP2D as BinPacking2D } from 'binpackingjs'
 const { Bin, Box, Packer } = BinPacking2D;
 import data from '../data/ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 
-const splitArryByThickness = arr => {
-    const newArry = [];
+const splitArrayByThickness = arr => {
+  // Return an empty array if the input is not an array
+  if (!Array.isArray(arr)) {
+    return []; 
+  }
+
+  const result = {};
+  
+  for (const curr of arr) {
+    // Skip the current element if it is falsy or has invalid width and/or height properties
+    if (!curr || (curr.width === "" && curr.widthFraction === 0) || (curr.height === "" && curr.heightFraction === 0)) {
+      continue; 
+    }
     
-    if(!Array.isArray(arr)){
-      return []; // Return an empty array if the input is not an array
+    const thickness = curr.thicknessFraction;
+    if (!result[thickness]) {
+      // Create a new array for the current thickness and add the current element to it
+      result[thickness] = [curr]; 
+    } else {
+      // Add the current element to the end of the existing array for the current thickness
+      const index = result[thickness].findIndex(obj => obj.thicknessFraction < thickness);
+      if (index === -1) {
+        result[thickness].push(curr); 
+      } else {
+        // Insert the current element at the correct position in the existing array for the current thickness
+        result[thickness].splice(index, 0, curr); 
+      }
     }
-  
-    const result = arr.reduce((acc, curr) => {
-        if(!curr){
-            return acc; // Skip the current element if it is falsy
-        }
-        
-        // This code checks if both the width and height properties are either non-empty strings or non-zero fractions and skips curr element if true
-        if ((curr.width === "" && curr.widthFraction === 0) || (curr.height === "" && curr.heightFraction === 0)) {
-            return acc;            
-        }
-  
-        const thickness = curr.thicknessFraction;
-        if (!acc[thickness]) {
-          acc[thickness] = [curr]; // Create a new array for the current thickness and add the current element to it
-        } else {
-          const index = acc[thickness].findIndex(obj => obj.thicknessFraction < thickness);
-          if (index === -1) {
-            acc[thickness].push(curr); // Add the current element to the end of the existing array for the current thickness
-          } else {
-            acc[thickness].splice(index, 0, curr); // Insert the current element at the correct position in the existing array for the current thickness
-          }
-        }
-        return acc; // Return the accumulator object with updated arrays for each thickness
-    }, {}); // Initialize the accumulator object as an empty object
-  
-    for(const thickness in result){
-      newArry.push(result[thickness]);
-    }
-    return newArry;
-  };
+  }
+  // Return an array of arrays, each containing objects with the same thicknessFraction value
+  return Object.values(result); 
+};
+
   
 
   const createBoxes = (array) => {
@@ -83,18 +80,14 @@ const createBins = (array, matThickness) => {
 }
 
 const removeEmptyBins = (bins) => {
-    const nonEmptyBins = [];
-    for(let i = 0; i < bins.length; i++) {
-        if(bins[i].boxes.length != 0) {
-            nonEmptyBins.push(bins[i]);
-        }
-    }
-    return nonEmptyBins;
+  const nonEmptyBins = bins.filter(({ boxes }) => boxes.length > 0);
+  nonEmptyBins.sort((a, b) => a.boxes[0].index - b.boxes[0].index);
+  return nonEmptyBins;
 }
 
 const packBoxes = (array) => {
     let finalArray = [];
-    const arraysByThick = splitArryByThickness(array);
+    const arraysByThick = splitArrayByThickness(array);
     arraysByThick.forEach((el) => {
         const bins = createBins(data, el[0].thicknessFraction); 
         const boxes = createBoxes( el );
