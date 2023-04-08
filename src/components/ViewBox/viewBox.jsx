@@ -84,8 +84,8 @@ const ViewBoxWrapper = (props) => {
   const renderHeightDim = (rect, minWidthSize) => {
     return rect.w > minWidthSize && (
       <>
-        {rect.h}
-        {rect.hFrac !== "0" && ` ${rect.hFrac}`}
+        {rect.h !== 0 && rect.h}
+        {rect.hFrac !== "0" && ` ${rect.hFrac} `}
       </>
     );
   };
@@ -94,8 +94,8 @@ const ViewBoxWrapper = (props) => {
   const renderWidthDim = (rect, minHeightSize) => {
     return rect.h > minHeightSize && (
       <>
-        {rect.w}
-        {rect.wFrac !== "0" && ` ${rect.wFrac}`}
+        {rect.w !== 0 && rect.w}
+        {rect.wFrac !== "0" && ` ${rect.wFrac} `}
       </>
     );
   };
@@ -200,7 +200,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                   ({b.index + 1}) {b.w}{(b.wFrac !== "0") ? " " + b.wFrac : ""}  x  {b.h}{(b.hFrac !== "0") ? " " + b.hFrac : ""}{(b.tFrac != 0) ? " x " + b.tFrac : ""}
+                   ({b.index + 1}) {b.w !== 0 && ` ${b.w}`}{b.wFrac !== "0" && ` ${b.wFrac} `}x{b.h !== 0 && ` ${b.h}`}{b.hFrac !== "0" && ` ${b.hFrac} `}{b.tFrac !== 0 && ` x ${b.tFrac}`}
                 </text>
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
