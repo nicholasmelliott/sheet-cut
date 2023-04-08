@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './viewBox.css';
 import getHexColorByIndex from '../../utils/colorByIndex';
+import scrollLeft from '../../utils/scrollLeft';
 
 const Rectangle = ({ width, height, x, y }) => (
   <rect
@@ -15,6 +16,9 @@ const Rectangle = ({ width, height, x, y }) => (
 
 const ViewBoxWrapper = (props) => {
   const {rectangles, printRef} = props;
+
+  const containerRef = useRef(null);
+  const prevRectsLengthRef = useRef(rectangles.length);
 
   let donorBoxTotal = rectangles.length;
   let priceTotal = (rectangles.reduce((acc, r) => acc + r.price, 0)).toFixed(2);
@@ -52,6 +56,16 @@ const ViewBoxWrapper = (props) => {
   const toBeCutSideDimsFontSize = 25;
   const toBeCutMainDimFill = "#000";
   const toBeCutSideDimsFill = "#FFF";
+
+   // When rectangles length changes
+   useEffect(() => {    
+    // If row length increases
+    if (rectangles.length > prevRectsLengthRef.current) {
+      // scrolls to newly added rect
+      scrollLeft(containerRef);
+    }
+    prevRectsLengthRef.current = rectangles.length;
+  },[rectangles.length]);
 
   // Scales font size and spacing to maintain consistency across all SVG viewboxes.
   const scaleWithWindow = (viewBoxWidth, adjVal) => {
@@ -94,7 +108,7 @@ const ViewBoxWrapper = (props) => {
           <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
         </div>
-        <div className="row text-center" style={{height: "100%"}}>
+        <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
           {rectangles.map((r, i) => (
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
