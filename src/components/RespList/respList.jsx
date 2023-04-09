@@ -31,6 +31,11 @@ const ResponsiveList = (props) => {
   };
 
   const handleIntInputChange = (e, index) => {
+    const { value } = e.target;
+    //Return if value is a negative number or 0
+    if (value !== "" && value <= 0) {
+      return;
+    }
     handleInputChange(e, index, parseInt);
   };
 
@@ -93,6 +98,7 @@ const ResponsiveList = (props) => {
               <Form.Control
                 inputMode="numeric"
                 type="number"
+                min="0"
                 name="width"
                 value={row.width}
                 onChange={(e) => handleIntInputChange(e, index)}
@@ -126,6 +132,7 @@ const ResponsiveList = (props) => {
               <Form.Control
                 inputMode="numeric"
                 type="number"
+                min="0"
                 name="height"
                 value={row.height}
                 onChange={(e) => handleIntInputChange(e, index)}
