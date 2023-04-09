@@ -200,7 +200,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                   ({b.index + 1}) {b.w !== 0 && ` ${b.w}`}{b.wFrac !== "0" && ` ${b.wFrac} `}x{b.h !== 0 && ` ${b.h}`}{b.hFrac !== "0" && ` ${b.hFrac} `}{b.tFrac !== 0 && ` x ${b.tFrac}`}
+                   ({b.index + 1}) {b.w !== 0 && ` ${b.w} `}{b.wFrac !== "0" && `${b.wFrac} `}x{b.h !== 0 && ` ${b.h} `}{b.hFrac !== "0" && `${b.hFrac} `}{b.tFrac !== 0 && `x ${b.tFrac}`}
                 </text>
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
