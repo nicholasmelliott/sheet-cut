@@ -81,10 +81,12 @@ const ResponsiveList = (props) => {
       <div className="resp-list-container resp-list-testimonial-group">
         <div className="row"  ref={containerRef}>
         {rows.map((row, index) => (
-          <div key={index} className="testGroupCol col-12 col-md-4" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
+          <div key={index} className="testGroupCol col-12 col-md-4 p-3" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
           <Form>
           <Row key={index}>
-            <div className='col-8 mb-1'>Sheet #{index + 1}</div>  
+            <div className='col-8 mb-1 pl-4 pb-2'>
+              <span className="fs-5">Sheet #{index + 1}</span>  
+            </div>  
             <div className='d-flex justify-content-end col-4'>  
               {rows.length > 1 && (
                 <CloseButton className="mb-1" variant="white" onClick={() => deleteRow(index)}/>
@@ -94,7 +96,7 @@ const ResponsiveList = (props) => {
           <Row>  
             <Col>
             <InputGroup className='input-group-lg'>
-              <InputGroup.Text>Width</InputGroup.Text>
+              <InputGroup.Text className="input-label p-2">Width (in)</InputGroup.Text>
               <Form.Control
                 inputMode="numeric"
                 type="number"
@@ -105,6 +107,7 @@ const ResponsiveList = (props) => {
                 ref={firstInputRef}
               />
               <Form.Control
+                className="p-2"
                 as="select"
                 name="widthFraction"
                 value={row.widthFraction}
@@ -128,7 +131,7 @@ const ResponsiveList = (props) => {
             <Row className="mt-2">  
             <Col>
             <InputGroup className='input-group-lg'>
-              <InputGroup.Text>Height</InputGroup.Text>
+              <InputGroup.Text className="input-label p-2">Height (in)</InputGroup.Text>
               <Form.Control
                 inputMode="numeric"
                 type="number"
@@ -138,6 +141,7 @@ const ResponsiveList = (props) => {
                 onChange={(e) => handleIntInputChange(e, index)}
               />
               <Form.Control
+                className="p-2"
                 as="select"
                 name="heightFraction"
                 value={row.heightFraction}
@@ -161,7 +165,7 @@ const ResponsiveList = (props) => {
             <Row className="mt-2">  
           <Col>
           <InputGroup className='input-group-lg'>
-              <InputGroup.Text>Thickness</InputGroup.Text> 
+              <InputGroup.Text className="input-label p-2">Thickness</InputGroup.Text> 
             <Form.Control
               as="select"
               name="thicknessFraction"
