@@ -80,114 +80,120 @@ const ResponsiveList = (props) => {
     <div>
       <div className="resp-list-container resp-list-testimonial-group">
         <div className="row"  ref={containerRef}>
-        {rows.map((row, index) => (
-          <div key={index} className="testGroupCol col-12 col-md-4 p-3" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
-          <Form>
-          <Row key={index}>
-            <div className='col-8 mb-1 pl-4 pb-2'>
-              <span className="fs-5">Sheet #{index + 1}</span>  
-            </div>  
-            <div className='d-flex justify-content-end col-4'>  
-              {rows.length > 1 && (
-                <CloseButton className="mb-1" variant="white" onClick={() => deleteRow(index)}/>
-              )}
+          {rows.map((row, index) => (
+            <div key={index} className="testGroupCol col-12 col-md-4 p-3" style={{ backgroundColor: getHexColorByIndex(row.colorIndex) }}>
+              <Form>
+                <Row key={index}>
+                  <div className='col-8 mb-1 pl-4 pb-2'>
+                    <span className="fs-5">Sheet #{index + 1}</span>  
+                  </div>  
+                  <div className='d-flex justify-content-end col-4'>  
+                    {rows.length > 1 && (
+                      <CloseButton className="mb-1" variant="white" onClick={() => deleteRow(index)}/>
+                    )}
+                  </div>
+                </Row>
+                <Row>  
+                  <Col>
+                    <InputGroup className='input-group-lg'>
+                      <InputGroup.Text className="input-label p-2">
+                        Width (in)
+                      </InputGroup.Text>
+                      <Form.Control
+                        inputMode="numeric"
+                        type="number"
+                        min="0"
+                        name="width"
+                        value={row.width}
+                        onChange={(e) => handleIntInputChange(e, index)}
+                        ref={firstInputRef}
+                      />
+                      <Form.Control
+                        className="p-2"
+                        as="select"
+                        name="widthFraction"
+                        value={row.widthFraction}
+                        onChange={(e) => handleFloatInputChange(e, index)}
+                      >
+                        <option value={0} defaultValue disabled>+ Frac. in</option>
+                        {generateReducedFractions(denominator).map((fraction) => (
+                          <option key={fraction.fraction} value={fraction.decimal}>
+                            {fraction.fraction}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </InputGroup>
+                  </Col>
+                </Row>
+                <Row>  
+                  <Col className='d-flex justify-content-center'>
+                    <span> x </span>
+                  </Col>
+                </Row>
+                <Row className="mt-2">  
+                  <Col>
+                    <InputGroup className='input-group-lg'>
+                      <InputGroup.Text className="input-label p-2">
+                        Height (in)
+                      </InputGroup.Text>
+                      <Form.Control
+                        inputMode="numeric"
+                        type="number"
+                        min="0"
+                        name="height"
+                        value={row.height}
+                        onChange={(e) => handleIntInputChange(e, index)}
+                      />
+                      <Form.Control
+                        className="p-2"
+                        as="select"
+                        name="heightFraction"
+                        value={row.heightFraction}
+                        onChange={(e) => handleFloatInputChange(e, index)}
+                      >
+                        <option value={0} defaultValue disabled>+ Frac. in</option>
+                        {generateReducedFractions(denominator).map((fraction) => (
+                          <option key={fraction.fraction} value={fraction.decimal}>
+                            {fraction.fraction}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </InputGroup>
+                  </Col>
+                </Row>
+                <Row>  
+                  <Col className='d-flex justify-content-center'>
+                    <span> x </span>
+                  </Col>
+                </Row>
+                <Row className="mt-2">  
+                  <Col>
+                    <InputGroup className='input-group-lg'>
+                      <InputGroup.Text className="input-label p-2">
+                        Thickness
+                      </InputGroup.Text> 
+                      <Form.Control
+                        as="select"
+                        name="thicknessFraction"
+                        value={row.thicknessFraction}
+                        onChange={(e) => handleFloatInputChange(e, index)}
+                      >
+                        {materials.map((material, i) => (
+                            <option key={i} value={material.thick}>
+                              {material.mat}
+                            </option>
+                        ))}
+                      </Form.Control>
+                    </InputGroup>
+                  </Col>
+                </Row>
+              </Form>
             </div>
-          </Row>
-          <Row>  
-            <Col>
-            <InputGroup className='input-group-lg'>
-              <InputGroup.Text className="input-label p-2">Width (in)</InputGroup.Text>
-              <Form.Control
-                inputMode="numeric"
-                type="number"
-                min="0"
-                name="width"
-                value={row.width}
-                onChange={(e) => handleIntInputChange(e, index)}
-                ref={firstInputRef}
-              />
-              <Form.Control
-                className="p-2"
-                as="select"
-                name="widthFraction"
-                value={row.widthFraction}
-                onChange={(e) => handleFloatInputChange(e, index)}
-              >
-                <option value={0} defaultValue disabled>+ Frac. in</option>
-                {generateReducedFractions(denominator).map((fraction) => (
-                  <option key={fraction.fraction} value={fraction.decimal}>
-                    {fraction.fraction}
-                  </option>
-                ))}
-              </Form.Control>
-              </InputGroup>
-            </Col>
-            </Row>
-            <Row>  
-            <Col className='d-flex justify-content-center'>
-              <span> x </span>
-            </Col>
-            </Row>
-            <Row className="mt-2">  
-            <Col>
-            <InputGroup className='input-group-lg'>
-              <InputGroup.Text className="input-label p-2">Height (in)</InputGroup.Text>
-              <Form.Control
-                inputMode="numeric"
-                type="number"
-                min="0"
-                name="height"
-                value={row.height}
-                onChange={(e) => handleIntInputChange(e, index)}
-              />
-              <Form.Control
-                className="p-2"
-                as="select"
-                name="heightFraction"
-                value={row.heightFraction}
-                onChange={(e) => handleFloatInputChange(e, index)}
-              >
-                <option value={0} defaultValue disabled>+ Frac. in</option>
-                {generateReducedFractions(denominator).map((fraction) => (
-                  <option key={fraction.fraction} value={fraction.decimal}>
-                    {fraction.fraction}
-                  </option>
-                ))}
-            </Form.Control>
-            </InputGroup>
-          </Col>
-          </Row>
-            <Row>  
-          <Col className='d-flex justify-content-center'>
-            <span> x </span>
-          </Col>
-          </Row>
-            <Row className="mt-2">  
-          <Col>
-          <InputGroup className='input-group-lg'>
-              <InputGroup.Text className="input-label p-2">Thickness</InputGroup.Text> 
-            <Form.Control
-              as="select"
-              name="thicknessFraction"
-              value={row.thicknessFraction}
-              onChange={(e) => handleFloatInputChange(e, index)}
-            >
-              {materials.map((material, i) => (
-                  <option key={i} value={material.thick}>
-                    {material.mat}
-                  </option>
-              ))}
-            </Form.Control>
-            </InputGroup>
-          </Col>
-          </Row>
-          </Form>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
-);
+  );
 };
 
 export default ResponsiveList;
