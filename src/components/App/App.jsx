@@ -32,6 +32,7 @@ function App() {
   const row = (index, colorIndex) => ({ 
     index,
     colorIndex,
+    quantity: 1,
     width: "", 
     widthFraction: 0,
     widthFractionText: "",

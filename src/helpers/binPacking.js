@@ -1,6 +1,6 @@
 import { BP2D as BinPacking2D } from 'binpackingjs'
 const { Bin, Box, Packer } = BinPacking2D;
-import data from '../data/ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
+import data from '../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 
 const splitArrayByThickness = arr => {
   // Return an empty array if the input is not an array

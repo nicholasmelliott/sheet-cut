@@ -51,7 +51,11 @@ const ResponsiveList = (props) => {
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {
     console.log(rows);
-    const bins = packBoxes(rows);
+    const duplicatedRows = rows.flatMap((row) =>
+      Array(row.quantity).fill({ ...row, quantity: 1 })
+    );
+    console.log("Duplicate Rows", duplicatedRows);
+    const bins = packBoxes(duplicatedRows);
     setRectangles(bins);
     console.log(rectangles);
   },[rows]);
@@ -86,7 +90,7 @@ const ResponsiveList = (props) => {
                 <Row key={index}>
                   <div className='col-8 mb-1 pl-4 pb-2'>
                     <span className="fs-5">Sheet #{index + 1}</span>  
-                  </div>  
+                  </div>
                   <div className='d-flex justify-content-end col-4'>  
                     {rows.length > 1 && (
                       <CloseButton className="mb-1" variant="white" onClick={() => deleteRow(index)}/>
@@ -173,6 +177,7 @@ const ResponsiveList = (props) => {
                         Thickness
                       </InputGroup.Text> 
                       <Form.Control
+                        style={{ width: '30%' }}
                         as="select"
                         name="thicknessFraction"
                         value={row.thicknessFraction}
@@ -184,6 +189,19 @@ const ResponsiveList = (props) => {
                             </option>
                         ))}
                       </Form.Control>
+                      <Form.Control
+                        as="select"
+                        name="quantity"
+                        value={row.quantity}
+                        onChange={(e) => handleIntInputChange(e, index)}
+                      >
+                        <option value={1} defaultValue disabled>Qty</option>
+                        {Array.from({ length: 50 }, (_, i) => i + 1).map((val, i) => (
+                            <option key={i} value={val}>
+                              {val}
+                            </option>
+                        ))}
+                      </Form.Control> 
                     </InputGroup>
                   </Col>
                 </Row>
