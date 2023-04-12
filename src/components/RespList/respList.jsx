@@ -52,7 +52,7 @@ const ResponsiveList = (props) => {
   useEffect(() => {
     console.log(rows);
     const duplicatedRows = rows.flatMap((row) =>
-      Array(row.quantity).fill({ ...row, quantity: 1 })
+      Array(row.quantity).fill({ ...row})
     );
     console.log("Duplicate Rows", duplicatedRows);
     const bins = packBoxes(duplicatedRows);

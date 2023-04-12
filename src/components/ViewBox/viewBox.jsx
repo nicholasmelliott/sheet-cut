@@ -109,7 +109,9 @@ const ViewBoxWrapper = (props) => {
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
         </div>
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
-          {rectangles.map((r, i) => (
+          {rectangles.map((r, i) =>{ 
+            const processedColorIndexes = new Set();
+            return(
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
               <defs>
@@ -193,6 +195,8 @@ const ViewBoxWrapper = (props) => {
                   ({b.index + 1})
                 </text>
                 {/* Draw the dimensions of the piece to-be-cut */}
+                {!processedColorIndexes.has(b.colorIndex) && (
+                 <> 
                 <text
                   x={cMargin + (r.width * multiplier) / 2} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
@@ -200,10 +204,13 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                   ({b.index + 1}) {b.w !== 0 && ` ${b.w} `}{b.wFrac !== "0" && `${b.wFrac} `}x{b.h !== 0 && ` ${b.h} `}{b.hFrac !== "0" && `${b.hFrac} `}{b.tFrac !== 0 && `x ${b.tFrac}`}
+                   {`(Qty. ${b.quantity})`} (#{b.index + 1}) {b.w !== 0 && ` ${b.w} `}{b.wFrac !== "0" && `${b.wFrac} `}x{b.h !== 0 && ` ${b.h} `}{b.hFrac !== "0" && `${b.hFrac} `}{b.tFrac !== 0 && `x ${b.tFrac}`}
                 </text>
+                {processedColorIndexes.add(b.colorIndex)}
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
+                </>
+                )}
                 {/* Draw the top dimension */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
@@ -251,7 +258,7 @@ const ViewBoxWrapper = (props) => {
           </g>
               </svg>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </div>
