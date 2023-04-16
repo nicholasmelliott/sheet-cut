@@ -37,14 +37,15 @@ const ViewBoxWrapper = (props) => {
   const donorPieceStroke = "#000";
   const donorTopDimDecrement = 10;
   const donorLeftDimDecrement = 25;
-  const donorBottomPriceIncrement = 50;
+  const donorBottomPriceIncrement = 60;
   const donorSidesFontSize = 30;
   const donorPriceFontSize = 30; 
   const donorSidesTextFill = "#000";
   const donorPriceTextFill = "#000";
+  const donorThicknessIncrement = 90;
 
   let toBeCutMainSpacing = 0;
-  const toBeCutMainBottomIncrement = 90;
+  const toBeCutMainBottomIncrement = 120;
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
@@ -160,8 +161,17 @@ const ViewBoxWrapper = (props) => {
               fontSize={scaleWithWindow(r.width, donorPriceFontSize)} 
               fill={donorPriceTextFill}
             >
-              ${r.price}
+              ${r.price} | {r.thicknessText}
             </text>
+            {/* <text 
+              x={cMargin + (r.width * multiplier) / 2} 
+              y={(cMargin + scaleWithWindow(r.width, donorThicknessIncrement) + (r.height * multiplier))}
+              fill={toBeCutMainDimFill}
+              textAnchor="middle"
+              fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+            >
+              {r.thicknessText}
+            </text> */}
             {/* Draw piece to-be-cut inside donor piece */}
             {r.boxes.map((b, j) => (
               <g key={j}>
@@ -174,6 +184,13 @@ const ViewBoxWrapper = (props) => {
                     <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.5" />
                     <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
                   </linearGradient>
+                  <filter x="0" y="0" width="1" height="1" id={`toBeCutPieceDimBG`}>
+                    <feFlood floodColor="#eee" result="bg" />
+                    <feMerge>
+                      <feMergeNode in="bg"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
                 </defs>
                 <rect
                   key={j}
@@ -185,6 +202,7 @@ const ViewBoxWrapper = (props) => {
                   strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                   stroke={toBeCutPieceStroke}
                 />
+                {/* Draw index of the piece to-be-cut in center of rect */}xl
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
                   y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
@@ -196,7 +214,18 @@ const ViewBoxWrapper = (props) => {
                 </text>
                 {/* Draw the dimensions of the piece to-be-cut */}
                 {!processedColorIndexes.has(b.colorIndex) && (
-                 <> 
+                 <g 
+                //  filter="url(#toBeCutPieceDimBG"
+                 >
+                 <text
+                  x={0} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
+                  fill={toBeCutMainDimFill}
+                  textAnchor="start"
+                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                >
+                  #{b.index + 1}
+                </text> 
                 <text
                   x={cMargin + (r.width * multiplier) / 2} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
@@ -204,12 +233,21 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                   {`(Qty. ${b.quantity})`} (#{b.index + 1}) {b.w !== 0 && ` ${b.w} `}{b.wFrac !== "0" && `${b.wFrac} `}x{b.h !== 0 && ` ${b.h} `}{b.hFrac !== "0" && `${b.hFrac} `}{b.tFrac !== 0 && `x ${b.tFrac}`}
+                  {b.w !== 0 && ` ${b.w}`}{(b.wFrac !== "0" && b.wFrac !== "") && ` ${b.wFrac}`}" x{b.h !== 0 && ` ${b.h}`}{(b.hFrac !== "0" && b.hFrac !== "") && ` ${b.hFrac}`}"
+                </text>
+                <text
+                  x={cBorder + (r.width * multiplier)} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
+                  fill={toBeCutMainDimFill}
+                  textAnchor="end"
+                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                >
+                   {`${r.boxQuantity[b.colorIndex]} of ${b.quantity} `}
                 </text>
                 {processedColorIndexes.add(b.colorIndex)}
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
-                </>
+                </g>
                 )}
                 {/* Draw the top dimension */}
                 <text

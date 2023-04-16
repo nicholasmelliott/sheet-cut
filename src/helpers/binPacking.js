@@ -62,15 +62,15 @@ const splitArrayByThickness = arr => {
   
 
 //Creates bins depending on thickness
-const createBins = (array, matThickness) => {
+const createBins = (array, matThickness, matThicknessText) => {
     const bins = [];
     array.forEach(el => {
         const dims = el.dimensions;
         if (dims) {
-            // console.log(dims.thickness + " : " + matThickness);
             if(dims.thickness == matThickness){
                 const bin = new Bin(dims.width, dims.height);
                 bin.thickness = dims.thickness;
+                bin.thicknessText = matThicknessText;
                 bin.price = el["Ace Retail"];
                 bins.push(bin);
             }
@@ -86,16 +86,31 @@ const removeEmptyBins = (bins) => {
   return nonEmptyBins;
 }
 
+// Calculates the sub quantity of boxes in a bin out of the total quantity of of a single form input
+const calculateBoxQuantities = (array) => {
+  array.forEach((obj) => {
+    let boxQtys = {};
+    obj.boxes.forEach((box) => {
+      // If the colorIndex exists in the boxQtys object, increment its count. Otherwise, set it to 1.
+      boxQtys[box.colorIndex] = (boxQtys[box.colorIndex] || 0) + 1;
+    });
+    // Add quantities to the parent object as a "boxQuantity" property
+    obj.boxQuantity = boxQtys;
+  });
+  return array;
+}
+
 const packBoxes = (array) => {
     let finalArray = [];
     const arraysByThick = splitArrayByThickness(array);
     arraysByThick.forEach((el) => {
-        const bins = createBins(data, el[0].thicknessFraction); 
+        const bins = createBins(data, el[0].thicknessFraction, el[0].thicknessFractionText); 
         const boxes = createBoxes( el );
         const packer = new Packer(bins);
         packer.pack(boxes);
         const nonEmptyBins = removeEmptyBins(packer.bins);
-        finalArray = [...finalArray, ...nonEmptyBins];
+        const boxQuantityArray = calculateBoxQuantities(nonEmptyBins);
+        finalArray = [...finalArray, ...boxQuantityArray];
     })
     return finalArray;
 }
