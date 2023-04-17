@@ -47,6 +47,7 @@ const ViewBoxWrapper = (props) => {
   // {/*ToBeCut Dimensions List Component***************************************************************/}
   let toBeCutMainSpacing = 0;
   const toBeCutMainBGIncrement = 95;
+  const toBeCutMainBGHeight= 40;
   const toBeCutMainBottomIncrement = 120;
   const toBeCutMainDimFontSize= 25;
   // {/************************************************************************************************/}
@@ -222,7 +223,7 @@ const ViewBoxWrapper = (props) => {
                   x={0} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBGIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
                   width="100%" 
-                  height="40" 
+                  height={scaleWithWindow(r.width, toBeCutMainBGHeight)} 
                   fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
                 />
                  <text
