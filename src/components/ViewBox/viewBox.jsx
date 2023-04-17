@@ -44,8 +44,12 @@ const ViewBoxWrapper = (props) => {
   const donorPriceTextFill = "#000";
   const donorThicknessIncrement = 90;
 
+  // {/*ToBeCut Dimensions List Component***************************************************************/}
   let toBeCutMainSpacing = 0;
+  const toBeCutMainBGIncrement = 95;
   const toBeCutMainBottomIncrement = 120;
+  const toBeCutMainDimFontSize= 25;
+  // {/************************************************************************************************/}
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
@@ -53,7 +57,7 @@ const ViewBoxWrapper = (props) => {
   const toBeCutBottomDimDecrement = 15;
   const toBeCutLeftDimIncrement = 15;
   const toBeCutRightDimDecrement = 15;
-  const toBeCutMainDimFontSize= 25;
+  const toBeCutSheetNumFontSize= 25;
   const toBeCutSideDimsFontSize = 25;
   const toBeCutMainDimFill = "#000";
   const toBeCutSideDimsFill = "#FFF";
@@ -105,14 +109,18 @@ const ViewBoxWrapper = (props) => {
   return (
     <div ref={printRef} style={{height: "100%"}}>
       <div className="container view-box-testimonial-group" style={{height: "100%"}}>
+        {/*Total Price and Sheets Component***************************************************************/}
         <div className="row text-center d-flex justify-content-between p-2">
           <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
         </div>
+        {/************************************************************************************************/}
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
           {rectangles.map((r, i) =>{ 
+            {/*ToBeCut Dimensions List Component***************************************************************/}
             const processedColorIndexes = new Set();
             let setIndex = 0;
+            {/*************************************************************************************************/}
             return(
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
@@ -202,21 +210,21 @@ const ViewBoxWrapper = (props) => {
                   y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
                   fill={toBeCutMainDimFill}
                   textAnchor="middle"
-                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                  fontSize={scaleWithWindow(r.width, toBeCutSheetNumFontSize)}
                 >
                   ({b.index + 1})
                 </text>
+                {/*ToBeCut Dimensions List Component***************************************************************/}
                 {/* Draw the dimensions of the piece to-be-cut */}
                 {!processedColorIndexes.has(b.colorIndex) && (
                  <>
                  <rect
                   x={0} 
-                  y={(cMargin + scaleWithWindow(r.width, 95 + toBeCutMainSpacing) + (r.height * multiplier))}
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBGIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
                   width="100%" 
                   height="40" 
                   fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
                 />
-                  {console.log("colorIndex", b.colorIndex, "index", b.index + 1, "i", i, "j", j)}
                  <text
                   x={0} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
@@ -244,6 +252,7 @@ const ViewBoxWrapper = (props) => {
                 >
                    {`${r.boxQuantity[b.colorIndex]} of ${b.quantity} `}
                 </text>
+                {/* Update spacing between dimensions */}
                 {processedColorIndexes.add(b.colorIndex)}
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
@@ -251,6 +260,7 @@ const ViewBoxWrapper = (props) => {
                 {setIndex++}
                 </>
                 )}
+                {/********************************************************************************************************/}
                 {/* Draw the top dimension */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
@@ -293,8 +303,10 @@ const ViewBoxWrapper = (props) => {
                 </text>
               </g>
             ))}
+            {/*ToBeCut Dimensions List Component***************************************************************/}
             {/* Reset toBeCut dims spacing for each viewbox */}
             {toBeCutMainSpacing = 0}  
+            {/************************************************************************************************/}
           </g>
               </svg>
             </div>
