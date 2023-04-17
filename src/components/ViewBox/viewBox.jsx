@@ -112,6 +112,7 @@ const ViewBoxWrapper = (props) => {
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
           {rectangles.map((r, i) =>{ 
             const processedColorIndexes = new Set();
+            let setIndex = 0;
             return(
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
@@ -184,13 +185,6 @@ const ViewBoxWrapper = (props) => {
                     <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.5" />
                     <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
                   </linearGradient>
-                  <filter x="0" y="0" width="1" height="1" id={`toBeCutPieceDimBG`}>
-                    <feFlood floodColor="#eee" result="bg" />
-                    <feMerge>
-                      <feMergeNode in="bg"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
                 </defs>
                 <rect
                   key={j}
@@ -202,7 +196,7 @@ const ViewBoxWrapper = (props) => {
                   strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                   stroke={toBeCutPieceStroke}
                 />
-                {/* Draw index of the piece to-be-cut in center of rect */}xl
+                {/* Draw index of the piece to-be-cut in center of rect */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
                   y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
@@ -214,9 +208,15 @@ const ViewBoxWrapper = (props) => {
                 </text>
                 {/* Draw the dimensions of the piece to-be-cut */}
                 {!processedColorIndexes.has(b.colorIndex) && (
-                 <g 
-                //  filter="url(#toBeCutPieceDimBG"
-                 >
+                 <>
+                 <rect
+                  x={0} 
+                  y={(cMargin + scaleWithWindow(r.width, 95 + toBeCutMainSpacing) + (r.height * multiplier))}
+                  width="100%" 
+                  height="40" 
+                  fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
+                />
+                  {console.log("colorIndex", b.colorIndex, "index", b.index + 1, "i", i, "j", j)}
                  <text
                   x={0} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
@@ -247,7 +247,9 @@ const ViewBoxWrapper = (props) => {
                 {processedColorIndexes.add(b.colorIndex)}
                 {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
-                </g>
+                {/* Update set Index */}
+                {setIndex++}
+                </>
                 )}
                 {/* Draw the top dimension */}
                 <text
