@@ -46,7 +46,7 @@ const ViewBoxWrapper = (props) => {
 
   // {/*ToBeCut Dimensions List Component***************************************************************/}
   let toBeCutMainSpacing = 0;
-  const toBeCutMainBGIncrement = 95;
+  const toBeCutMainBGIncrement = 93;
   const toBeCutMainBGHeight= 40;
   const toBeCutMainBottomIncrement = 120;
   const toBeCutMainDimFontSize= 25;
