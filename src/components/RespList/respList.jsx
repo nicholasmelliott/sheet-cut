@@ -50,14 +50,12 @@ const ResponsiveList = (props) => {
 
   //When rows is updated, viewbox is re-rendered
   useEffect(() => {
-    console.log(rows);
     const duplicatedRows = rows.flatMap((row) =>
       Array(row.quantity).fill({ ...row})
     );
-    console.log("Duplicate Rows", duplicatedRows);
     const bins = packBoxes(duplicatedRows);
     setRectangles(bins);
-    console.log(rectangles);
+    console.log("Rows", rows, "Duplicate Rows", duplicatedRows, "Rectangles", rectangles);
   },[rows]);
 
   // When rows length changes
