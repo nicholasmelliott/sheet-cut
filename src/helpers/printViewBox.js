@@ -21,8 +21,9 @@ const print = (printRef) => {
         }
         .view-box-testimonial-group > .row > .col {
           display: inline-block;
-          width: 33.33%;
-          height: 33.33%;
+          width: 22%;
+          height: 40%;
+          padding: 1.5%
         }
         /* Apply styling to the div containing Total Price and Total Sheets */
         .row.text-center.d-flex.justify-content-between.p-2 {
