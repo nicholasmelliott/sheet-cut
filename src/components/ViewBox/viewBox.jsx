@@ -37,14 +37,20 @@ const ViewBoxWrapper = (props) => {
   const donorPieceStroke = "#000";
   const donorTopDimDecrement = 10;
   const donorLeftDimDecrement = 25;
-  const donorBottomPriceIncrement = 50;
+  const donorBottomPriceIncrement = 60;
   const donorSidesFontSize = 30;
   const donorPriceFontSize = 30; 
   const donorSidesTextFill = "#000";
   const donorPriceTextFill = "#000";
+  const donorThicknessIncrement = 90;
 
+  // {/*ToBeCut Dimensions List Component***************************************************************/}
   let toBeCutMainSpacing = 0;
-  const toBeCutMainBottomIncrement = 90;
+  const toBeCutMainBGIncrement = 93;
+  const toBeCutMainBGHeight= 40;
+  const toBeCutMainBottomIncrement = 120;
+  const toBeCutMainDimFontSize= 25;
+  // {/************************************************************************************************/}
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
@@ -52,7 +58,7 @@ const ViewBoxWrapper = (props) => {
   const toBeCutBottomDimDecrement = 15;
   const toBeCutLeftDimIncrement = 15;
   const toBeCutRightDimDecrement = 15;
-  const toBeCutMainDimFontSize= 25;
+  const toBeCutSheetNumFontSize= 25;
   const toBeCutSideDimsFontSize = 25;
   const toBeCutMainDimFill = "#000";
   const toBeCutSideDimsFill = "#FFF";
@@ -104,12 +110,19 @@ const ViewBoxWrapper = (props) => {
   return (
     <div ref={printRef} style={{height: "100%"}}>
       <div className="container view-box-testimonial-group" style={{height: "100%"}}>
+        {/*Total Price and Sheets Component***************************************************************/}
         <div className="row text-center d-flex justify-content-between p-2">
           <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
           <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
         </div>
+        {/************************************************************************************************/}
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
-          {rectangles.map((r, i) => (
+          {rectangles.map((r, i) =>{ 
+            {/*ToBeCut Dimensions List Component***************************************************************/}
+            const processedColorIndexes = new Set();
+            let setIndex = 0;
+            {/*************************************************************************************************/}
+            return(
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
               <defs>
@@ -158,8 +171,17 @@ const ViewBoxWrapper = (props) => {
               fontSize={scaleWithWindow(r.width, donorPriceFontSize)} 
               fill={donorPriceTextFill}
             >
-              ${r.price}
+              ${r.price} | {r.thicknessText}
             </text>
+            {/* <text 
+              x={cMargin + (r.width * multiplier) / 2} 
+              y={(cMargin + scaleWithWindow(r.width, donorThicknessIncrement) + (r.height * multiplier))}
+              fill={toBeCutMainDimFill}
+              textAnchor="middle"
+              fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+            >
+              {r.thicknessText}
+            </text> */}
             {/* Draw piece to-be-cut inside donor piece */}
             {r.boxes.map((b, j) => (
               <g key={j}>
@@ -183,16 +205,36 @@ const ViewBoxWrapper = (props) => {
                   strokeDasharray={scaleWithWindow(r.width, toBeCutPieceStrokeDasharray)}
                   stroke={toBeCutPieceStroke}
                 />
+                {/* Draw index of the piece to-be-cut in center of rect */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
                   y={(b.y * multiplier + cMargin + prevHeight) + (b.height * multiplier / 2)}
                   fill={toBeCutMainDimFill}
                   textAnchor="middle"
-                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                  fontSize={scaleWithWindow(r.width, toBeCutSheetNumFontSize)}
                 >
                   ({b.index + 1})
                 </text>
+                {/*ToBeCut Dimensions List Component***************************************************************/}
                 {/* Draw the dimensions of the piece to-be-cut */}
+                {!processedColorIndexes.has(b.colorIndex) && (
+                 <>
+                 <rect
+                  x={0} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBGIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
+                  width="100%" 
+                  height={scaleWithWindow(r.width, toBeCutMainBGHeight)} 
+                  fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
+                />
+                 <text
+                  x={0} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
+                  fill={toBeCutMainDimFill}
+                  textAnchor="start"
+                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                >
+                  #{b.index + 1}
+                </text> 
                 <text
                   x={cMargin + (r.width * multiplier) / 2} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
@@ -200,10 +242,26 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
                 >
-                   ({b.index + 1}) {b.w !== 0 && ` ${b.w} `}{b.wFrac !== "0" && `${b.wFrac} `}x{b.h !== 0 && ` ${b.h} `}{b.hFrac !== "0" && `${b.hFrac} `}{b.tFrac !== 0 && `x ${b.tFrac}`}
+                  {b.w !== 0 && ` ${b.w}`}{(b.wFrac !== "0" && b.wFrac !== "") && ` ${b.wFrac}`}" x{b.h !== 0 && ` ${b.h}`}{(b.hFrac !== "0" && b.hFrac !== "") && ` ${b.hFrac}`}"
+                </text>
+                <text
+                  x={cBorder + (r.width * multiplier)} 
+                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
+                  fill={toBeCutMainDimFill}
+                  textAnchor="end"
+                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
+                >
+                   {`${r.boxQuantity[b.colorIndex]} of ${b.quantity} `}
                 </text>
                 {/* Update spacing between dimensions */}
+                {processedColorIndexes.add(b.colorIndex)}
+                {/* Update spacing between dimensions */}
                 {toBeCutMainSpacing += 35}
+                {/* Update set Index */}
+                {setIndex++}
+                </>
+                )}
+                {/********************************************************************************************************/}
                 {/* Draw the top dimension */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
@@ -246,12 +304,14 @@ const ViewBoxWrapper = (props) => {
                 </text>
               </g>
             ))}
+            {/*ToBeCut Dimensions List Component***************************************************************/}
             {/* Reset toBeCut dims spacing for each viewbox */}
             {toBeCutMainSpacing = 0}  
+            {/************************************************************************************************/}
           </g>
               </svg>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </div>
