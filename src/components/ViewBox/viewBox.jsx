@@ -191,8 +191,8 @@ const ViewBoxWrapper = (props) => {
                   <linearGradient id={`toBeCutPieceGradient${i}${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.5" />
                     <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.5" />
-                    <stop offset="40%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
-                    <stop offset="60%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
+                    <stop offset="40%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.5" />
+                    <stop offset="60%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.5" />
                     <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.5" />
                     <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
                   </linearGradient>
