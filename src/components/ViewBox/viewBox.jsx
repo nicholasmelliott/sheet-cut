@@ -46,8 +46,10 @@ const ViewBoxWrapper = (props) => {
 
   // {/*ToBeCut Dimensions List Component***************************************************************/}
   let toBeCutMainSpacing = 0;
+  const toBeCutMainSpacingIncrement = 35;
   const toBeCutMainBGIncrement = 93;
   const toBeCutMainBGHeight= 40;
+  const toBeCutMainBGMargin = 15;
   const toBeCutMainBottomIncrement = 120;
   const toBeCutMainDimFontSize= 25;
   // {/************************************************************************************************/}
@@ -227,7 +229,7 @@ const ViewBoxWrapper = (props) => {
                   fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
                 />
                  <text
-                  x={0} 
+                  x={toBeCutMainBGMargin} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
                   fill={toBeCutMainDimFill}
                   textAnchor="start"
@@ -245,7 +247,7 @@ const ViewBoxWrapper = (props) => {
                   {b.w !== 0 && ` ${b.w}`}{(b.wFrac !== "0" && b.wFrac !== "") && ` ${b.wFrac}`}" x{b.h !== 0 && ` ${b.h}`}{(b.hFrac !== "0" && b.hFrac !== "") && ` ${b.hFrac}`}"
                 </text>
                 <text
-                  x={cBorder + (r.width * multiplier)} 
+                  x={cBorder + (r.width * multiplier) - toBeCutMainBGMargin} 
                   y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
                   fill={toBeCutMainDimFill}
                   textAnchor="end"
@@ -256,7 +258,7 @@ const ViewBoxWrapper = (props) => {
                 {/* Update spacing between dimensions */}
                 {processedColorIndexes.add(b.colorIndex)}
                 {/* Update spacing between dimensions */}
-                {toBeCutMainSpacing += 35}
+                {toBeCutMainSpacing += toBeCutMainSpacingIncrement}
                 {/* Update set Index */}
                 {setIndex++}
                 </>
