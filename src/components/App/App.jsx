@@ -80,7 +80,7 @@ function App() {
               <span>&#9776;</span>
             </Dropdown.Toggle>
             <Button variant="secondary" style={{width: "30%"}} onClick={addRow} disabled={!isMenuOpen}>Add</Button>
-            <Dropdown.Menu className="w-100 p-3" style={{backgroundColor: '#eee'}}>
+            <Dropdown.Menu className="w-100 p-3" style={{background: 'transparent', border: "0px"}}>
               <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials}/>
             </Dropdown.Menu>
           </Dropdown>
