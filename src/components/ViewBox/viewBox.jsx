@@ -27,6 +27,7 @@ const ViewBoxWrapper = (props) => {
   const cMargin = cBorder/2;
   const multiplier = 15;
   const heightIncrement = 400;
+  const renderIndexMinSizeWH = 2;
   const minWidthSize = 8;
   const minHeightSize = 8;
   
@@ -88,6 +89,18 @@ const ViewBoxWrapper = (props) => {
     }
   }
 
+  // Conditionally render index text based on rect width and height.
+  const renderIndex = (rect, minSize) => {
+    if(rect.w <= minSize || rect.h <= minSize) {
+      return null; 
+    }
+    return (
+      <>
+        ({rect.index + 1})
+      </>
+    );
+  };
+  
   // Conditionally render text based on rect width.
   const renderHeightDim = (rect, minWidthSize) => {
     return rect.w > minWidthSize && (
@@ -215,7 +228,7 @@ const ViewBoxWrapper = (props) => {
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSheetNumFontSize)}
                 >
-                  ({b.index + 1})
+                  {renderIndex(b, renderIndexMinSizeWH)}
                 </text>
                 {/*ToBeCut Dimensions List Component***************************************************************/}
                 {/* Draw the dimensions of the piece to-be-cut */}
