@@ -83,11 +83,11 @@ const ResponsiveList = (props) => {
       <div className="resp-list-container resp-list-testimonial-group">
         <div className="row"  ref={containerRef}>
           {rows.map((row, index) => (
-            <div key={index} className="testGroupCol col-11 col-md-4 offset-half" style={{ background: `${getHexColorByIndex(row.colorIndex)}`}}>
+            <div key={index} className="testGroupCol col-11 col-md-4 offset-half">
               <Form>
                 <Row key={index}>
                   <div className='col-8 mb-1 pl-4 pb-2'>
-                    <span className="fs-5">Sheet #{index + 1}</span>  
+                    <span className="fs-5" style={{ borderBottom: `3px solid ${getHexColorByIndex(row.colorIndex)}`, borderBottomRightRadius: "10px", paddingRight: "8px",  paddingBottom: "2px"}}>Sheet #{index + 1}</span>  
                   </div>
                   <div className='d-flex justify-content-end col-4'>  
                     {rows.length > 1 && (

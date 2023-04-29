@@ -27,7 +27,7 @@ const ViewBoxWrapper = (props) => {
   const cMargin = cBorder/2;
   const multiplier = 15;
   const heightIncrement = 400;
-  const renderIndexMinSizeWH = 2;
+  const renderIndexMinSizeWH = 1;
   const minWidthSize = 8;
   const minHeightSize = 8;
   
@@ -202,12 +202,12 @@ const ViewBoxWrapper = (props) => {
               <g key={j}>
                 <defs>
                   <linearGradient id={`toBeCutPieceGradient${i}${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.5" />
-                    <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.5" />
-                    <stop offset="40%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.5" />
-                    <stop offset="60%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.5" />
-                    <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.5" />
-                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+                    <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.9" />
+                    <stop offset="40%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="1" />
+                    <stop offset="60%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="1" />
+                    <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.9" />
                   </linearGradient>
                 </defs>
                 <rect
@@ -227,6 +227,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutMainDimFill}
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSheetNumFontSize)}
+                  dominant-baseline="middle"
                 >
                   {renderIndex(b, renderIndexMinSizeWH)}
                 </text>
@@ -304,6 +305,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutSideDimsFill}
                   textAnchor="start"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
+                  dominant-baseline="middle"
                 >
                   {renderHeightDim(b, minWidthSize)}
                 </text>
@@ -314,6 +316,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutSideDimsFill}
                   textAnchor="end"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
+                  dominant-baseline="middle"
                 >
                   {renderHeightDim(b, minWidthSize)}
                 </text>
