@@ -227,7 +227,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutMainDimFill}
                   textAnchor="middle"
                   fontSize={scaleWithWindow(r.width, toBeCutSheetNumFontSize)}
-                  dominant-baseline="middle"
+                  dominantBaseline="middle"
                 >
                   {renderIndex(b, renderIndexMinSizeWH)}
                 </text>
@@ -305,7 +305,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutSideDimsFill}
                   textAnchor="start"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
-                  dominant-baseline="middle"
+                  dominantBaseline="middle"
                 >
                   {renderHeightDim(b, minWidthSize)}
                 </text>
@@ -316,7 +316,7 @@ const ViewBoxWrapper = (props) => {
                   fill={toBeCutSideDimsFill}
                   textAnchor="end"
                   fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
-                  dominant-baseline="middle"
+                  dominantBaseline="middle"
                 >
                   {renderHeightDim(b, minWidthSize)}
                 </text>
