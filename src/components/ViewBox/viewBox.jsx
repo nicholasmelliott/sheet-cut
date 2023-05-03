@@ -3,17 +3,6 @@ import './viewBox.css';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import scrollLeft from '../../utils/scrollLeft';
 
-const Rectangle = ({ width, height, x, y }) => (
-  <rect
-    x={x}
-    y={y}
-    width={width}
-    height={height}
-    fill="green"
-    stroke="black"
-  />
-);
-
 const ViewBoxWrapper = (props) => {
   const {rectangles, printRef} = props;
 
@@ -188,15 +177,6 @@ const ViewBoxWrapper = (props) => {
             >
               ${r.price} | {r.thicknessText}
             </text>
-            {/* <text 
-              x={cMargin + (r.width * multiplier) / 2} 
-              y={(cMargin + scaleWithWindow(r.width, donorThicknessIncrement) + (r.height * multiplier))}
-              fill={toBeCutMainDimFill}
-              textAnchor="middle"
-              fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
-            >
-              {r.thicknessText}
-            </text> */}
             {/* Draw piece to-be-cut inside donor piece */}
             {r.boxes.map((b, j) => (
               <g key={j}>
