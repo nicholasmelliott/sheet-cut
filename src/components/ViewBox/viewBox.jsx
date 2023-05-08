@@ -85,7 +85,7 @@ const ViewBoxWrapper = (props) => {
     }
     return (
       <>
-        ({rect.index + 1})
+        #{rect.index + 1}
       </>
     );
   };
