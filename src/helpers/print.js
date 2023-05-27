@@ -1,5 +1,5 @@
-const print = (printRef, printTotalsRef) => {
-    const content = printRef.current.innerHTML;
+const print = (printViewBoxRef, printTotalsRef) => {
+    const content = printViewBoxRef.current.innerHTML;
     const totalsContent = printTotalsRef.current.innerHTML;
     const printWindow = document.getElementById("ifmcontentstoprint").contentWindow;
     printWindow.document.write(`<html><head><title>Print Component</title>

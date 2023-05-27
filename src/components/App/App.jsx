@@ -4,7 +4,7 @@ import './App.css';
 import ResponsiveList from '../RespList/respList';
 import Totals from '../Totals/totals';
 import ViewBox from '../ViewBox/viewBox';
-import print from '../../helpers/printViewBox';
+import print from '../../helpers/print';
 
 function App() {
   const mats = [
@@ -47,11 +47,11 @@ function App() {
   const [rectangles, setRectangles] = useState([]);
   const [materials] = useState(mats);
   const [rows, setRows] = useState([row(0, 0)]);
-  const printRef = useRef(null);
+  const printViewBoxRef = useRef(null);
   const printTotalsRef = useRef(null);
 
   const handlePrint = () => {
-    print(printRef, printTotalsRef);
+    print(printViewBoxRef, printTotalsRef);
   }
 
   // Handles dropdown menu button click
@@ -73,7 +73,7 @@ function App() {
       <iframe id="ifmcontentstoprint" style={{"height": "0px", "width": "0px", "position": "absolute"}}></iframe>
       <div style={{height: "80vh"}}>
         <Totals rectangles={rectangles} printRef={printTotalsRef} />
-        <ViewBox rectangles={rectangles} printRef={printRef} />
+        <ViewBox rectangles={rectangles} printRef={printViewBoxRef} />
       </div>
       <div style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
         <div className="d-flex align-items-center justify-content-center w-100" style={{backgroundColor: '#eee', height: '60px', width: "100%"}}>
