@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import './App.css';
 import ResponsiveList from '../RespList/respList';
+import Totals from '../Totals/totals';
 import ViewBox from '../ViewBox/viewBox';
 import print from '../../helpers/printViewBox';
 
@@ -70,6 +71,7 @@ function App() {
     <div className="App">
       <iframe id="ifmcontentstoprint" style={{"height": "0px", "width": "0px", "position": "absolute"}}></iframe>
       <div style={{height: "80vh"}}>
+        <Totals rectangles={rectangles}/>
         <ViewBox rectangles={rectangles} printRef={printRef} />
       </div>
       <div style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>

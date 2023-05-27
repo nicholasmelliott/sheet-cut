@@ -9,8 +9,6 @@ const ViewBoxWrapper = (props) => {
   const containerRef = useRef(null);
   const prevRectsLengthRef = useRef(rectangles.length);
 
-  let donorBoxTotal = rectangles.length;
-  let priceTotal = (rectangles.reduce((acc, r) => acc + r.price, 0)).toFixed(2);
   let prevHeight = 0;
   const cBorder = 250;
   const cMargin = cBorder/2;
@@ -114,12 +112,6 @@ const ViewBoxWrapper = (props) => {
   return (
     <div ref={printRef} style={{height: "100%"}}>
       <div className="container view-box-testimonial-group" style={{height: "100%"}}>
-        {/*Total Price and Sheets Component***************************************************************/}
-        <div className="row text-center d-flex justify-content-between p-2">
-          <div className="col-6 text-success">Total Price: ${priceTotal}</div> 
-          <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
-        </div>
-        {/************************************************************************************************/}
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
           {rectangles.map((r, i) =>{ 
             {/*ToBeCut Dimensions List Component***************************************************************/}
