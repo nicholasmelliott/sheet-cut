@@ -48,9 +48,10 @@ function App() {
   const [materials] = useState(mats);
   const [rows, setRows] = useState([row(0, 0)]);
   const printRef = useRef(null);
+  const printTotalsRef = useRef(null);
 
   const handlePrint = () => {
-    print(printRef);
+    print(printRef, printTotalsRef);
   }
 
   // Handles dropdown menu button click
@@ -71,7 +72,7 @@ function App() {
     <div className="App">
       <iframe id="ifmcontentstoprint" style={{"height": "0px", "width": "0px", "position": "absolute"}}></iframe>
       <div style={{height: "80vh"}}>
-        <Totals rectangles={rectangles}/>
+        <Totals rectangles={rectangles} printRef={printTotalsRef} />
         <ViewBox rectangles={rectangles} printRef={printRef} />
       </div>
       <div style={{position: 'fixed', bottom: 0, left: 0, right: 0}}>

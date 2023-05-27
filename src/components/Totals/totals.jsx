@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 
-const Totals = ({ rectangles }) => {
-  const printRef = useRef(null);
+const Totals = ({ rectangles, printRef }) => {
   const donorBoxTotal = rectangles.length;
   const priceTotal = rectangles.reduce((acc, r) => acc + r.price, 0).toFixed(2);
 

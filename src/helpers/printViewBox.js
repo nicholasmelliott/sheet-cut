@@ -1,5 +1,6 @@
-const print = (printRef) => {
+const print = (printRef, printTotalsRef) => {
     const content = printRef.current.innerHTML;
+    const totalsContent = printTotalsRef.current.innerHTML;
     const printWindow = document.getElementById("ifmcontentstoprint").contentWindow;
     printWindow.document.write(`<html><head><title>Print Component</title>
     <style>
@@ -48,6 +49,7 @@ const print = (printRef) => {
     </style>
     </head>
     <body>
+      <div>${totalsContent}</div>
       <div id="print-content">${content}</div>
     </body>
     </html>`);
