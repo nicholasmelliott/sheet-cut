@@ -1,16 +1,17 @@
 
 const colors = [
-  "#e51636",
+  "#36b8e5", // Maya Blue
   "#36e579", // Spring Green
   "#e5cc36", // Goldenrod
-  "#363be5", // Royal Blue
+  "#ffb300", // Orange
+  "#e366ff", // Purple
+  "#d44b28",
   "#e5369c", // Deep Pink
   "#36e5cf", // Celeste
-  "#e56236", // Dark Orange
+  "#c1fa7a", // Light Green
   "#3684e5", // Dodger Blue
-  "#9c36e5", // Purple
-  "#36b8e5", // Maya Blue
-  "#e5366b"  // Cerise
+  "#f8fa7a" // Yellow
+
 ];
 
 
