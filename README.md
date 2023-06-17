@@ -1,3 +1,3 @@
 # Sheet Cut
 
-<img src="./public/SheetCutExample.gif" alt="Your GIF" style="width: 200px; height: 500px;">
+<img src="./public/SheetCutExample.gif" alt="Your GIF" style="width: 300px; height: 500px;">
