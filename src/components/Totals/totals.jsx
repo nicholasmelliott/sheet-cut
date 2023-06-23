@@ -8,7 +8,7 @@ const Totals = ({ rectangles, printRef }) => {
     <div ref={printRef}>
         <div className="row text-center d-flex justify-content-between p-2">
           <div className="col-6 text-success">Total Price: ${priceTotal}</div>
-          <div className="col-6 text-primary">Total Sheets: {donorBoxTotal}</div>
+          <div className="col-6 text-primary">Total Donor Sheets: {donorBoxTotal}</div>
         </div>
     </div>
   );
