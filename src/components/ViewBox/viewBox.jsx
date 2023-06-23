@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './viewBox.css';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import scrollLeft from '../../utils/scrollLeft';
+import ToBeCutDimsList from '../ToBeCutDimsList/ToBeCutDimsList';
 
 const ViewBoxWrapper = (props) => {
   const {rectangles, printRef} = props;
@@ -307,6 +308,7 @@ const ViewBoxWrapper = (props) => {
             </div>
           )})}
         </div>
+        <ToBeCutDimsList rectangles={rectangles} />
       </div>
     </div>
   );
