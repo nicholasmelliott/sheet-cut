@@ -1,6 +1,6 @@
 # Material Cutting App
 
-The Material Cutting App is a web application that helps users optimize their material usage by finding the best way to cut out desired material sheet sizes from available donor material sheets. It provides an interactive visualization of the cutting plan and allows users to enter the dimensions of the material sheets they want to cut and view the recommended cutting layout.
+The Material Cutting App is a web application designed to optimize material usage by generating cutting plans for desired material sheet sizes. It helps users make efficient use of available donor material sheets by providing a visual representation of the recommended cutting layout. The app allows users to input their desired material sheet dimensions and finds the best way to cut them from available donor sheets. With an interactive interface and the ability to print cutting layouts for offline reference, the Material Cutting App streamlines the material cutting process and minimizes waste.
 
 ## Features
 
