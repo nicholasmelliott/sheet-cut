@@ -19,7 +19,7 @@ The Material Cutting App is a web application designed to optimize material usag
 - CSS: Styling and layout of the app.
 - JavaScript: Programming language used for app logic and calculations.
 
-### Getting started
+## Getting started
 
 Clone the repository and run `npm install` or `yarn` to install all dependencies:
 
