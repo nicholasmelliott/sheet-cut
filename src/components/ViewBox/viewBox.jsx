@@ -305,10 +305,11 @@ const ViewBoxWrapper = (props) => {
             {/************************************************************************************************/}
           </g>
               </svg>
+              {/* Work in progress */}
+              {/* <ToBeCutDimsList rectangles={r} /> */}
             </div>
           )})}
         </div>
-        <ToBeCutDimsList rectangles={rectangles} />
       </div>
     </div>
   );
