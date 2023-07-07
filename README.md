@@ -19,6 +19,38 @@ The Material Cutting App is a web application designed to optimize material usag
 - CSS: Styling and layout of the app.
 - JavaScript: Programming language used for app logic and calculations.
 
+## Getting started
+
+Clone the repository and run `npm install` or `yarn` to install all dependencies:
+
+```bash
+git clone https://github.com/your-repo/material-cutting-app.git
+cd material-cutting-app
+npm install
+# or
+yarn
+```
+
+### Run the app locally
+
+Start the application in development mode with Vite:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+### Building for production
+
+To create a production-ready build of the app:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
 ## Usage
 
 1. Enter the dimensions of the material sheets you want to cut.
