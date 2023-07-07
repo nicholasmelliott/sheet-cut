@@ -74,7 +74,7 @@ const ResponsiveList = (props) => {
     setRows((prevRows) => 
       prevRows
         .filter((_, i) => i !== index)
-        .map((row, i) => ({...row, index: i}))
+        .map((row, i) => ({...row, index: i, colorIndex: i}))
     );
   };
 
