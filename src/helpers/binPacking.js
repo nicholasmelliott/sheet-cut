@@ -1,5 +1,6 @@
 import { BP2D as BinPacking2D } from 'binpackingjs'
-const { Bin, Box, Packer } = BinPacking2D;
+const { Bin, Packer } = BinPacking2D;
+import createBoxes from './binPacking/createBoxes';
 import data from '../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 
 const splitArrayByThickness = arr => {
@@ -34,32 +35,6 @@ const splitArrayByThickness = arr => {
   // Return an array of arrays, each containing objects with the same thicknessFraction value
   return Object.values(result); 
 };
-
-  
-
-  const createBoxes = (array) => {
-    return array.map((el) => {
-      const { width, height, heightFraction, widthFraction, heightFractionText, widthFractionText, thicknessFraction, thicknessFractionText, index, colorIndex, quantity } = el;
-      const updatedWidth = width > height ? height : width;
-      const updatedHeight = width > height ? width : height;
-      const updatedWFrac = width > height ? heightFraction : widthFraction;
-      const updatedHFrac = width > height ? widthFraction : heightFraction;
-      const updatedWFracText = width > height ? heightFractionText : widthFractionText;
-      const updatedHFracText = width > height ? widthFractionText : heightFractionText;
-      const box = new Box((updatedWidth + updatedWFrac), (updatedHeight + updatedHFrac));
-      box.thickness = thicknessFraction;
-      box.index = index;
-      box.colorIndex = colorIndex;
-      box.w = updatedWidth;
-      box.wFrac = updatedWFracText;
-      box.h = updatedHeight;
-      box.hFrac = updatedHFracText;
-      box.tFrac = thicknessFractionText
-      box.quantity = quantity;
-      return box;
-    });
-  }
-  
 
 //Creates bins depending on thickness
 const createBins = (array, matThickness, matThicknessText) => {
