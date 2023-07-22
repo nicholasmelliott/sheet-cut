@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Form, Row, Col, Button, InputGroup, CloseButton } from 'react-bootstrap';
 import generateReducedFractions from '../../utils/fractions';
 import scrollLeft from '../../utils/scrollLeft';
-import packBoxes from '../../helpers/binPacking';
+import packBoxes from '../../helpers/binPacking/binPacking';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import './respList.css';
 
