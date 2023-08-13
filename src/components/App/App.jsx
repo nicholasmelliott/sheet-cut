@@ -35,6 +35,7 @@ function App() {
   // Handles dropdown menu button click
   const handleToggle = (isOpen) => {
     setIsMenuOpen(isOpen);
+    // Scrolls to top of page so Totals remains in view. Effect is minimal but important
     window.scrollTo(0, 0);
   };
 
