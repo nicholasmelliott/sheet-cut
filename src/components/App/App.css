@@ -17,3 +17,35 @@ body {
 .dropdown-toggle[aria-expanded="true"]::after {
   transform: rotate(180deg);
 }
+
+.display-wrapper {
+  height: 80vh;
+}
+
+.dropdown-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0; 
+  right: 0;
+}
+
+.dropdown-background {
+  background-color: #eee; 
+  height: 60px;
+  width: 100%;
+}
+
+.dropdown-background .dropdown-menu-background {
+  background: transparent;
+  border: 0px;
+}
+
+.ifmcontentstoprint {
+  height: 0px; 
+  width: 0px;
+  position: absolute;
+}
+
+.main-nav-btn {
+  width: 30%;
+}
