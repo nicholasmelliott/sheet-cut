@@ -5,31 +5,9 @@ import ResponsiveList from '../RespList/respList';
 import Totals from '../Totals/totals';
 import ViewBox from '../ViewBox/viewBox';
 import print from '../../helpers/print';
+import { MATERIALS } from '../../data/materials'
 
-function App() {
-  const mats = [
-    {
-      mat: "SS Glass",
-      thick: 2.5
-    },
-    {
-      mat: "DS Glass",
-      thick: 3.0
-    },
-    {
-      mat: "1/8 Acrylic",
-      thick: .100
-    },
-    {
-      mat: "3/16 Acrylic",
-      thick: .118
-    },
-    {
-      mat: "1/4 Acrylic",
-      thick: .220
-    }
-  ];
-
+function App() { 
   const row = (index, colorIndex) => ({ 
     index,
     colorIndex,
@@ -45,7 +23,7 @@ function App() {
   });
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [rectangles, setRectangles] = useState([]);
-  const [materials] = useState(mats);
+  const [materials] = useState(MATERIALS);
   const [rows, setRows] = useState([row(0, 0)]);
   const printViewBoxRef = useRef(null);
   const printTotalsRef = useRef(null);
