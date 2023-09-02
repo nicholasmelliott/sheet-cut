@@ -1,0 +1,25 @@
+.main {
+    width: 100%;
+    height: 40;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin: 0;
+  }
+
+.box-index span {
+    fill: #000;
+    font-size: 17px;
+    margin-left: 0px;
+    height: 10px;
+}
+
+.box-dims span {
+    fill: #000;
+    font-size: 17px;
+    text-align: center;
+}
+
+.box-quantity span {
+    fill: #000;
+    font-size: 17px;
+}
