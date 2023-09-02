@@ -25,9 +25,9 @@ const ToBeCutDimensionsList = ({ rectangles }) => {
                 <div className="col-6 box-dims">
                   <span>
                     {b.w !== 0 && ` ${b.w}`}
-                    {b.wFrac !== "0" && b.wFrac !== "" && ` ${b.wFrac}"`} x
+                    {b.wFrac !== "0" && b.wFrac !== "" && ` ${b.wFrac}`}" x
                     {b.h !== 0 && ` ${b.h}`}
-                    {b.hFrac !== "0" && b.hFrac !== "" && ` ${b.hFrac}"`}
+                    {b.hFrac !== "0" && b.hFrac !== "" && ` ${b.hFrac}`}"
                   </span>
                 </div>
                 <div className="col-3 text-end box-quantity" style={{paddingLeft: "0px"}}>
