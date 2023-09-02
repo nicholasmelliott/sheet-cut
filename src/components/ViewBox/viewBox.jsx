@@ -14,7 +14,7 @@ const ViewBoxWrapper = (props) => {
   const cBorder = 250;
   const cMargin = cBorder/2;
   const multiplier = 15;
-  const heightIncrement = 400;
+  const heightIncrement = 0;
   const renderIndexMinSizeWH = 1;
   const minWidthSize = 8;
   const minHeightSize = 8;
@@ -33,15 +33,6 @@ const ViewBoxWrapper = (props) => {
   const donorPriceTextFill = "#000";
   const donorThicknessIncrement = 90;
 
-  // {/*ToBeCut Dimensions List Component***************************************************************/}
-  let toBeCutMainSpacing = 0;
-  const toBeCutMainSpacingIncrement = 40;
-  const toBeCutMainBGIncrement = 93;
-  const toBeCutMainBGHeight= 40;
-  const toBeCutMainBGMargin = 15;
-  const toBeCutMainBottomIncrement = 120;
-  const toBeCutMainDimFontSize= 25;
-  // {/************************************************************************************************/}
   const toBeCutPieceFill = "#c7dcff";
   const toBeCutPieceStrokeDasharray = 10;
   const toBeCutPieceStroke = "#000";
@@ -115,10 +106,6 @@ const ViewBoxWrapper = (props) => {
       <div className="container view-box-testimonial-group" style={{height: "100%"}}>
         <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
           {rectangles.map((r, i) =>{ 
-            {/*ToBeCut Dimensions List Component***************************************************************/}
-            const processedColorIndexes = new Set();
-            let setIndex = 0;
-            {/*************************************************************************************************/}
             return(
             <div key={i} className="col">
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
@@ -204,57 +191,6 @@ const ViewBoxWrapper = (props) => {
                 >
                   {renderIndex(b, renderIndexMinSizeWH)}
                 </text>
-                {/*ToBeCut Dimensions List Component***************************************************************/}
-                {/* Draw the dimensions of the piece to-be-cut */}
-                {!processedColorIndexes.has(b.colorIndex) && (
-                 <>
-                 <rect
-                  x={0} 
-                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBGIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
-                  width="100%" 
-                  height={scaleWithWindow(r.width, toBeCutMainBGHeight)} 
-                  fill={setIndex % 2 == 0 ? "#eee" : "#fff"}
-                  stroke="#eee"
-                  strokeWidth={setIndex % 2 == 0 ? 0 : 3}
-                  rx="10"
-                  ry="10"      
-                />
-                 <text
-                  x={toBeCutMainBGMargin} 
-                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
-                  fill={toBeCutMainDimFill}
-                  textAnchor="start"
-                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
-                >
-                  #{b.index + 1}
-                </text> 
-                <text
-                  x={cMargin + (r.width * multiplier) / 2} 
-                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
-                  fill={toBeCutMainDimFill}
-                  textAnchor="middle"
-                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
-                >
-                  {b.w !== 0 && ` ${b.w}`}{(b.wFrac !== "0" && b.wFrac !== "") && ` ${b.wFrac}`}" x{b.h !== 0 && ` ${b.h}`}{(b.hFrac !== "0" && b.hFrac !== "") && ` ${b.hFrac}`}"
-                </text>
-                <text
-                  x={cBorder + (r.width * multiplier) - toBeCutMainBGMargin} 
-                  y={(cMargin + scaleWithWindow(r.width, toBeCutMainBottomIncrement + toBeCutMainSpacing) + (r.height * multiplier))}
-                  fill={toBeCutMainDimFill}
-                  textAnchor="end"
-                  fontSize={scaleWithWindow(r.width, toBeCutMainDimFontSize)}
-                >
-                   {`${r.boxQuantity[b.colorIndex]} of ${b.quantity} `}
-                </text>
-                {/* Update spacing between dimensions */}
-                {processedColorIndexes.add(b.colorIndex)}
-                {/* Update spacing between dimensions */}
-                {toBeCutMainSpacing += toBeCutMainSpacingIncrement}
-                {/* Update set Index */}
-                {setIndex++}
-                </>
-                )}
-                {/********************************************************************************************************/}
                 {/* Draw the top dimension */}
                 <text
                   x={(b.x * multiplier + cMargin) + (b.width * multiplier / 2)}
@@ -299,14 +235,9 @@ const ViewBoxWrapper = (props) => {
                 </text>
               </g>
             ))}
-            {/*ToBeCut Dimensions List Component***************************************************************/}
-            {/* Reset toBeCut dims spacing for each viewbox */}
-            {toBeCutMainSpacing = 0}  
-            {/************************************************************************************************/}
           </g>
               </svg>
-              {/* Work in progress */}
-              {/* <ToBeCutDimsList rectangles={r} /> */}
+              <ToBeCutDimsList rectangles={r} />
             </div>
           )})}
         </div>
