@@ -8,31 +8,30 @@ const ToBeCutDimensionsList = ({ rectangles }) => {
 
   return (
     <div>
-      {rectangles.boxes.map((b, j) => {
+      {rectangles.boxes.map((box) => {
         const backgroundColor = setIndex % 2 === 0 ? "#eee" : "#fff";
-          console.log(b);
-        if (!processedColorIndexes.has(b.colorIndex)) {
-          processedColorIndexes.add(b.colorIndex);
+        if (!processedColorIndexes.has(box.colorIndex)) {
+          processedColorIndexes.add(box.colorIndex);
           setIndex++;
           return (
-            <div key={j}>
+            <div key={box.index}>
               <div className="row main" style={{ backgroundColor: backgroundColor, margin: 0}}>
                 <div className="col-3 text-start box-index">
                   <span>
-                    #{b.index + 1}
+                    #{box.index + 1}
                   </span>
                 </div>
                 <div className="col-6 box-dims">
                   <span>
-                    {b.w !== 0 && ` ${b.w}`}
-                    {b.wFrac !== "0" && b.wFrac !== "" && ` ${b.wFrac}`}" x
-                    {b.h !== 0 && ` ${b.h}`}
-                    {b.hFrac !== "0" && b.hFrac !== "" && ` ${b.hFrac}`}"
+                    {box.w !== 0 && ` ${box.w}`}
+                    {box.wFrac !== "0" && box.wFrac !== "" && ` ${box.wFrac}`}" x
+                    {box.h !== 0 && ` ${box.h}`}
+                    {box.hFrac !== "0" && box.hFrac !== "" && ` ${box.hFrac}`}"
                   </span>
                 </div>
                 <div className="col-3 text-end box-quantity" style={{paddingLeft: "0px"}}>
                   <span>
-                    {`${rectangles.boxQuantity[b.colorIndex]} of ${b.quantity}`}
+                    {`${rectangles.boxQuantity[box.colorIndex]} of ${box.quantity}`}
                   </span>
                 </div>
               </div>
