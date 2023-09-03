@@ -22,7 +22,7 @@ const print = (printViewBoxRef, printTotalsRef) => {
         }
         .view-box-testimonial-group > .row > .col {
           display: inline-block;
-          width: 22%;
+          width: 30%;
           height: 40%;
           padding: 1.5%
         }
@@ -44,6 +44,32 @@ const print = (printViewBoxRef, printTotalsRef) => {
         }
         rect {
           fill: none;
+        }
+        .main {
+          display: block;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+        }
+  
+        .box-index, .box-dims, .box-quantity {
+          display: inline-block;
+          margin: 0;
+          padding: 0;
+          // height: 5%;
+          // padding: 1.5%
+        }
+  
+        .box-index {
+          width: 20%;
+        }
+  
+        .box-dims {
+          width: 60%;
+        }
+  
+        .box-quantity {
+          width: 20%;
         }
       }
     </style>
