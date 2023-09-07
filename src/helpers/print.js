@@ -45,6 +45,8 @@ const print = (printViewBoxRef, printTotalsRef) => {
         rect {
           fill: none;
         }
+        
+        /* Apply styling to ToBeCutDimsList component */
         .main {
           display: block;
           margin: 0;
@@ -66,6 +68,7 @@ const print = (printViewBoxRef, printTotalsRef) => {
   
         .box-dims {
           width: 60%;
+          text-align: center;
         }
   
         .box-quantity {
