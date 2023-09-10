@@ -4,8 +4,7 @@ import getHexColorByIndex from '../../utils/colorByIndex';
 import scrollLeft from '../../utils/scrollLeft';
 import ToBeCutDimsList from '../ToBeCutDimsList/ToBeCutDimsList';
 
-const ViewBoxWrapper = (props) => {
-  const {rectangles, printRef} = props;
+const ViewBoxWrapper = ({rectangles, printRef}) => {
 
   const containerRef = useRef(null);
   const prevRectsLengthRef = useRef(rectangles.length);
