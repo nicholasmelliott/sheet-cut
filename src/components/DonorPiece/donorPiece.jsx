@@ -1,0 +1,95 @@
+import React from 'react';
+import ToBeCutPiece from '../ToBeCutPiece/toBeCutPiece';
+
+const DonorPiece = ({ r, i }) => {
+    
+    let prevHeight = 0;
+    const cBorder = 250;
+    const cMargin = cBorder/2;
+    const multiplier = 15;
+
+    // const donorPieceFill = "#a1c5ff";
+    const donorPieceFill = "#003d34";
+    const donorPieceStroke = "#000";
+    const donorTopDimDecrement = 10;
+    const donorLeftDimDecrement = 25;
+    const donorBottomPriceIncrement = 60;
+    const donorSidesFontSize = 30;
+    const donorPriceFontSize = 30; 
+    const donorSidesTextFill = "#000";
+    const donorPriceTextFill = "#000";
+    const donorThicknessIncrement = 90;
+
+    const windowWidth = window.innerWidth
+
+    // Scales font size and spacing to maintain consistency across all SVG viewboxes.
+    const scaleWithWindow = (viewBoxWidth, adjVal) => {
+      const xlWindowMult = 3;
+      const lgWindowMult = 2;
+      if(windowWidth > 1200){
+        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * xlWindowMult);
+      }else if(windowWidth > 768){
+        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * lgWindowMult);
+      }else{
+        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
+      }
+    }
+
+    return (
+        <g key={i}>
+            <defs>
+              <linearGradient id={`donorPieceGradient${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                <stop offset="10%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                <stop offset="40%" stopColor={donorPieceFill} stopOpacity="0.1" />
+                <stop offset="60%" stopColor={donorPieceFill} stopOpacity="0.1" />
+                <stop offset="90%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.3" />
+              </linearGradient>
+            </defs>
+            {/* Draw donor piece */}
+            <rect
+              x={cMargin}
+              y={cMargin + prevHeight}
+              width={r.width * multiplier}
+              height={r.height * multiplier}
+              fill={`url(#donorPieceGradient${i})`}
+              stroke={donorPieceStroke}
+            />
+            {/* Draw donor piece dimensions next to corresponding sides */}
+            <text 
+              x={cMargin + (r.width * multiplier) / 2} 
+              y={cMargin - scaleWithWindow(r.width, donorTopDimDecrement) + prevHeight} 
+              textAnchor="middle" 
+              fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
+              fill={donorSidesTextFill}
+            >
+              {r.width}
+            </text>
+            <text 
+              x={cMargin - scaleWithWindow(r.width, donorLeftDimDecrement)} 
+              y={cMargin + (r.height * multiplier) / 2 + prevHeight} 
+              textAnchor="middle" 
+              fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
+              fill={donorSidesTextFill}
+            >
+              {r.height}
+            </text>
+            <text 
+              x={cMargin + (r.width * multiplier) / 2} 
+              y={(cMargin + scaleWithWindow(r.width, donorBottomPriceIncrement)) + (r.height * multiplier)} 
+              textAnchor="middle" 
+              fontSize={scaleWithWindow(r.width, donorPriceFontSize)} 
+              fill={donorPriceTextFill}
+            >
+              ${r.price} | {r.thicknessText}
+            </text>
+            {r.boxes.map((b, j) => (
+              <ToBeCutPiece key={j} r={r} i={i} b={b} j={j} />
+            ))}
+        </g>
+    );
+  };
+  
+
+  export default DonorPiece;
