@@ -1,28 +1,27 @@
 import React from 'react';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import scaleWithWindow from '../../utils/scaleWithWindow';
+import {
+    prevHeight,
+    cMargin, 
+    multiplier,
+    toBeCutPieceStrokeDasharray,
+    toBeCutPieceStroke,
+    toBeCutTopDimIncrement,
+    toBeCutBottomDimDecrement,
+    toBeCutLeftDimIncrement,
+    toBeCutRightDimDecrement,
+    toBeCutSheetNumFontSize,
+    toBeCutSideDimsFontSize,
+    toBeCutMainDimFill,
+    toBeCutSideDimsFill
+} from '../../constants/viewBoxConstants';
 
 const ToBeCutPiece = ({ r, i, b, j }) => {
-    let prevHeight = 0;
-    const cBorder = 250;
-    const cMargin = cBorder/2;
-    const multiplier = 15;
     const renderIndexMinSizeWH = 1;
     const minWidthSize = 8;
     const minHeightSize = 8;
-
-    // const toBeCutPieceFill = "#c7dcff";
-    const toBeCutPieceStrokeDasharray = 10;
-    const toBeCutPieceStroke = "#000";
-    const toBeCutTopDimIncrement = 35;
-    const toBeCutBottomDimDecrement = 15;
-    const toBeCutLeftDimIncrement = 15;
-    const toBeCutRightDimDecrement = 15;
-    const toBeCutSheetNumFontSize= 25;
-    const toBeCutSideDimsFontSize = 25;
-    const toBeCutMainDimFill = "#000";
-    const toBeCutSideDimsFill = "#FFF";
-
+    
     // Conditionally render index text based on rect width and height.
     const renderIndex = (rect, minSize) => {
       if(rect.w <= minSize || rect.h <= minSize) {

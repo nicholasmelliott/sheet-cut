@@ -1,26 +1,22 @@
 import React from 'react';
 import ToBeCutPiece from '../ToBeCutPiece/toBeCutPiece';
 import scaleWithWindow from '../../utils/scaleWithWindow';
+import {
+  prevHeight,
+  cMargin, 
+  multiplier,
+  donorPieceFill,
+  donorPieceStroke,
+  donorTopDimDecrement,
+  donorLeftDimDecrement,
+  donorBottomPriceIncrement,
+  donorSidesFontSize,
+  donorPriceFontSize,
+  donorSidesTextFill,
+  donorPriceTextFill
+} from '../../constants/viewBoxConstants';
 
 const DonorPiece = ({ r, i }) => {
-    
-    let prevHeight = 0;
-    const cBorder = 250;
-    const cMargin = cBorder/2;
-    const multiplier = 15;
-
-    // const donorPieceFill = "#a1c5ff";
-    const donorPieceFill = "#003d34";
-    const donorPieceStroke = "#000";
-    const donorTopDimDecrement = 10;
-    const donorLeftDimDecrement = 25;
-    const donorBottomPriceIncrement = 60;
-    const donorSidesFontSize = 30;
-    const donorPriceFontSize = 30; 
-    const donorSidesTextFill = "#000";
-    const donorPriceTextFill = "#000";
-    const donorThicknessIncrement = 90;
-
     return (
         <g key={i}>
             <defs>
