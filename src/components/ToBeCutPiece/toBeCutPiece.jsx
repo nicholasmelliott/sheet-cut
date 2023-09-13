@@ -1,5 +1,6 @@
 import React from 'react';
 import getHexColorByIndex from '../../utils/colorByIndex';
+import scaleWithWindow from '../../utils/scaleWithWindow';
 
 const ToBeCutPiece = ({ r, i, b, j }) => {
     let prevHeight = 0;
@@ -21,21 +22,6 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
     const toBeCutSideDimsFontSize = 25;
     const toBeCutMainDimFill = "#000";
     const toBeCutSideDimsFill = "#FFF";
-
-    const windowWidth = window.innerWidth;
-
-    // Scales font size and spacing to maintain consistency across all SVG viewboxes.
-    const scaleWithWindow = (viewBoxWidth, adjVal) => {
-      const xlWindowMult = 3;
-      const lgWindowMult = 2;
-      if(windowWidth > 1200){
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * xlWindowMult);
-      }else if(windowWidth > 768){
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * lgWindowMult);
-      }else{
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
-      }
-    }
 
     // Conditionally render index text based on rect width and height.
     const renderIndex = (rect, minSize) => {

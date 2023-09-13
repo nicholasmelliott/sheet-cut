@@ -1,5 +1,6 @@
 import React from 'react';
 import ToBeCutPiece from '../ToBeCutPiece/toBeCutPiece';
+import scaleWithWindow from '../../utils/scaleWithWindow';
 
 const DonorPiece = ({ r, i }) => {
     
@@ -19,21 +20,6 @@ const DonorPiece = ({ r, i }) => {
     const donorSidesTextFill = "#000";
     const donorPriceTextFill = "#000";
     const donorThicknessIncrement = 90;
-
-    const windowWidth = window.innerWidth
-
-    // Scales font size and spacing to maintain consistency across all SVG viewboxes.
-    const scaleWithWindow = (viewBoxWidth, adjVal) => {
-      const xlWindowMult = 3;
-      const lgWindowMult = 2;
-      if(windowWidth > 1200){
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * xlWindowMult);
-      }else if(windowWidth > 768){
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * (adjVal * lgWindowMult);
-      }else{
-        return (((viewBoxWidth * multiplier) + cBorder)/ windowWidth) * adjVal;
-      }
-    }
 
     return (
         <g key={i}>
