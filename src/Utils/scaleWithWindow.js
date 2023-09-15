@@ -1,4 +1,4 @@
-const windowWidth = window.innerWidth;
+const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 const cBorder = 250;
 const multiplier = 15;
 
