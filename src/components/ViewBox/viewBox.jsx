@@ -3,14 +3,12 @@ import './viewBox.css';
 import scrollLeft from '../../utils/scrollLeft';
 import ToBeCutDimsList from '../ToBeCutDimsList/ToBeCutDimsList';
 import DonorPiece from '../DonorPiece/donorPiece';
-import {cBorder, multiplier} from '../../constants/viewBoxConstants';
+import {cBorder, multiplier, heightIncrement} from '../../constants/viewBoxConstants';
 
 const ViewBoxWrapper = ({rectangles, printRef}) => {
 
   const containerRef = useRef(null);
   const prevRectsLengthRef = useRef(rectangles.length);
-
-  const heightIncrement = 0;
  
    // When rectangles length changes
    useEffect(() => {    

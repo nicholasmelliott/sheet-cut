@@ -5,6 +5,7 @@ const PREV_HEIGHT = 0;
 const MULTIPLIER = 15;
 const CBORDER = 250;
 const CMARGIN = CBORDER / 2;
+const HEIGHT_INCREMENT = 100;
 
 // Donor piece constants
 const DONOR_PIECE_FILL = "#003d34";
@@ -35,6 +36,7 @@ const TO_BE_CUT_SIDE_DIMS_FILL = "#FFF";
 export {
     PREV_HEIGHT as prevHeight,
     MULTIPLIER as multiplier,
+    HEIGHT_INCREMENT as heightIncrement,
     CBORDER as cBorder,
     CMARGIN as cMargin,
     DONOR_PIECE_FILL as donorPieceFill,
