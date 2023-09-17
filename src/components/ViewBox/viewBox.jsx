@@ -3,6 +3,7 @@ import './viewBox.css';
 import scrollLeft from '../../utils/scrollLeft';
 import ToBeCutDimsList from '../ToBeCutDimsList/ToBeCutDimsList';
 import DonorPiece from '../DonorPiece/donorPiece';
+import DonorPiecePrice from '../DonorPiecePrice/donorPiecePrice';
 import {cBorder, multiplier, heightIncrement} from '../../constants/viewBoxConstants';
 
 const ViewBoxWrapper = ({rectangles, printRef}) => {
@@ -30,6 +31,7 @@ const ViewBoxWrapper = ({rectangles, printRef}) => {
               <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
                 <DonorPiece r={r} i={i} />
               </svg>
+              <DonorPiecePrice rectangles={r} />
               <ToBeCutDimsList rectangles={r} />
             </div>
           )})}

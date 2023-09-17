@@ -12,11 +12,8 @@ const DONOR_PIECE_FILL = "#003d34";
 const DONOR_PIECE_STROKE = "#000";
 const DONOR_TOP_DIM_DECREMENT = 10;
 const DONOR_LEFT_DIM_DECREMENT = 25;
-const DONOR_BOTTOM_PRICE_INCREMENT = 60;
 const DONOR_SIDES_FONT_SIZE = 30;
-const DONOR_PRICE_FONT_SIZE = 30;
 const DONOR_SIDES_TEXT_FILL = "#000";
-const DONOR_PRICE_TEXT_FILL = "#000";
 const DONOR_THICKNESS_INCREMENT = 90;
 
 // To be cut piece constants
@@ -43,11 +40,8 @@ export {
     DONOR_PIECE_STROKE as donorPieceStroke,
     DONOR_TOP_DIM_DECREMENT as donorTopDimDecrement,
     DONOR_LEFT_DIM_DECREMENT as donorLeftDimDecrement,
-    DONOR_BOTTOM_PRICE_INCREMENT as donorBottomPriceIncrement,
     DONOR_SIDES_FONT_SIZE as donorSidesFontSize,
-    DONOR_PRICE_FONT_SIZE as donorPriceFontSize,
     DONOR_SIDES_TEXT_FILL as donorSidesTextFill,
-    DONOR_PRICE_TEXT_FILL as donorPriceTextFill,
     DONOR_THICKNESS_INCREMENT as donorThicknessIncrement,
     TO_BE_CUT_PIECE_FILL as toBeCutPieceFill,
     TO_BE_CUT_PIECE_STROKE_DASHARRAY as toBeCutPieceStrokeDasharray,

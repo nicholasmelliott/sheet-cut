@@ -9,11 +9,8 @@ import {
   donorPieceStroke,
   donorTopDimDecrement,
   donorLeftDimDecrement,
-  donorBottomPriceIncrement,
   donorSidesFontSize,
-  donorPriceFontSize,
-  donorSidesTextFill,
-  donorPriceTextFill
+  donorSidesTextFill
 } from '../../constants/viewBoxConstants';
 
 const DonorPiece = ({ r, i }) => {
@@ -56,15 +53,6 @@ const DonorPiece = ({ r, i }) => {
               fill={donorSidesTextFill}
             >
               {r.height}
-            </text>
-            <text 
-              x={cMargin + (r.width * multiplier) / 2} 
-              y={(cMargin + scaleWithWindow(r.width, donorBottomPriceIncrement)) + (r.height * multiplier)} 
-              textAnchor="middle" 
-              fontSize={scaleWithWindow(r.width, donorPriceFontSize)} 
-              fill={donorPriceTextFill}
-            >
-              ${r.price} | {r.thicknessText}
             </text>
             {r.boxes.map((b, j) => (
               <ToBeCutPiece key={j} r={r} i={i} b={b} j={j} />
