@@ -5,7 +5,7 @@ const PREV_HEIGHT = 0;
 const MULTIPLIER = 15;
 const CBORDER = 250;
 const CMARGIN = CBORDER / 2;
-const HEIGHT_INCREMENT = 100;
+const HEIGHT_INCREMENT = 0;
 
 // Donor piece constants
 const DONOR_PIECE_FILL = "#003d34";
