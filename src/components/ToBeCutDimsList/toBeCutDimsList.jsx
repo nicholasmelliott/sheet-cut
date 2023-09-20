@@ -1,5 +1,6 @@
 import React from 'react';
 import './toBeCutDimsList.css';
+import { TO_BE_CUT_LIST_ALT_ITEM_FILL_1, TO_BE_CUT_LIST_ALT_ITEM_FILL_2 } from '../../constants/viewBoxConstants';
 
 const ToBeCutDimensionsList = ({ rectangles }) => {
   
@@ -9,7 +10,7 @@ const ToBeCutDimensionsList = ({ rectangles }) => {
   return (
     <div>
       {rectangles.boxes.sort((a, b) => a.index - b.index).map((box) => {
-        const backgroundColor = setIndex % 2 === 0 ? "#eee" : "#fff";
+        const backgroundColor = setIndex % 2 === 0 ? TO_BE_CUT_LIST_ALT_ITEM_FILL_1 : TO_BE_CUT_LIST_ALT_ITEM_FILL_2;
         if (!processedColorIndexes.has(box.colorIndex)) {
           processedColorIndexes.add(box.colorIndex);
           setIndex++;

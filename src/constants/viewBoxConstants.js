@@ -29,6 +29,10 @@ const TO_BE_CUT_SIDE_DIMS_FONT_SIZE = 25;
 const TO_BE_CUT_MAIN_DIM_FILL = "#000";
 const TO_BE_CUT_SIDE_DIMS_FILL = "#FFF";
 
+// To be cut list constants
+const TO_BE_CUT_LIST_ALT_ITEM_FILL_1 = "#eee";
+const TO_BE_CUT_LIST_ALT_ITEM_FILL_2 = "#fff";
+
 // Export constants with lowercase aliases
 export {
     PREV_HEIGHT as prevHeight,
@@ -53,5 +57,7 @@ export {
     TO_BE_CUT_SHEET_NUM_FONT_SIZE as toBeCutSheetNumFontSize,
     TO_BE_CUT_SIDE_DIMS_FONT_SIZE as toBeCutSideDimsFontSize,
     TO_BE_CUT_MAIN_DIM_FILL as toBeCutMainDimFill,
-    TO_BE_CUT_SIDE_DIMS_FILL as toBeCutSideDimsFill
+    TO_BE_CUT_SIDE_DIMS_FILL as toBeCutSideDimsFill,
+    TO_BE_CUT_LIST_ALT_ITEM_FILL_1,
+    TO_BE_CUT_LIST_ALT_ITEM_FILL_2
 };
