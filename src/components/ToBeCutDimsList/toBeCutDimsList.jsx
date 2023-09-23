@@ -8,7 +8,7 @@ const ToBeCutDimensionsList = ({ rectangles }) => {
   let setIndex = 0;
 
   return (
-    <div>
+    <div className="pb-5" >
       {rectangles.boxes.sort((a, b) => a.index - b.index).map((box) => {
         const backgroundColor = setIndex % 2 === 0 ? TO_BE_CUT_LIST_ALT_ITEM_FILL_1 : TO_BE_CUT_LIST_ALT_ITEM_FILL_2;
         if (!processedColorIndexes.has(box.colorIndex)) {
