@@ -83,7 +83,7 @@ const ResponsiveList = (props) => {
       <div className="resp-list-container resp-list-testimonial-group">
         <div className="row"  ref={containerRef}>
           {rows.map((row, index) => (
-            <div key={index} className="testGroupCol col-11 col-md-4 offset-half">
+            <div key={index} className="testGroupCol col-11 col-md-4 col-xxl-3 offset-half">
               <Form>
                 <Row key={index}>
                   <div className='col-8 mb-1 pl-4 pb-2'>
