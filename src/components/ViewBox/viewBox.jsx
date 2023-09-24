@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './viewBox.css';
 import scrollLeft from '../../utils/scrollLeft';
-import ToBeCutDimsList from '../ToBeCutDimsList/ToBeCutDimsList';
+import ToBeCutDimsList from '../ToBeCutDimsList/toBeCutDimsList';
 import DonorPiece from '../DonorPiece/donorPiece';
 import DonorPiecePrice from '../DonorPiecePrice/donorPiecePrice';
 import {cBorder, multiplier, heightIncrement} from '../../constants/viewBoxConstants';
