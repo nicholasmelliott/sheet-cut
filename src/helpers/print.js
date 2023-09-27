@@ -34,11 +34,11 @@ const print = (printViewBoxRef, printTotalsRef) => {
           height: 0;
           margin: 20px;
         }
-        .col-6.text-success {
+        .col-6.text-success, .col-6 {
           text-align: left;
           margin-right: 20px;
         }
-        .col-6.text-primary {
+        .col-6.text-primary, .col-6 {
           text-align: right;
           margin-left: 20px;
         }
