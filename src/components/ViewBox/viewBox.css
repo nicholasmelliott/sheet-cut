@@ -6,6 +6,7 @@
   }
   .view-box-testimonial-group > .row > .col {
     display: inline-block;
+    vertical-align: top;
   }
 
   @media (min-width: 768px) {
