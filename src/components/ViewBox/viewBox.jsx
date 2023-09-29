@@ -22,9 +22,9 @@ const ViewBoxWrapper = ({rectangles, printRef}) => {
   },[rectangles.length]);
 
   return (
-    <div ref={printRef} style={{height: "100%"}}>
-      <div className="container view-box-testimonial-group" style={{height: "100%"}}>
-        <div className="row text-center" ref={containerRef} style={{height: "100%"}}>
+    <div ref={printRef} className="container">
+      <div className="view-box-testimonial-group">
+        <div className="row text-center" ref={containerRef}>
           {rectangles.map((r, i) =>{ 
             return(
             <div key={i} className="col">

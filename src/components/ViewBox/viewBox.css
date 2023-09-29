@@ -1,5 +1,13 @@
+.container {
+  height: 100%;
+}
+
+.view-box-testimonial-group {
+  height: 100%
+}
 
 .view-box-testimonial-group > .row {
+    height: 100%;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
