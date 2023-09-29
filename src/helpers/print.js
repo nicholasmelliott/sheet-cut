@@ -52,6 +52,8 @@ const print = (printViewBoxRef, printTotalsRef) => {
           margin: 0;
           padding: 0;
           width: 100%;
+          border: 1px solid lightGray;
+          border-radius: 5px;
         }
   
         .box-index, .box-dims, .box-quantity {
