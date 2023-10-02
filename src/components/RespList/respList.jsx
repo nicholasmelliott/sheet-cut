@@ -32,15 +32,24 @@ const ResponsiveList = (props) => {
 
   const handleIntInputChange = (e, index) => {
     const { value } = e.target;
-    //Return if value is a negative number or 0
-    if (value !== "" && value <= 0) {
+    
+    // Prevents 0 from being input option
+    if (value === "0") {
       return;
     }
+
     handleInputChange(e, index, parseInt);
   };
 
   const handleFloatInputChange = (e, index) => {
     handleInputChange(e, index, parseFloat);
+  };
+
+  const handleIntKeyDown = (e) => {
+    // Prevent 'e', '-', '+', or '.' from being entered
+    if (['e', 'E', '-', '+', '.'].includes(e.key)) {
+      e.preventDefault();
+    }
   };
 
   useEffect(() => {
@@ -108,6 +117,7 @@ const ResponsiveList = (props) => {
                         name="width"
                         value={row.width}
                         onChange={(e) => handleIntInputChange(e, index)}
+                        onKeyDown={handleIntKeyDown}
                         ref={firstInputRef}
                       />
                       <Form.Control
@@ -145,6 +155,7 @@ const ResponsiveList = (props) => {
                         name="height"
                         value={row.height}
                         onChange={(e) => handleIntInputChange(e, index)}
+                        onKeyDown={handleIntKeyDown}
                       />
                       <Form.Control
                         className="p-2"
