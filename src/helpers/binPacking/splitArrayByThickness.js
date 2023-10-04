@@ -18,14 +18,8 @@ const splitArrayByThickness = arr => {
         // Create a new array for the current thickness and add the current element to it
         result[thickness] = [curr]; 
       } else {
-        // Add the current element to the end of the existing array for the current thickness
-        const index = result[thickness].findIndex(obj => obj.thicknessFraction < thickness);
-        if (index === -1) {
-          result[thickness].push(curr); 
-        } else {
-          // Insert the current element at the correct position in the existing array for the current thickness
-          result[thickness].splice(index, 0, curr); 
-        }
+        //  Push the current element into the existing array
+        result[thickness].push(curr); 
       }
     }
     // Return an array of arrays, each containing objects with the same thicknessFraction value
