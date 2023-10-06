@@ -30,7 +30,11 @@ function App() {
   const printTotalsRef = useRef(null);
 
   const handlePrint = () => {
-    print(printViewBoxRef, printTotalsRef);
+    try {
+      print(printViewBoxRef, printTotalsRef);
+    } catch (error) {
+      console.error("An error occurred while printing:", error);
+    }
   }
 
   // Handles dropdown menu button click
