@@ -3,6 +3,9 @@ const { Bin, Packer } = BinPacking2D;
 import splitArrayByThickness from './splitArrayByThickness';
 import createBoxes from './createBoxes';
 import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
+import heuristic from 'binpackingjs/src/2D/heuristics/BestAreaFit';
+// TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
+// import heuristic from './TopLeftFit';
 
 //Creates bins depending on thickness
 const createBins = (array, matThickness, matThicknessText) => {
@@ -11,7 +14,7 @@ const createBins = (array, matThickness, matThicknessText) => {
         const dims = el.dimensions;
         if (dims) {
             if(dims.thickness == matThickness){
-                const bin = new Bin(dims.width, dims.height);
+                const bin = new Bin(dims.width, dims.height, new heuristic);
                 bin.thickness = dims.thickness;
                 bin.thicknessText = matThicknessText;
                 bin.price = el["Ace Retail"];
