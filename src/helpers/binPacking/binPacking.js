@@ -31,7 +31,7 @@ const createBins = (array, matThickness, matThicknessText) => {
 const removeEmptyBins = (bins) => {
   // Filter out bins that have no boxes
   const nonEmptyBins = bins.filter(({ boxes }) => boxes.length > 0);
-  
+
   // Sort non-empty bins based on the index of the first box in each bin
   nonEmptyBins.sort((a, b) => a.boxes[0].index - b.boxes[0].index);
   return nonEmptyBins;
@@ -51,16 +51,28 @@ const calculateBoxQuantities = (array) => {
   return array;
 }
 
+// Main function to pack boxes into bins based on their thickness
 const packBoxes = (array) => {
     let finalArray = [];
+
+    // Group boxes by thickness
     const arraysByThick = splitArrayByThickness(array);
+
+    // Iterate through each thickness group
     arraysByThick.forEach((el) => {
+        // Create bins and boxes for the current group
         const bins = createBins(data, el[0].thicknessFraction, el[0].thicknessFractionText); 
         const boxes = createBoxes( el );
+
+        // Pack the boxes into the bins
         const packer = new Packer(bins);
         packer.pack(boxes);
+
+        // Filter out empty bins and calculate box quantities
         const nonEmptyBins = removeEmptyBins(packer.bins);
         const boxQuantityArray = calculateBoxQuantities(nonEmptyBins);
+
+        // Update the final array
         finalArray = [...finalArray, ...boxQuantityArray];
     })
     return finalArray;
