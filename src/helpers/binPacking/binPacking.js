@@ -27,8 +27,12 @@ const createBins = (array, matThickness, matThicknessText) => {
     return bins;
 }
 
+// Remove bins that are empty and sort the remaining bins by the index of their first box
 const removeEmptyBins = (bins) => {
+  // Filter out bins that have no boxes
   const nonEmptyBins = bins.filter(({ boxes }) => boxes.length > 0);
+  
+  // Sort non-empty bins based on the index of the first box in each bin
   nonEmptyBins.sort((a, b) => a.boxes[0].index - b.boxes[0].index);
   return nonEmptyBins;
 }
