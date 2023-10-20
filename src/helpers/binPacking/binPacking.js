@@ -22,6 +22,7 @@ const createBins = (array, matThickness, matThicknessText) => {
             }
         }
     });
+    // Sort the bins by width and then by height in descending order
     bins.sort(function(a, b) { return b.width - a.width || b.height - a.height });
     return bins;
 }
