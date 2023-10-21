@@ -25,7 +25,10 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [rectangles, setRectangles] = useState([]);
   const [materials] = useState(MATERIALS);
-  const [rows, setRows] = useState([row(0, 0)]);
+  const [rows, setRows] = useState(() => {
+    const savedRows = localStorage.getItem('rows');
+    return savedRows ? JSON.parse(savedRows) : [row(0, 0)];
+  });
   const printViewBoxRef = useRef(null);
   const printTotalsRef = useRef(null);
 
@@ -48,9 +51,19 @@ function App() {
     setRows((prevRows) => [...prevRows, row(prevRows.length, prevRows.length)]);
   };
 
+  const clearRows = () => {
+    setRows([row(0, 0)]);
+    localStorage.removeItem('rows');
+  };
+  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('rows', JSON.stringify(rows));
+  }, [rows]);
 
   return (
     <ErrorBoundary>
@@ -69,6 +82,7 @@ function App() {
               </Dropdown.Toggle>
               <Button variant="secondary" className="main-nav-btn" onClick={addRow} disabled={!isMenuOpen}>Add</Button>
               <Dropdown.Menu className="w-100 p-3 dropdown-menu-background">
+                <Button className="btn-sm reset-btn" variant="danger" style={{borderRadius: '50%'}} onClick={clearRows}>Reset Sheets</Button>
                 <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials}/>
               </Dropdown.Menu>
             </Dropdown>
