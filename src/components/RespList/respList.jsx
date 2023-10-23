@@ -106,7 +106,7 @@ const ResponsiveList = (props) => {
                 </Row>
                 <Row>  
                   <Col>
-                    {(row.height || row.heightFraction) && !(row.width || row.widthFraction) ? <span>Second dimension required.</span> : null}
+                    {(row.height || row.heightFraction) && !(row.width || row.widthFraction) ? <span className="text-danger">Second dimension required.</span> : null}
                     <InputGroup className='input-group-lg'>
                       <InputGroup.Text className="input-label p-2">
                         Width (in)
@@ -145,7 +145,7 @@ const ResponsiveList = (props) => {
                 </Row>
                 <Row className="mt-2">  
                   <Col>
-                    {!(row.height || row.heightFraction) && (row.width || row.widthFraction) ? <span>Second dimension required.</span> : null}
+                    {!(row.height || row.heightFraction) && (row.width || row.widthFraction) ? <span className="text-danger">Second dimension required.</span> : null}
                     <InputGroup className='input-group-lg'>
                       <InputGroup.Text className="input-label p-2">
                         Height (in)
