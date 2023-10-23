@@ -9,7 +9,7 @@ import './respList.css';
 const DENOMINATOR = 16;
 
 const ResponsiveList = (props) => {
-  const {rows, setRows, rectangles, setRectangles, materials} = props;
+  const {rows, setRows, rectangles, setRectangles, materials, validDimensions} = props;
   const containerRef = useRef(null);
   const firstInputRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
@@ -104,6 +104,7 @@ const ResponsiveList = (props) => {
                     )}
                   </div>
                 </Row>
+                {!validDimensions ? <span> Please enter valid dimensions.</span> : null}
                 <Row>  
                   <Col>
                     {(row.height || row.heightFraction) && !(row.width || row.widthFraction) ? <span>Second dimension required.</span> : null}
