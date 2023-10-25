@@ -8,7 +8,8 @@ const areDimensionsValid = (userDimensionsArray) => {
   
     // Iterate over each userDimensions object in the array
     for (const userDimensions of userDimensionsArray) {
-      const { width: userWidth, height: userHeight } = userDimensions;
+      const userWidth = (parseFloat(userDimensions.width) || 0) + (parseFloat(userDimensions.widthFraction) || 0);
+      const userHeight = (parseFloat(userDimensions.height) || 0) + (parseFloat(userDimensions.heightFraction) || 0);
   
       let isValidForAnyDataObject = false;
   
@@ -26,7 +27,7 @@ const areDimensionsValid = (userDimensionsArray) => {
           typeof userWidth === 'number' && typeof userHeight === 'number' &&
           typeof dataWidth === 'number' && typeof dataHeight === 'number'
         ) {
-          if (userWidth <= dataWidth && userHeight <= dataHeight) {
+          if ((userWidth <= dataWidth && userHeight <= dataHeight) || (userWidth <= dataHeight && userHeight <= dataWidth)) {
             isValidForAnyDataObject = true;
             break;
           }
