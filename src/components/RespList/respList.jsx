@@ -5,11 +5,12 @@ import scrollLeft from '../../utils/scrollLeft';
 import packBoxes from '../../helpers/binPacking/binPacking';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import './respList.css';
+import areDimensionsValid from '../../helpers/validateDimensions';
 
 const DENOMINATOR = 16;
 
 const ResponsiveList = (props) => {
-  const {rows, setRows, rectangles, setRectangles, materials, validDimensions} = props;
+  const {rows, setRows, rectangles, setRectangles, materials} = props;
   const containerRef = useRef(null);
   const firstInputRef = useRef(null);  
   const prevRowsLengthRef = useRef(rows.length);
@@ -104,7 +105,13 @@ const ResponsiveList = (props) => {
                     )}
                   </div>
                 </Row>
-                {!validDimensions ? <span> Please enter valid dimensions.</span> : null}
+                {
+                  (
+                    (row.width !== 0 && row.width !== "" && row.height !== 0 && row.height !== "") 
+                  ) 
+                  ? (!areDimensionsValid([row]) ? <span className="text-danger">Dimensions are too large.</span> : null) 
+                  : null
+                }
                 <Row>  
                   <Col>
                     {(row.height || row.heightFraction) && !(row.width || row.widthFraction) ? <span className="text-danger">Second dimension required.</span> : null}
