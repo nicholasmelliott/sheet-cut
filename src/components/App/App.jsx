@@ -7,6 +7,7 @@ import Totals from '../Totals/totals';
 import ViewBox from '../ViewBox/viewBox';
 import print from '../../helpers/print';
 import { MATERIALS } from '../../data/materials'
+import areDimensionsValid from '../../helpers/validateDimensions';
 
 function App() { 
   const row = (index, colorIndex) => ({ 
@@ -29,6 +30,7 @@ function App() {
     const savedRows = localStorage.getItem('rows');
     return savedRows ? JSON.parse(savedRows) : [row(0, 0)];
   });
+  const [validDimensions, setValidDimensions] = useState(true); 
   const printViewBoxRef = useRef(null);
   const printTotalsRef = useRef(null);
 
@@ -55,7 +57,6 @@ function App() {
     setRows([row(0, 0)]);
     localStorage.removeItem('rows');
   };
-  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,6 +64,8 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('rows', JSON.stringify(rows));
+    const valid = areDimensionsValid(rows);
+    setValidDimensions(valid);
   }, [rows]);
 
   return (
@@ -83,7 +86,7 @@ function App() {
               <Button variant="secondary" className="main-nav-btn" onClick={addRow} disabled={!isMenuOpen}>Add</Button>
               <Dropdown.Menu className="w-100 p-3 dropdown-menu-background">
                 <Button className="btn-sm reset-btn" variant="danger" style={{borderRadius: '50%'}} onClick={clearRows}>Reset Sheets</Button>
-                <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials}/>
+                <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials} validDimensions={validDimensions}/>
               </Dropdown.Menu>
             </Dropdown>
           </div>
