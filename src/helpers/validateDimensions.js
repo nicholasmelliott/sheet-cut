@@ -7,7 +7,7 @@ const preProcessedDataArray = dataArray.map(dataObject => {
         ...dataObject,
         dimensions: {
           ...dataObject.dimensions,
-          thickness: parseFloat(parseFloat(dataObject.dimensions.thickness).toFixed(1))
+          thickness: parseFloat(dataObject.dimensions.thickness)
         }
       };
     }
