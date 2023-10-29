@@ -19,8 +19,8 @@ import {
 
 const ToBeCutPiece = ({ r, i, b, j }) => {
     const renderIndexMinSizeWH = 1;
-    const minWidthSize = 8;
-    const minHeightSize = 8;
+    const minWidthSize = 20;
+    const minHeightSize = 20;
     
     // Conditionally render index text based on rect width and height.
     const renderIndex = (rect, minSize) => {
@@ -95,7 +95,7 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
               textAnchor="middle"
               fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
             >
-              {renderWidthDim(b, minHeightSize)}
+              {renderWidthDim(b, minHeightSize) && renderHeightDim(b, minWidthSize)}
             </text>
             {/* Draw the bottom dimension */}
             <text
@@ -105,7 +105,7 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
               textAnchor="middle"
               fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
             >
-              {renderWidthDim(b, minHeightSize)}
+              {renderWidthDim(b, minHeightSize) && renderHeightDim(b, minWidthSize)}
             </text>
             {/* Draw the left dimension */}
             <text
@@ -116,7 +116,7 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
               fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               dominantBaseline="middle"
             >
-              {renderHeightDim(b, minWidthSize)}
+              {renderHeightDim(b, minWidthSize) && renderWidthDim(b, minHeightSize)}
             </text>
             {/* Draw the right dimension */}
             <text
@@ -127,7 +127,7 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
               fontSize={scaleWithWindow(r.width, toBeCutSideDimsFontSize)}
               dominantBaseline="middle"
             >
-              {renderHeightDim(b, minWidthSize)}
+              {renderHeightDim(b, minWidthSize) && renderWidthDim(b, minHeightSize)}
             </text>
         </g>
     );
