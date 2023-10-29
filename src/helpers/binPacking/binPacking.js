@@ -2,23 +2,41 @@ import { BP2D as BinPacking2D } from 'binpackingjs'
 const { Bin, Packer } = BinPacking2D;
 import splitArrayByThickness from './splitArrayByThickness';
 import createBoxes from './createBoxes';
+import {floatToReducedFraction} from '../../utils/fractions';
 import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 import heuristic from 'binpackingjs/src/2D/heuristics/BestAreaFit';
 // TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
 // import heuristic from './TopLeftFit';
 
-//Creates bins depending on thickness
+//Creates bins depending on thickness and adds needed properties to bin
 const createBins = (array, matThickness, matThicknessText) => {
     const bins = [];
     array.forEach(el => {
         const dims = el.dimensions;
         if (dims) {
             if(dims.thickness == matThickness){
-                const bin = new Bin(dims.width, dims.height, new heuristic);
-                bin.thickness = dims.thickness;
-                bin.thicknessText = matThicknessText;
-                bin.price = el["Ace Retail"];
-                bins.push(bin);
+              const wInt = Math.floor(dims.width);
+              const hInt = Math.floor(dims.height);
+              let wDec = dims.width - wInt;
+              let hDec = dims.height - hInt;
+              
+              // Convert decimals into reduced fractions with largest denominator of 16
+              if (wDec % 1 !== 0) {
+                wDec = floatToReducedFraction(wDec, 16)
+              }
+              if (hDec % 1 !== 0) {
+                hDec = floatToReducedFraction(hDec, 16)
+              }
+
+              const bin = new Bin(dims.width, dims.height, new heuristic);
+              bin.wInt = wInt;
+              bin.hInt = hInt;
+              bin.wDec = wDec;
+              bin.hDec = hDec;
+              bin.thickness = dims.thickness;
+              bin.thicknessText = matThicknessText;
+              bin.price = el["Ace Retail"];
+              bins.push(bin);
             }
         }
     });

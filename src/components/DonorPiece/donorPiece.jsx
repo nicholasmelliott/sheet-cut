@@ -43,7 +43,8 @@ const DonorPiece = ({ r, i }) => {
               fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
               fill={donorSidesTextFill}
             >
-              {r.width}
+              {r.wInt !== 0 && r.wInt}
+              {r.wDec !== 0 && ` ${r.wDec} `}
             </text>
             <text 
               x={cMargin - scaleWithWindow(r.width, donorLeftDimDecrement)} 
@@ -52,7 +53,8 @@ const DonorPiece = ({ r, i }) => {
               fontSize={scaleWithWindow(r.width, donorSidesFontSize)}
               fill={donorSidesTextFill}
             >
-              {r.height}
+              {r.hInt !== 0 && r.hInt}
+              {r.hDec !== 0 && ` ${r.hDec} `}
             </text>
             {r.boxes.map((b, j) => (
               <ToBeCutPiece key={j} r={r} i={i} b={b} j={j} />
