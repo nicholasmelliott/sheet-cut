@@ -6,8 +6,7 @@ import packBoxes from '../../helpers/binPacking/binPacking';
 import getHexColorByIndex from '../../utils/colorByIndex';
 import './respList.css';
 import areDimensionsValid from '../../helpers/validateDimensions';
-
-const DENOMINATOR = 16;
+import { MAX_DENOMINATOR } from '../../constants/constants';
 
 const ResponsiveList = (props) => {
   const {rows, setRows, rectangles, setRectangles, materials} = props;
@@ -137,7 +136,7 @@ const ResponsiveList = (props) => {
                         onChange={(e) => handleFloatInputChange(e, index)}
                       >
                         <option value={0} defaultValue disabled>+ Frac. in</option>
-                        {generateReducedFractions(DENOMINATOR).map((fraction) => (
+                        {generateReducedFractions(MAX_DENOMINATOR).map((fraction) => (
                           <option key={fraction.fraction} value={fraction.decimal}>
                             {fraction.fraction}
                           </option>
@@ -175,7 +174,7 @@ const ResponsiveList = (props) => {
                         onChange={(e) => handleFloatInputChange(e, index)}
                       >
                         <option value={0} defaultValue disabled>+ Frac. in</option>
-                        {generateReducedFractions(DENOMINATOR).map((fraction) => (
+                        {generateReducedFractions(MAX_DENOMINATOR).map((fraction) => (
                           <option key={fraction.fraction} value={fraction.decimal}>
                             {fraction.fraction}
                           </option>

@@ -5,6 +5,8 @@ import createBoxes from './createBoxes';
 import {floatToReducedFraction} from '../../utils/fractions';
 import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 import heuristic from 'binpackingjs/src/2D/heuristics/BestAreaFit';
+import { MAX_DENOMINATOR } from '../../constants/constants';
+
 // TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
 // import heuristic from './TopLeftFit';
 
@@ -22,10 +24,10 @@ const createBins = (array, matThickness, matThicknessText) => {
               
               // Convert decimals into reduced fractions with largest denominator of 16
               if (wDec % 1 !== 0) {
-                wDec = floatToReducedFraction(wDec, 16)
+                wDec = floatToReducedFraction(wDec, MAX_DENOMINATOR)
               }
               if (hDec % 1 !== 0) {
-                hDec = floatToReducedFraction(hDec, 16)
+                hDec = floatToReducedFraction(hDec, MAX_DENOMINATOR)
               }
 
               const bin = new Bin(dims.width, dims.height, new heuristic);
