@@ -81,7 +81,7 @@ function App() {
               </Dropdown.Toggle>
               <Button variant="success" className="main-nav-btn" onClick={addRow} disabled={!isMenuOpen}>Add</Button>
               <Dropdown.Menu className="w-100 p-3 dropdown-menu-background">
-                <Button className="btn-sm reset-btn" variant="danger" style={{borderRadius: '50%'}} onClick={clearRows}>Reset Sheets</Button>
+                <Button className="btn-sm reset-btn" variant="warning" style={{borderRadius: '50%'}} onClick={clearRows}>Reset Sheets</Button>
                 <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials} />
               </Dropdown.Menu>
             </Dropdown>
