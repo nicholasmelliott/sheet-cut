@@ -4,14 +4,14 @@ import splitArrayByThickness from './splitArrayByThickness';
 import createBoxes from './createBoxes';
 import {floatToReducedFraction} from '../../utils/fractions';
 import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
-import heuristic from 'binpackingjs/src/2D/heuristics/BestAreaFit';
+import getPackingConfiguration from './packingConfiguration';
 import { MAX_DENOMINATOR } from '../../constants/constants';
 
 // TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
 // import heuristic from './TopLeftFit';
 
 //Creates bins depending on thickness and adds needed properties to bin
-const createBins = (array, matThickness, matThicknessText) => {
+const createBins = (array, matThickness, matThicknessText, config) => {
     const bins = [];
     array.forEach(el => {
         const dims = el.dimensions;
@@ -30,7 +30,7 @@ const createBins = (array, matThickness, matThicknessText) => {
                 hDec = floatToReducedFraction(hDec, MAX_DENOMINATOR)
               }
 
-              const bin = new Bin(dims.width, dims.height, new heuristic);
+              const bin = new Bin(dims.width, dims.height, new config.heuristic);
               bin.wInt = wInt;
               bin.hInt = hInt;
               bin.wDec = wDec;
@@ -42,8 +42,8 @@ const createBins = (array, matThickness, matThicknessText) => {
             }
         }
     });
-    // Sort the bins by width and then by height in descending order
-    bins.sort(function(a, b) { return b.width - a.width || b.height - a.height });
+    // Sort the bins by width and then by height in ascending order
+    bins.sort(config.sortFunction);
     return bins;
 }
 
@@ -73,6 +73,7 @@ const calculateBoxQuantities = (array) => {
 
 // Main function to pack boxes into bins based on their thickness
 const packBoxes = (array) => {
+    const config = getPackingConfiguration(array);
     let finalArray = [];
 
     // Group boxes by thickness
@@ -81,7 +82,7 @@ const packBoxes = (array) => {
     // Iterate through each thickness group
     arraysByThick.forEach((el) => {
         // Create bins and boxes for the current group
-        const bins = createBins(data, el[0].thicknessFraction, el[0].thicknessFractionText); 
+        const bins = createBins(data, el[0].thicknessFraction, el[0].thicknessFractionText, config); 
         const boxes = createBoxes( el );
 
         // Pack the boxes into the bins
