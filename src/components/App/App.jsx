@@ -79,7 +79,7 @@ function App() {
               <Dropdown.Toggle variant="light" id="dropdown-autoclose-false dropdown-button-drop-up" className='mx-auto main-nav-btn' style={{"backgroundColor": "lightgray"}}>
                 <span>&#9776;</span>
               </Dropdown.Toggle>
-              <Button variant="success" className="main-nav-btn" onClick={addRow} disabled={!isMenuOpen}>Add</Button>
+              <Button variant="success" className="main-nav-btn" onClick={addRow} disabled={!isMenuOpen}>{isMenuOpen ? '' : '🔒'} Add</Button>
               <Dropdown.Menu className="w-100 p-3 dropdown-menu-background">
                 <Button className="btn-sm reset-btn" variant="warning" style={{borderRadius: '50%'}} onClick={clearRows}>Reset Sheets</Button>
                 <ResponsiveList rows={rows} setRows={setRows} rectangles={rectangles} setRectangles={setRectangles} materials={materials} />
