@@ -6,7 +6,7 @@ import BestShortSide from '../../../node_modules/binpackingjs/src/2D/heuristics/
 const allBoxesAreSameSize = (boxes) => {
     const [firstBox] = boxes;
     
-    // Check if any box has width and height of 0 or empty strings
+    // Validates that all boxes are either dimensionless (width/height of 0 or '') or match the first box's size.
     return boxes.every(box => 
         // Check if the box has zero or empty size
         (((box.width === 0 || box.width === '') && box.widthFraction === 0) ||
