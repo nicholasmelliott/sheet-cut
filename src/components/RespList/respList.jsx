@@ -108,7 +108,7 @@ const ResponsiveList = (props) => {
                   (
                     (row.width !== 0 && row.width !== "" && row.height !== 0 && row.height !== "") 
                   ) 
-                  ? (!areDimensionsValid([row]) ? <span className="text-danger">Dimensions are too large.</span> : null) 
+                  ? (!areDimensionsValid([row]) ? <span className="text-danger">Dimensions larger than available sheets.</span> : null) 
                   : null
                 }
                 <Row>  
