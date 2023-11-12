@@ -30,7 +30,7 @@ const ViewBoxWrapper = ({rectangles, printRef}) => {
             <div key={i} className="col">
               <DonorPiecePrice rectangles={r} />
               <ToBeCutDimsList rectangles={r} />
-              <svg viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} width="100%" height="100%" preserveAspectRatio="none">
+              <svg className="svg-container" viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} preserveAspectRatio="none">
                 <DonorPiece r={r} i={i} />
               </svg>
             </div>
