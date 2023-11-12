@@ -7,8 +7,7 @@ const colors = [
   "#e366ff", // Purple
   "#d44b28",
   "#e5369c", // Deep Pink
-  "#36e5cf", // Celeste
-  "#c1fa7a", // Light Green
+  "#36e5cf", // Celeste,
   "#3684e5", // Dodger Blue
   "#f8fa7a" // Yellow
 
