@@ -24,7 +24,8 @@ const print = (printViewBoxRef, printTotalsRef) => {
           display: inline-block;
           width: 30%;
           height: 40%;
-          padding: 1.5%
+          padding: 1.5%;
+          vertical-align: top;
         }
         /* Apply styling to the div containing Total Price and Total Sheets */
         .row.text-center.d-flex.justify-content-between.p-2 {
