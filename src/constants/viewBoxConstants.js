@@ -17,7 +17,7 @@ const DONOR_SIDES_TEXT_FILL = "#000";
 const DONOR_THICKNESS_INCREMENT = 90;
 
 // To be cut piece constants
-const TO_BE_CUT_PIECE_FILL = "#c7dcff";
+const TO_BE_CUT_PIECE_FILL = "#E6F5F8";
 const TO_BE_CUT_PIECE_STROKE_DASHARRAY = 10;
 const TO_BE_CUT_PIECE_STROKE = "#000";
 const TO_BE_CUT_TOP_DIM_INCREMENT = 35;
@@ -27,7 +27,7 @@ const TO_BE_CUT_RIGHT_DIM_DECREMENT = 15;
 const TO_BE_CUT_SHEET_NUM_FONT_SIZE = 15;
 const TO_BE_CUT_SIDE_DIMS_FONT_SIZE = 20;
 const TO_BE_CUT_MAIN_DIM_FILL = "#000";
-const TO_BE_CUT_SIDE_DIMS_FILL = "#FFF";
+const TO_BE_CUT_SIDE_DIMS_FILL = "#999";
 
 // To be cut list constants
 const TO_BE_CUT_LIST_ALT_ITEM_FILL_1 = "#eee";
