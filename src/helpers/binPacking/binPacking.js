@@ -5,7 +5,7 @@ import createBoxes from './createBoxes';
 import {floatToReducedFraction} from '../../utils/fractions';
 import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_ProductResults_2023-02-25_08-30-06-AM_product_w_Dimensions.json';
 import getPackingConfiguration from './packingConfiguration';
-import { MAX_DENOMINATOR } from '../../constants/constants';
+import { MAX_DENOMINATOR, PRICE_PROP } from '../../constants/constants';
 
 // TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
 // import heuristic from './TopLeftFit';
@@ -37,7 +37,8 @@ const createBins = (array, matThickness, matThicknessText, config) => {
               bin.hDec = hDec;
               bin.thickness = dims.thickness;
               bin.thicknessText = matThicknessText;
-              bin.price = el["Ace Retail"];
+              // Check for price property and assign 0 if undefined
+              bin.price = (typeof el[PRICE_PROP] !== 'undefined') ? el[PRICE_PROP] : 0;
               bins.push(bin);
             }
         }
