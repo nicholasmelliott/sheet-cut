@@ -13,7 +13,7 @@ import {
   donorSidesTextFill
 } from '../../constants/viewBoxConstants';
 
-const DonorPiece = ({ r, i }) => {
+const DonorPiece = ({ r, i, useNewDefs }) => {
     return (
         <g key={i}>
             <defs>
@@ -57,7 +57,7 @@ const DonorPiece = ({ r, i }) => {
               {r.hDec !== 0 && ` ${r.hDec}`}"
             </text>
             {r.boxes.map((b, j) => (
-              <ToBeCutPiece key={j} r={r} i={i} b={b} j={j} />
+              <ToBeCutPiece key={j} r={r} i={i} b={b} j={j} useNewDefs={useNewDefs} />
             ))}
         </g>
     );

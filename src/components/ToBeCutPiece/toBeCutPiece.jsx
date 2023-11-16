@@ -5,6 +5,7 @@ import {
     prevHeight,
     cMargin, 
     multiplier,
+    toBeCutPieceFill,
     toBeCutPieceStrokeDasharray,
     toBeCutPieceStroke,
     toBeCutTopDimIncrement,
@@ -17,7 +18,7 @@ import {
     toBeCutSideDimsFill
 } from '../../constants/viewBoxConstants';
 
-const ToBeCutPiece = ({ r, i, b, j }) => {
+const ToBeCutPiece = ({ r, i, b, j, useNewDefs }) => {
     const renderIndexMinSizeWH = 1;
     const minWidthSize = 20;
     const minHeightSize = 20;
@@ -56,7 +57,19 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
 
     return (
         <g>
+          {useNewDefs ? (
             <defs>
+              <linearGradient id={`toBeCutPieceGradient${i}${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
+                <stop offset="10%" stopColor="#fff" stopOpacity="0.9" />
+                <stop offset="40%" stopColor={toBeCutPieceFill} stopOpacity="1" />
+                <stop offset="60%" stopColor={toBeCutPieceFill} stopOpacity="1" />
+                <stop offset="90%" stopColor="#fff" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#fff" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
+            ) : (
+              <defs>
               <linearGradient id={`toBeCutPieceGradient${i}${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
                 <stop offset="10%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
@@ -66,6 +79,7 @@ const ToBeCutPiece = ({ r, i, b, j }) => {
                 <stop offset="100%" stopColor={getHexColorByIndex(b.colorIndex)} stopOpacity="0.3" />
               </linearGradient>
             </defs>
+            )}
             <rect
               key={j}
               x={b.x * multiplier + cMargin}

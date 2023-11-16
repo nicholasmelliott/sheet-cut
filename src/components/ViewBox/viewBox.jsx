@@ -6,7 +6,7 @@ import DonorPiece from '../DonorPiece/donorPiece';
 import DonorPiecePrice from '../DonorPiecePrice/donorPiecePrice';
 import {cBorder, multiplier, heightIncrement} from '../../constants/viewBoxConstants';
 
-const ViewBoxWrapper = ({rectangles, printRef}) => {
+const ViewBoxWrapper = ({rectangles, printRef, useNewDefs}) => {
 
   const containerRef = useRef(null);
   const prevRectsLengthRef = useRef(rectangles.length);
@@ -31,7 +31,7 @@ const ViewBoxWrapper = ({rectangles, printRef}) => {
               <DonorPiecePrice rectangles={r} />
               <ToBeCutDimsList rectangles={r} />
               <svg className="svg-container" viewBox={`0 0 ${(r.width * multiplier) + cBorder} ${(r.height * multiplier) + cBorder + heightIncrement}`} preserveAspectRatio="none">
-                <DonorPiece r={r} i={i} />
+                <DonorPiece r={r} i={i} useNewDefs={useNewDefs}/>
               </svg>
             </div>
           )})}

@@ -25,12 +25,20 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [rectangles, setRectangles] = useState([]);
   const [materials] = useState(MATERIALS);
+  const [useNewDefs, setUseNewDefs] = useState(() => {
+    const saved = localStorage.getItem('useNewDefs');
+    return saved === 'true'; // Convert string to boolean
+  });
   const [rows, setRows] = useState(() => {
     const savedRows = localStorage.getItem('rows');
     return savedRows ? JSON.parse(savedRows) : [row(0, 0)];
   }); 
   const printViewBoxRef = useRef(null);
   const printTotalsRef = useRef(null);
+
+  const toggleDefs = () => {
+    setUseNewDefs(prevState => !prevState);
+  };
 
   const handlePrint = () => {
     try {
@@ -64,13 +72,19 @@ function App() {
     localStorage.setItem('rows', JSON.stringify(rows));
   }, [rows]);
 
+  // Save to localStorage when useNewDefs changes
+  useEffect(() => {
+    localStorage.setItem('useNewDefs', useNewDefs);
+  }, [useNewDefs]);
+
   return (
     <ErrorBoundary>
       <div className="App">
         <iframe id="ifmcontentstoprint" className='ifmcontentstoprint'></iframe>
+        <Button className="btn-sm color-btn" variant="secondary" style={{borderRadius: '50%'}} onClick={toggleDefs}>C</Button>
         <div className="display-wrapper">
           <Totals rectangles={rectangles} printRef={printTotalsRef} />
-          <ViewBox rectangles={rectangles} printRef={printViewBoxRef} />
+          <ViewBox rectangles={rectangles} printRef={printViewBoxRef} useNewDefs={useNewDefs}/>
         </div>
         <div className="dropdown-wrapper">
           <div className="d-flex align-items-center justify-content-center w-100 dropdown-background">
