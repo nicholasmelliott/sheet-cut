@@ -75,3 +75,8 @@ body {
   align-items: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.multicolor-button {
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  color: white !important;
+}

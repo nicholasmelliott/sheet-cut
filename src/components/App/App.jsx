@@ -25,6 +25,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [rectangles, setRectangles] = useState([]);
   const [materials] = useState(MATERIALS);
+  const [isColored, setIsColored] = useState(false);
   const [useNewDefs, setUseNewDefs] = useState(() => {
     const saved = localStorage.getItem('useNewDefs');
     return saved === 'true'; // Convert string to boolean
@@ -37,6 +38,7 @@ function App() {
   const printTotalsRef = useRef(null);
 
   const toggleDefs = () => {
+    setIsColored(!isColored);
     setUseNewDefs(prevState => !prevState);
   };
 
@@ -81,7 +83,7 @@ function App() {
     <ErrorBoundary>
       <div className="App">
         <iframe id="ifmcontentstoprint" className='ifmcontentstoprint'></iframe>
-        <Button className="btn-sm color-btn" variant="secondary" style={{borderRadius: '50%'}} onClick={toggleDefs}>C</Button>
+        <Button className={isColored ? "btn-sm color-btn" : "btn-sm color-btn multicolor-button"} variant="light" style={{borderRadius: '50%'}} onClick={toggleDefs}>C</Button>
         <div className="display-wrapper">
           <Totals rectangles={rectangles} printRef={printTotalsRef} />
           <ViewBox rectangles={rectangles} printRef={printViewBoxRef} useNewDefs={useNewDefs}/>
