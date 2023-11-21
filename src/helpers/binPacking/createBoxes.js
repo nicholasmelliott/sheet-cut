@@ -32,8 +32,8 @@ const createBoxes = (array) => {
       };
   
       const box = new CustomBox(
-        dimensions.updatedWidth + dimensions.updatedWFrac, 
-        dimensions.updatedHeight + dimensions.updatedHFrac,
+        parseFloat(dimensions.updatedWidth + dimensions.updatedWFrac), 
+        parseFloat(dimensions.updatedHeight + dimensions.updatedHFrac),
         dimensions.updatedWidth,
         dimensions.updatedHeight, 
         thicknessFraction, 
@@ -44,7 +44,7 @@ const createBoxes = (array) => {
         dimensions.updatedHFracText, 
         thicknessFractionText
       );
-  
+      console.log(box)
       return box;
     });
   }
