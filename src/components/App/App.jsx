@@ -83,7 +83,15 @@ function App() {
     <ErrorBoundary>
       <div className="App">
         <iframe id="ifmcontentstoprint" className='ifmcontentstoprint'></iframe>
-        <Button className={isColored ? "btn-sm color-btn" : "btn-sm color-btn multicolor-button"} variant="light" style={{borderRadius: '50%'}} onClick={toggleDefs}>C</Button>
+        <Button 
+          className={isColored ? "btn-sm color-btn" : "btn-sm color-btn multicolor-button"} 
+          variant="light" 
+          style={{borderRadius: '50%'}} 
+          onClick={toggleDefs} 
+          data-toggle="tooltip" 
+          data-placement="right" 
+          title="Choose between multicolor or standard color display."
+        >C</Button>
         <div className="display-wrapper">
           <Totals rectangles={rectangles} printRef={printTotalsRef} />
           <ViewBox rectangles={rectangles} printRef={printViewBoxRef} useNewDefs={useNewDefs}/>
