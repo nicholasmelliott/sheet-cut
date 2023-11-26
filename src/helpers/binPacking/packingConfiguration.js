@@ -30,13 +30,15 @@ const getPackingConfiguration = (boxes) => {
     } else if (boxesAreDifferentSizes(boxes)) {
         return {
             heuristic: BestShortSide,
-            sortFunction: (a, b) => b.width - a.width || b.height - a.height
+            sortFunction: (a, b) => b.width - a.width || b.height - a.height,
+            priceSortFunction: (a, b) => a.price - b.price
         };
     }
     // Return default heuristic
     return {
         heuristic: BestShortSide,
-        sortFunction: (a, b) => b.width - a.width || b.height - a.height
+        sortFunction: (a, b) => b.width - a.width || b.height - a.height,
+        priceSortFunction: (a, b) => a.price - b.price
     };
 };
 
