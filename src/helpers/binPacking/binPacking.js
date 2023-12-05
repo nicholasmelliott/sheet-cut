@@ -7,9 +7,6 @@ import data from '../../data/Quantity_10_ProductResults_2023-03-18_08-44-35-AM_P
 import getPackingConfiguration from './packingConfiguration';
 import { MAX_DENOMINATOR, PRICE_PROP } from '../../constants/constants';
 
-// TODO: The following heuristic import is commented out for now as we are using 'BestAreaFit'.
-// import heuristic from './TopLeftFit';
-
 //Creates bins depending on thickness and adds needed properties to bin
 const createBins = (array, matThickness, matThicknessText, config) => {
     const bins = [];
