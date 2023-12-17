@@ -31,3 +31,4 @@ The Material Cutting App is a web application designed to optimize material usag
 
 
 <img src="./public/Screenshot 2023-11-12 104811.png" alt="Your GIF" style="width: 300px; height: 500px;">
+<img src="./public/SheetCutExample.gif" alt="Your GIF" style="width: 300px; height: 500px;">
